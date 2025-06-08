@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   FaArrowLeft,
   FaUser,
@@ -7,42 +7,42 @@ import {
   FaEyeSlash,
   FaGoogle,
   FaGithub,
-  FaCheck,
-} from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+  FaCheck
+} from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    remember: false,
+    email: '',
+    password: '',
+    remember: false
   });
   const [showToast, setShowToast] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
-
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = e => {
     e.preventDefault();
     // require "remember me"
     if (!formData.remember) {
-      setError("You must agree to “Remember me” before signing in.");
+      setError('You must agree to “Remember me” before signing in.');
       return;
     }
-    setError("");
+    setError('');
     setShowToast(true);
     // after showing toast, redirect
     setTimeout(() => {
       setShowToast(false);
-      navigate("/");
+      navigate('/');
     }, 2000);
   };
 
@@ -51,27 +51,27 @@ const Login = () => {
       {/* Background Elements */}
       <div className="absolute top-10 left-10 w-48 h-48 bg-emerald-700 rounded-full mix-blend-soft-light opacity-20 animate-pulse"></div>
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-green-700 rounded-full mix-blend-soft-light opacity-20 animate-pulse"></div>
-
+      
       {/* Toast Notification */}
       {showToast && (
         <div className="toast-notification">
-          <div
-            className=" fixed top-6 right-6
+            <div className=" fixed top-6 right-6
       bg-green-600 text-black
       inline-flex items-center
       px-4 py-2
       rounded-lg
       shadow-lg z-50
       whitespace-nowrap
-      hover:opacity-90 transition-opacity duration-200"
-          >
-            <FaCheck className="mr-2" />
-            Login successful!
-          </div>
+      hover:opacity-90 transition-opacity duration-200">
+          <FaCheck className="mr-2" />
+          Login successful! 
+        </div>
+            
         </div>
       )}
+      
 
-      <div className="absolute top-6 left-6">
+       <div className="absolute top-6 left-6">
         <Link
           to="/"
           className="flex items-center text-white hover:underline hover:text-emerald-600"
@@ -86,7 +86,7 @@ const Login = () => {
         <div className="login-card relative overflow-hidden rounded-3xl shadow-2xl">
           <div className="absolute -top-32 -left-32 w-64 h-64 bg-gradient-to-r from-emerald-500 to-transparent rounded-full opacity-20 animate-spin-slow"></div>
           <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-gradient-to-l from-green-500 to-transparent rounded-full opacity-20 animate-spin-slow-reverse"></div>
-
+          
           <div className="relative bg-gray-900 bg-opacity-80 backdrop-blur-xl p-8 rounded-3xl border border-emerald-700/30">
             {/* Logo */}
             <div className="flex justify-center mb-8">
@@ -96,102 +96,109 @@ const Login = () => {
                 </div>
               </div>
             </div>
+            
+                   <h2 className="text-2xl font-bold text-center text-white mb-8">
+          Welcome Back
+        </h2>
 
-            <h2 className="text-2xl font-bold text-center text-white mb-8">
-              Welcome Back
-            </h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="relative">
+            <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email Address"
+              required
+              className="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="relative">
-                <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email Address"
-                  required
-                  className="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                />
-              </div>
+          <div className="relative">
+            <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+              className="w-full pl-12 pr-12 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(v => !v)}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
 
-              <div className="relative">
-                <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Password"
-                  required
-                  className="w-full pl-12 pr-12 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
+          <div className="flex items-center justify-between">
+            <label className="flex cursor-pointer items-center text-white">
+              <input
+                type="checkbox"
+                name="remember"
+                checked={formData.remember}
+                onChange={handleChange}
+                className="mr-2  h-4 w-4 text-green-500 bg-gray-800 border-gray-600 rounded focus:ring-green-500"
+                required
+              />
+              Remember me
+            </label>
+            <Link
+              to=""
+              className="text-sm text-green-400 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
 
-              <div className="flex items-center justify-between">
-                <label className="flex cursor-pointer items-center text-white">
-                  <input
-                    type="checkbox"
-                    name="remember"
-                    checked={formData.remember}
-                    onChange={handleChange}
-                    className="mr-2  h-4 w-4 text-green-500 bg-gray-800 border-gray-600 rounded focus:ring-green-500"
-                    required
-                  />
-                  Remember me
-                </label>
-                <Link to="" className="text-sm text-green-400 hover:underline">
-                  Forgot password?
-                </Link>
-              </div>
+          {error && (
+            <p className="text-sm text-red-500">{error}</p>
+          )}
 
-              {error && <p className="text-sm text-red-500">{error}</p>}
+          <button
+            type="submit"
+            className="w-full cursor-pointer py-3 rounded-lg bg-green-500 hover:bg-green-600 text-black font-semibold transition"
+          >
+            Sign In
+          </button>
+        </form>
 
-              <button
-                type="submit"
-                className="w-full cursor-pointer py-3 rounded-lg bg-green-500 hover:bg-green-600 text-black font-semibold transition"
-              >
-                Sign In
-              </button>
-            </form>
+        <div className="flex items-center my-6">
+          <div className="flex-grow border-t border-gray-700"></div>
+          <span className="mx-3 text-gray-400">Or continue with</span>
+          <div className="flex-grow border-t border-gray-700"></div>
+        </div>
 
-            <div className="flex items-center my-6">
-              <div className="flex-grow border-t border-gray-700"></div>
-              <span className="mx-3 text-gray-400">Or continue with</span>
-              <div className="flex-grow border-t border-gray-700"></div>
-            </div>
+        <div className="flex justify-center space-x-6 mb-4">
+          <button className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition">
+            <FaGoogle className="text-white" />
+          </button>
+          <button className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition">
+            <FaGithub className="text-white" />
+          </button>
+        </div>
 
-            <div className="flex justify-center space-x-6 mb-4">
-              <button className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition">
-                <FaGoogle className="text-white" />
-              </button>
-              <button className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition">
-                <FaGithub className="text-white" />
-              </button>
-            </div>
+        <p className="text-center text-white">
+          Don’t have an account?{' '}
+          <Link
+            to="/signup"
+            className="text-green-400 font-semibold hover:underline"
+          >
+            Sign Up
+          </Link>
+        </p>
 
-            <p className="text-center text-white">
-              Don’t have an account?{" "}
-              <Link
-                to="/signup"
-                className="text-green-400 font-semibold hover:underline"
-              >
-                Sign Up
-              </Link>
-            </p>
+            
           </div>
         </div>
       </div>
 
       {/* Custom CSS */}
-      <style>{`
+      <style >{`
   
         .toast-notification {
           position: fixed;

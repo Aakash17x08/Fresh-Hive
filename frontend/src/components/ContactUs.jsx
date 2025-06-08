@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUser, FaEnvelope, FaPhone, FaTag, FaComment, FaPaperPlane } from 'react-icons/fa';
+import { FaUser, FaEnvelope,FaCheck, FaPhone, FaTag, FaComment, FaPaperPlane } from 'react-icons/fa';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -42,10 +42,15 @@ const ContactUs = () => {
       {/* Toast Notification */}
       {showToast && (
         <div className="toast-notification">
-          <div className="flex items-center">
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"></path>
-            </svg>
+          <div className="fixed top-17  right-6
+      bg-green-600 text-black
+      inline-flex items-center
+      px-4 py-2
+      rounded-lg
+      shadow-lg z-50
+      whitespace-nowrap
+      hover:opacity-90 transition-opacity duration-200">
+            <FaCheck className=" mr-2" />
             Form submitted successfully!
           </div>
         </div>
@@ -183,32 +188,9 @@ const ContactUs = () => {
           text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
-        .toast-notification {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          background: linear-gradient(to right, #047857, #065f46);
-          color: #d1fae5;
-          padding: 16px 24px;
-          border-radius: 10px;
-          box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-          z-index: 100;
-          animation: toastSlide 0.5s ease-out, toastFade 0.5s ease-out 1.5s;
-          border: 1px solid rgba(110, 231, 183, 0.3);
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-        }
         
-        @keyframes toastSlide {
-          0% { transform: translateX(100%); opacity: 0; }
-          100% { transform: translateX(0); opacity: 1; }
-        }
         
-        @keyframes toastFade {
-          0% { opacity: 1; }
-          100% { opacity: 0; }
-        }
+        
         
         .contact-form-container {
           background: rgba(5, 46, 22, 0.6);
