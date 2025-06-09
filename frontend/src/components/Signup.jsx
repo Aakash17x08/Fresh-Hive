@@ -81,7 +81,7 @@ const Signup = () => {
        </div>
 
         {/* Card */}
-        <div className="bg-gray-900 py-8 px-6 shadow-2xl rounded-2xl border border-green-300">
+        <div className="bg-gray-900 py-8 px-6 mt-20 shadow-2xl rounded-2xl border border-green-300">
           <div className="text-center mb-8">
             <div className="mx-auto mb-4 flex justify-center">
               <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center">

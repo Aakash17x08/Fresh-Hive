@@ -81,7 +81,7 @@ const Login = () => {
         </Link>
       </div>
 
-      <div className="relative w-full max-w-md z-10">
+      <div className="relative w-full mt-20 max-w-md z-10">
         {/* Animated Card */}
         <div className="login-card relative overflow-hidden rounded-3xl shadow-2xl">
           <div className="absolute -top-32 -left-32 w-64 h-64 bg-gradient-to-r from-emerald-500 to-transparent rounded-full opacity-20 animate-spin-slow"></div>

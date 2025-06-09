@@ -29,7 +29,7 @@ const Cart = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-900 to-emerald-950 py-12 px-4">
+      <div className="min-h-screen bg-black py-12 px-4">
         <div className="container mx-auto max-w-4xl">
           <Link to="/items" className="inline-flex cursor-pointer  items-center text-emerald-300 hover:text-emerald-100 mb-8">
             <FiArrowLeft className="mr-2" />
