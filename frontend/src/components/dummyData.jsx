@@ -8,7 +8,7 @@ import Spinach from "../assets/Spinach.png"
 import BellPeppers from "../assets/BellPeppers.png"
 import Tomato from "../assets/Tomatoes.png"
 import Papaya from "../assets/Papaya.png"
-import DragonFruit from "../assets/DragonFruit.png"
+import DragonFruit from '../assets/Dragon Fruit.png'
 import Kiwi from "../assets/Kiwi.png"
 import Potato from "../assets/Potato.png"
 import LadyFinger from "../assets/LadyFinger.png"
