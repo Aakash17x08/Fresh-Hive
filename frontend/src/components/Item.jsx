@@ -1,52 +1,102 @@
 import React, { useState } from 'react';
-import { groceryData } from './dummyDataItem.jsx';
 import { FiArrowLeft, FiChevronDown, FiChevronUp, FiPlus, FiMinus } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { useCart } from '../CartContext';
+import { groceryData } from './dummyDataItem';
 
-// Enhanced Add to Cart Button
-const AddToCartButton = () => (
-  <button className="mt-3 w-full bg-emerald-400 hover:bg-emerald-300 text-black cursor-pointer py-3 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-[1.02] group font-bold shadow-lg shadow-emerald-900/20">
-    <span>Add to Cart</span>
-    <span className="ml-2 text-xl transform group-hover:translate-x-1 transition-transform">
-      →
-    </span>
-  </button>
-);
+const ProductCard = ({ item }) => {
+  const { addToCart, removeFromCart, updateQuantity, cart } = useCart();
+  
+  // Get current quantity in cart
+  const cartItem = cart.find(cartItem => cartItem.id === item.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+  
+  const handleAddToCart = () => {
+    addToCart(item);
+  };
+  
+  const handleIncrement = () => {
+    if (quantity === 0) {
+      addToCart(item);
+    } else {
+      updateQuantity(item.id, quantity + 1);
+    }
+  };
+  
+  const handleDecrement = () => {
+    if (quantity === 1) {
+      removeFromCart(item.id);
+    } else if (quantity > 1) {
+      updateQuantity(item.id, quantity - 1);
+    }
+  };
 
-// Product Card with improved design
-const ProductCard = ({ item }) => (
-  <div className="bg-emerald-900 rounded-2xl overflow-hidden shadow-2xl shadow-emerald-950 hover:shadow-emerald-900/50 transition-all duration-300 hover:-translate-y-1 border-2 border-emerald-700">
-    <div className="h-48 relative overflow-hidden">
-      <img 
-        src={item.image} 
-        className="object-contain w-full h-full transition-transform duration-500" 
-        alt={item.name}
-      />
-    </div>
-    <div className="p-5">
-      <div className="flex justify-between items-start">
-        <h3 className="font-bold text-emerald-50 text-lg truncate max-w-[70%]">
-          {item.name}
-        </h3>
+  return (
+    <div className="bg-emerald-900 rounded-2xl overflow-hidden shadow-2xl shadow-emerald-950 hover:shadow-emerald-900/50 transition-all duration-300 hover:-translate-y-1 border-2 border-emerald-700">
+      <div className="h-48 relative overflow-hidden bg-emerald-950 flex items-center justify-center">
+        <img 
+          src={item.image} 
+          className="object-contain w-full h-full transition-transform duration-500" 
+          alt={item.name}
+        />
       </div>
-      
-      <p className="mt-2 text-emerald-200 text-sm h-12 overflow-hidden">
-        {item.description || `Fresh organic ${item.name.toLowerCase()} sourced locally`}
-      </p>
-      
-      <div className="mt-4 flex justify-between items-center">
-        <span className="text-emerald-50 font-bold text-xl">
-          ₹{item.price.toFixed(2)}
-        </span>
-        <span className="text-emerald-300 line-through text-sm">
-          ₹{(item.price * 1.15).toFixed(2)}
-        </span>
+      <div className="p-5">
+        <div className="flex justify-between items-start">
+          <h3 className="font-bold text-emerald-50 text-lg truncate max-w-[70%]">
+            {item.name}
+          </h3>
+          <span className="text-emerald-300 text-sm bg-emerald-800/50 px-2 py-1 rounded-full">
+            Organic
+          </span>
+        </div>
+        
+        <p className="mt-2 text-emerald-200 text-sm h-12 overflow-hidden">
+          {item.description || `Fresh organic ${item.name.toLowerCase()} sourced locally`}
+        </p>
+        
+        <div className="mt-4 flex justify-between items-center">
+          <span className="text-emerald-50 font-bold text-xl">
+            ₹{item.price.toFixed(2)}
+          </span>
+          <span className="text-emerald-300 line-through text-sm">
+            ₹{(item.price * 1.15).toFixed(2)}
+          </span>
+        </div>
+        
+        <div className="mt-3">
+          {quantity > 0 ? (
+            <div className="flex items-center justify-between bg-emerald-400 text-black rounded-full">
+              <button 
+                onClick={handleDecrement}
+                className="p-3 cursor-pointer rounded-l-full hover:bg-emerald-300 transition-colors"
+              >
+                <FiMinus />
+              </button>
+              <span className="font-bold">{quantity}</span>
+              <button 
+                onClick={handleIncrement}
+                className="p-3 cursor-pointer rounded-r-full hover:bg-emerald-300 transition-colors"
+              >
+                <FiPlus />
+              </button>
+            </div>
+          ) : (
+            <button 
+              onClick={handleAddToCart}
+              className="w-full bg-emerald-400 hover:bg-emerald-300 text-black cursor-pointer py-3 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-[1.02] group font-bold shadow-lg shadow-emerald-900/20"
+            >
+              <span>Add to Cart</span>
+              <span className="ml-2 text-xl transform group-hover:translate-x-1 transition-transform">
+                →
+              </span>
+            </button>
+          )}
+        </div>
       </div>
-      <AddToCartButton />
     </div>
-  </div>
-);
+  );
+};
 
-// Main Items Component
 const Items = () => {
   const [expandedCategories, setExpandedCategories] = useState({});
   const [allExpanded, setAllExpanded] = useState(false);
@@ -74,12 +124,11 @@ const Items = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-900 to-emerald-950">
       <div className="container mx-auto px-4 py-8">
-        {/* Enhanced Header */}
         <header className="mb-12 text-center py-8 relative">
-          <div className="absolute top-5 left-0 flex items-center text-emerald-300 hover:text-emerald-100 cursor-pointer transition-colors">
+          <Link to="/" className="absolute top-5 left-0 flex items-center text-emerald-300 hover:text-emerald-100 cursor-pointer transition-colors">
             <FiArrowLeft className="mr-2" />
             <span>Back</span>
-          </div>
+          </Link>
           
           <h1 className="text-5xl font-bold text-emerald-100 mt-7 tracking-tight">
             <span className="text-emerald-400">Organic</span> Pantry
@@ -93,18 +142,16 @@ const Items = () => {
           </div>
         </header>
 
-        {/* Global Expand/Collapse Button */}
         <div className="flex justify-center mb-10">
           <button 
             onClick={toggleAllCategories}
             className="flex items-center bg-emerald-800 hover:bg-emerald-700 cursor-pointer text-emerald-200 py-3 px-6 rounded-full transition-all shadow-lg shadow-emerald-950 hover:shadow-emerald-900/50"
           >
-            <span className="mr-2 font-medium">{allExpanded ? 'Collapse All Categories' : 'Expand All Categories'}</span>
+            <span className="mr-2 font-medium">{allExpanded ? 'Collapse All' : 'Expand All'}</span>
             {allExpanded ? <FiMinus className="text-lg" /> : <FiPlus className="text-lg" />}
           </button>
         </div>
 
-        {/* Categories */}
         {groceryData.map(category => {
           const isExpanded = expandedCategories[category.id] || allExpanded;
           const visibleItems = isExpanded ? category.items : category.items.slice(0, 4);
