@@ -5,11 +5,11 @@ import {
   FiShoppingBag, 
   FiMail, 
   FiUser,
-  FiShoppingCart,
   FiX,
   FiMenu,
 } from 'react-icons/fi';
-import { FaGem } from 'react-icons/fa';
+import { FaGem, FaOpencart  } from 'react-icons/fa';
+
 import { useCart } from '../CartContext';
 
 export default function Navbar() {
@@ -17,9 +17,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(location.pathname);
   const { cartCount } = useCart();    
-
-
-
 
   // Update active tab on route change and close mobile menu
   useEffect(() => {
@@ -81,7 +78,7 @@ export default function Navbar() {
             </Link>
 
             <Link to="/cart" className="relative p-2.5 rounded-full hover:bg-slate-700/50 transition-colors group">
-              <FiShoppingCart className="h-5 w-5 text-slate-300 group-hover:text-green-200 transition-colors" />
+              <FaOpencart  className="h-5 w-5 text-slate-300 group-hover:text-green-200 transition-colors" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white bg-green-500 rounded-full">
                   {cartCount}
@@ -151,7 +148,7 @@ export default function Navbar() {
 
             <div className="pt-4 mt-4 border-t border-emerald-700 grid grid-cols-2 gap-3">
              <Link to="/cart" className="relative p-2.5 rounded-full hover:bg-slate-700/50 transition-colors">
-          <FiShoppingCart className="h-5 w-5 text-slate-300 hover:text-green-200" />
+          <FaOpencart className="h-5 w-5 text-slate-300 hover:text-green-200" />
           {cartCount > 0 && (
             <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold text-white bg-green-500 rounded-full">
               {cartCount}

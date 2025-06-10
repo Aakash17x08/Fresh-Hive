@@ -114,8 +114,8 @@ export const categories = [
 // Products data with more items
 export const products = [
   // Fruits
-  { id: 1, name: 'Organic Apples', price: 50, category: 'Fruits', image: Apples },
-  { id: 2, name: 'Fresh Bananas', price: 96, category: 'Fruits', image: Bananas },
+  { id: 1, name: ' Apples', price: 50, category: 'Fruits', image: Apples },
+  { id: 2, name: ' Bananas', price: 96, category: 'Fruits', image: Bananas },
   { id: 3, name: 'Sweet Strawberries', price: 45, category: 'Fruits', image: Strawberries },
   { id: 4, name: 'Juicy Oranges', price: 12, category: 'Fruits', image: Orange},
   { id: 5, name: 'Seedless Grapes', price: 37, category: 'Fruits', image: Grapes },
@@ -145,9 +145,9 @@ export const products = [
  { id: 24,name: 'Ghee',             price: 55, category: 'Dairy', image: Ghee },
   
   // Beverages
-  { id: 25, name: 'Sparkling Water', price: 55, category: 'Beverages', image: Water },
-  { id: 26, name: 'Fresh Orange Juice', price: 85, category: 'Beverages', image: OrangeJuice },
-  { id: 27, name: 'Premium Coffee', price: 96, category: 'Beverages', image: Coffee },
+  { id: 25, name: ' Water', price: 55, category: 'Beverages', image: Water },
+  { id: 26, name: ' Orange Juice', price: 85, category: 'Beverages', image: OrangeJuice },
+  { id: 27, name: ' Coffee', price: 96, category: 'Beverages', image: Coffee },
   { id: 28, name: 'Green Tea', price: 74, category: 'Beverages', image: Tea },
   { id: 29, name: 'Energy Drink', price: 94, category: 'Beverages', image: EnergyDrink },
   { id: 30, name: 'Coconut Water',    price: 29, category: 'Beverages', image: CoconutWater },
@@ -182,7 +182,7 @@ export const products = [
 { id: 50, name: 'Brioche Bun',           price: 28, category: 'Bakery', image: Brioche },
 { id: 51, name: 'Baguette',              price: 25, category: 'Bakery', image: Baguette },
 { id: 52, name: 'Banana Bread',          price: 39, category: 'Bakery', image: BananaBread},
-{ id: 53, name: 'Chocolate Donut',       price: 12, category: 'Bakery', image: ChocolateDonut},
+{ id: 53, name: 'Choco Donut',       price: 12, category: 'Bakery', image: ChocolateDonut},
 { id: 54, name: 'Eclair',                price: 29, category: 'Bakery', image: Eclair },
 { id: 55, name: 'Pound Cake',            price: 33, category: 'Bakery', image: PoundCake },
 { id: 56, name: 'Focaccia Bread',        price: 48, category: 'Bakery', image: FocacciaBread },

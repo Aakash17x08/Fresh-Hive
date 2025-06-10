@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcAmex, FaApplePay } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
 import { BsTelephone } from 'react-icons/bs';
@@ -6,16 +5,10 @@ import { FiLink, FiBookmark, FiMail   } from 'react-icons/fi';
 
 
 const Footer = () => {
-  const [year, setYear] = useState(new Date().getFullYear());
   
-  useEffect(() => {
-    // Set current year on mount
-    setYear(new Date().getFullYear());
-  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
-      
       
       {/* Enhanced Footer */}
       <footer className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 text-white pt-16 pb-8 relative overflow-hidden border-t-8 border-emerald-500">
