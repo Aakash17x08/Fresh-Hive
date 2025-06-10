@@ -50,7 +50,7 @@ const ItemsHome = () => {
           <h1
             className="text-4xl font-bold tracking-tighter"
             style={{
-              fontFamily: "'Pacifico', cursive",
+              fontFamily: "'Playfair Display', serif",
               textShadow: "2px 2px 4px rgba(0,0,0,0.2)",
             }}
           >
@@ -88,7 +88,7 @@ const ItemsHome = () => {
         <div className="text-center mb-6">
           <h2
             className="text-3xl font-bold text-emerald-700 capitalize mb-2"
-            style={{ fontFamily: "'Dancing Script', cursive" }}
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {activeCategory === "All"
               ? "Featured Products"

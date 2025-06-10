@@ -68,9 +68,8 @@ const Signup = () => {
       )}
 
       <div className="max-w-md w-full">
-        {/* Back Button aligned left */}
        
- <div className="absolute top-6 left-6">
+ <div className="absolute top-6 mt-15 left-6">
          <Link
            to="/login"
            className="flex items-center text-white hover:text-emerald-600"
@@ -79,6 +78,7 @@ const Signup = () => {
            Back to Login
          </Link>
        </div>
+
 
         {/* Card */}
         <div className="bg-gray-900 py-8 px-6 mt-20 shadow-2xl rounded-2xl border border-green-300">

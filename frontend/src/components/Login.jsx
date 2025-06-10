@@ -71,7 +71,7 @@ const Login = () => {
       )}
       
 
-       <div className="absolute top-6 left-6">
+       <div className="absolute top-6 mt-14 left-6">
         <Link
           to="/"
           className="flex items-center text-white hover:underline hover:text-emerald-600"

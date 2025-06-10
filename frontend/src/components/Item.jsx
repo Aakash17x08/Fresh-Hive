@@ -130,8 +130,8 @@ const Items = () => {
             <span>Back</span>
           </Link>
           
-          <h1 className="text-5xl font-bold text-emerald-100 mt-7 tracking-tight">
-            <span className="text-emerald-400">Organic</span> Pantry
+          <h1 className="text-5xl font-bold text-emerald-100 mt-7 ">
+            <span className="text-emerald-400 font-playfair">ORGANIC</span> PANTRY
           </h1>
           <p className="text-emerald-300 mt-4 max-w-2xl mx-auto text-lg">
             Premium quality groceries sourced from local organic farms

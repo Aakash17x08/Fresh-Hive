@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaPinterest, FaYoutube, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcAmex, FaApplePay } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcAmex, FaApplePay } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
+import { BsTelephone } from 'react-icons/bs';
+import { FiLink, FiBookmark, FiMail   } from 'react-icons/fi';
+
 
 const Footer = () => {
   const [year, setYear] = useState(new Date().getFullYear());
@@ -38,11 +41,6 @@ const Footer = () => {
             {/* Brand Column */}
             <div>
               <div className="flex items-center mb-6">
-                <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center mr-3 shadow-lg rotate-6 transform">
-                  <div className="bg-emerald-600 w-10 h-10 rounded-lg flex items-center justify-center">
-                    <FaEnvelope className="text-white text-xl" />
-                  </div>
-                </div>
                 <h2 className="text-3xl font-bold text-white tracking-wider">RUSH<span className="text-emerald-300">BASKET</span></h2>
               </div>
               <p className="text-emerald-200 mb-6 leading-relaxed">
@@ -61,9 +59,7 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-bold mb-6 pb-2 border-b-2 border-emerald-500 inline-block text-white  items-center">
                 <span className="mr-2">Quick Links</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
-                </svg>
+                <FiLink className="h-5 w-5 text-emerald-400" />
               </h3>
               <ul className="space-y-3">
                 {['About Us', 'Our Products', 'Farmers Network', 'Delivery Information', 'Privacy Policy', 'Terms & Conditions'].map((item, index) => (
@@ -81,9 +77,7 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-bold mb-6 pb-2 border-b-2 border-emerald-500 inline-block text-white  items-center">
                 <span className="mr-2">Contact Us</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
+                     <BsTelephone className="h-5 w-5 text-emerald-400" />
               </h3>
               <ul className="space-y-4">
                 <li className="flex items-start group">
@@ -101,7 +95,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <h4 className="font-medium text-emerald-300 group-hover:text-white transition-colors">Phone Number</h4>
-                    <p className="text-emerald-100 group-hover:text-white transition-colors">+1 (800) GREEN-NOW</p>
+                    <p className="text-emerald-100 group-hover:text-white transition-colors">+91 (123) LUCKNOW</p>
                   </div>
                 </li>
                 <li className="flex items-start group">
@@ -120,10 +114,7 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-bold mb-6 pb-2 border-b-2 border-emerald-500 inline-block text-white  items-center">
                 <span className="mr-2">Newsletter</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
+                <FiMail className="h-5 w-5 text-emerald-400" />
               </h3>
               <p className="text-emerald-200 mb-6">
                 Subscribe to our newsletter for fresh updates, exclusive offers, and seasonal recipes!
@@ -148,9 +139,7 @@ const Footer = () => {
           {/* Payment Methods */}
           <div className="flex flex-col items-center border-t-2 border-emerald-800 pt-8">
             <h4 className="text-emerald-300 mb-4 font-medium flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5 2a2 2 0 00-2 2v14l3.5-2 3.5 2 3.5-2 3.5 2V4a2 2 0 00-2-2H5zm2.5 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6.207.293a1 1 0 00-1.414 0l-6 6a1 1 0 101.414 1.414l6-6a1 1 0 000-1.414zM12.5 10a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" clipRule="evenodd" />
-              </svg>
+              <FiBookmark className="h-5 w-5 mr-2" />
               We Accept All Major Payment Methods
             </h4>
             <div className="flex flex-wrap justify-center gap-4 mb-6">
@@ -161,13 +150,7 @@ const Footer = () => {
               ))}
             </div>
             
-            {/* Copyright
-            <div className="text-center border-t border-emerald-800 pt-6 w-full">
-              <p className="text-emerald-400">
-                © {year} RushBasket. All rights reserved. 
-                <span className="block mt-1 text-emerald-500">Freshness Guaranteed • Sustainably Sourced</span>
-              </p>
-            </div> */}
+            
           </div>
         </div>
         

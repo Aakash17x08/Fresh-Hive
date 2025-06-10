@@ -61,8 +61,8 @@ const Cart = () => {
         {/* Centered Heading */}
         <div className="text-center mb-10">
           <h1 
-            className="text-4xl font-bold text-emerald-100 mt-12"
-            style={{ fontFamily: "'Dancing Script', cursive" }}
+            className="text-4xl font-bold font-cursive  whitespace-nowrap text-emerald-100 mt-12"
+            
           >
             Your Shopping Cart
           </h1>
