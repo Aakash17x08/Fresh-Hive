@@ -43,9 +43,9 @@ const ItemsHome = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Sidebar */}
-      <aside className="w-64 rounded-r-3xl bg-gradient-to-b from-emerald-600 to-emerald-800 text-white p-4 shadow-2xl flex flex-col">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Sidebar - hidden on small devices */}
+      <aside className="hidden lg:flex w-64 rounded-r-3xl bg-gradient-to-b from-emerald-600 to-emerald-800 text-white p-4 shadow-2xl flex-col">
         <div className="text-center mb-8 mt-4">
           <h1
             className="text-4xl font-bold tracking-tighter"
@@ -84,6 +84,25 @@ const ItemsHome = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6 overflow-y-auto">
+        {/* Mobile Category Scroll */}
+        <div className="lg:hidden mb-6 overflow-x-auto">
+          <div className="flex space-x-4">
+            {categories.map((cat) => (
+              <button
+                key={cat.name}
+                onClick={() => setActiveCategory(cat.name)}
+                className={`whitespace-nowrap px-4 py-2 rounded-full border-2 transition-colors ${
+                  activeCategory === cat.name
+                    ? "bg-emerald-600 text-white border-emerald-600"
+                    : "bg-white text-emerald-700 border-emerald-300"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Section Title */}
         <div className="text-center mb-6">
           <h2
@@ -98,15 +117,15 @@ const ItemsHome = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {filteredProducts.slice(0, 8).map((product) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
+          {filteredProducts.map((product) => {
             const qty = getQuantity(product.id);
             return (
               <div
                 key={product.id}
                 className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 border border-gray-100 transform hover:-translate-y-1"
               >
-                <div className="w-full h-52 bg-gray-100 flex items-center justify-center">
+                <div className="w-full h-40 sm:h-52 bg-gray-100 flex items-center justify-center">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -174,8 +193,7 @@ const ItemsHome = () => {
             onClick={redirectToItemsPage}
             className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-transform duration-300 inline-flex items-center text-lg"
           >
-            View All{" "}
-            {activeCategory === "All" ? "Products" : activeCategory}
+            View All {activeCategory === "All" ? "Products" : activeCategory}
             <FaChevronRight className="ml-3" />
           </button>
         </div>

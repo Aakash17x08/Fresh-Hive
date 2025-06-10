@@ -53,7 +53,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center pt-24 px-4 sm:px-6 md:px-8">
       {/* Toast */}
       {showToast && (
         <div className="fixed top-6 right-6 z-50 animate-fadeIn">
@@ -61,34 +61,29 @@ const Signup = () => {
             <FiCheckCircle className="text-xl" />
             <div>
               <p className="font-medium">Account Created Successfully!</p>
-             
             </div>
           </div>
         </div>
       )}
 
-      <div className="max-w-md w-full">
-       
- <div className="absolute top-6 mt-15 left-6">
-         <Link
-           to="/login"
-           className="flex items-center text-white hover:text-emerald-600"
-         >
-           <FiArrowLeft className="mr-2" />
-           Back to Login
-         </Link>
-       </div>
-
+      <div className="w-full max-w-md sm:max-w-lg md:max-w-md relative">
+        {/* Back Link */}
+        <div className="absolute top-6 xl:mt-23 md:mt-23 left-4 sm:-top-20">
+          <Link to="/login" className="flex items-center  text-white hover:text-emerald-600">
+            <FiArrowLeft className="mr-2" />
+            Back to Login
+          </Link>
+        </div>
 
         {/* Card */}
-        <div className="bg-gray-900 py-8 px-6 mt-20 shadow-2xl rounded-2xl border border-green-300">
+        <div className="bg-gray-900 py-8 px-6 sm:px-8 md:px-10 mt-20 sm:mt-28 md:mt-32 shadow-2xl rounded-2xl border border-green-300">
           <div className="text-center mb-8">
             <div className="mx-auto mb-4 flex justify-center">
               <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center">
                 <FiUser className="text-white text-2xl" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-green-600">Create Your Account</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-green-600">Create Your Account</h2>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -131,14 +126,12 @@ const Signup = () => {
 
             <button
               type="submit"
-              className="w-full py-4 rounded-xl bg-green-600 text-black font-medium focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-green-500/50  duration-300  hover:shadow-xl"
+              className="w-full py-4 rounded-xl bg-green-600 text-black font-medium focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-green-500/50 duration-300 hover:shadow-xl"
             >
               Create Account
             </button>
           </form>
         </div>
-
-       
       </div>
     </div>
   );
