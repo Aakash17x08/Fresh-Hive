@@ -31,7 +31,7 @@ const Cart = () => {
     return (
       <div className="min-h-screen bg-black py-12 px-4">
         <div className="container mx-auto max-w-4xl">
-          <Link to="/items" className="inline-flex cursor-pointer  items-center text-emerald-300 hover:text-emerald-100 mb-8">
+          <Link to="/items" className="inline-flex cursor-pointer items-center text-emerald-300 hover:text-emerald-100 mb-8">
             <FiArrowLeft className="mr-2" />
             Continue Shopping
           </Link>
@@ -44,7 +44,7 @@ const Cart = () => {
             </p>
             <Link
               to="/items"
-              className="inline-block bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-3 px-8 rounded-full transition-all cursor-pointer duration-300 hover:scale-[1.03]"
+              className="inline-block cursor-pointer bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-3 px-8 rounded-full transition-all duration-300 hover:scale-[1.03]"
             >
               Browse Products
             </Link>
@@ -58,7 +58,7 @@ const Cart = () => {
     <div className="min-h-screen bg-black py-12 px-4">
       <div className="container mx-auto max-w-4xl">
 
-         {/* Centered Heading */}
+        {/* Centered Heading */}
         <div className="text-center mb-10">
           <h1 
             className="text-4xl font-bold text-emerald-100 mt-12"
@@ -68,7 +68,7 @@ const Cart = () => {
           </h1>
           <button
             onClick={clearCart}
-            className="text-emerald-300 cursor-pointer  hover:text-red-400 flex items-center transition-colors"
+            className="text-emerald-300 cursor-pointer hover:text-red-400 flex items-center transition-colors"
           >
             <FiTrash2 className="mr-1" />
             Clear Cart
@@ -76,15 +76,15 @@ const Cart = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
+          {/* Cart Items as 3‑column grid */}
           <div className="lg:col-span-2">
-            <div className="bg-emerald-800/30 backdrop-blur-sm rounded-2xl border border-emerald-700 overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {cart.map((item) => (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:flex-row items-center p-6 border-b border-emerald-700 last:border-b-0"
+                  className="bg-emerald-800/30 backdrop-blur-sm rounded-2xl border border-emerald-700 p-6 flex flex-col items-center shadow-2xl"
                 >
-                  <div className="w-24 h-24 rounded-xl overflow-hidden bg-emerald-900 flex items-center justify-center">
+                  <div className="w-24 h-24 rounded-xl overflow-hidden bg-emerald-900 flex items-center justify-center mb-4">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -92,35 +92,32 @@ const Cart = () => {
                     />
                   </div>
 
-                  <div className="flex-1 px-6 py-4">
-                    <h3 className="font-bold text-emerald-50 text-lg">{item.name}</h3>
-                    <p className="text-emerald-300 mt-1">₹{item.price.toFixed(2)}</p>
-                  </div>
+                  <h3 className="font-bold text-emerald-50 text-lg mb-2">{item.name}</h3>
+                  <p className="text-emerald-300 mb-4">₹{item.price.toFixed(2)}</p>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center bg-emerald-900 rounded-full">
-                      <button
-                        onClick={() => handleQuantityChange(item.id, -1)}
-                        className="p-2 cursor-pointer  text-emerald-300 hover:text-emerald-100"
-                      >
-                        <FiMinus />
-                      </button>
-                      <span className="text-emerald-50 w-8 text-center">{item.quantity}</span>
-                      <button
-                        onClick={() => handleQuantityChange(item.id, 1)}
-                        className="p-2 cursor-pointer  text-emerald-300 hover:text-emerald-100"
-                      >
-                        <FiPlus />
-                      </button>
-                    </div>
-
+                  <div className="flex items-center space-x-4 mb-4">
                     <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="p-2 cursor-pointer  text-emerald-300 hover:text-red-400"
+                      onClick={() => handleQuantityChange(item.id, -1)}
+                      className="p-2 cursor-pointer text-emerald-300 hover:text-emerald-100"
                     >
-                      <FiTrash2 />
+                      <FiMinus />
+                    </button>
+                    <span className="text-emerald-50 w-8 text-center">{item.quantity}</span>
+                    <button
+                      onClick={() => handleQuantityChange(item.id, 1)}
+                      className="p-2 cursor-pointer text-emerald-300 hover:text-emerald-100"
+                    >
+                      <FiPlus />
                     </button>
                   </div>
+
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="flex cursor-pointer items-center text-emerald-300 hover:text-red-400"
+                  >
+                    <FiTrash2 className="mr-1" />
+                    Remove
+                  </button>
                 </div>
               ))}
             </div>
@@ -157,15 +154,15 @@ const Cart = () => {
                 </div>
               </div>
 
-              <button className="mt-8 w-full bg-emerald-400 hover:bg-emerald-300 text-black font-bold py-4 rounded-xl transition-all cursor-pointer duration-300">
+              <button className="mt-8 w-full bg-emerald-400 hover:bg-emerald-300 text-black font-bold py-4 rounded-xl transition-all duration-300">
                 Proceed to Checkout
               </button>
 
               <div className="mt-6 text-center">
-               <Link to="/items" className="inline-flex items-center  text-emerald-300 hover:text-emerald-100 mb-8">
-          <FiArrowLeft className="mr-2" />
-          Continue Shopping
-        </Link>
+                <Link to="/items" className="inline-flex items-center text-emerald-300 hover:text-emerald-100">
+                  <FiArrowLeft className="mr-2" />
+                  Continue Shopping
+                </Link>
               </div>
             </div>
           </div>

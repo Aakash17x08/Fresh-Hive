@@ -1,20 +1,24 @@
 // src/page/ItemsHome.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaChevronRight, FaMinus, FaPlus } from "react-icons/fa";
 import { categories, products } from "../components/dummyData.jsx";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
 
 const ItemsHome = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  // 1) Initialize from localStorage (or "All" if nothing is stored)
+  const [activeCategory, setActiveCategory] = useState(() => {
+    return localStorage.getItem("activeCategory") || "All";
+  });
+
+  // 2) Whenever activeCategory changes, save it
+  useEffect(() => {
+    localStorage.setItem("activeCategory", activeCategory);
+  }, [activeCategory]);
+
   const navigate = useNavigate();
-  const {
-    cart,
-    addToCart,
-    updateQuantity,
-    removeFromCart
-  } = useCart();
+  const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
 
   // Filter products by active category
   const filteredProducts =
@@ -22,23 +26,16 @@ const ItemsHome = () => {
       ? products
       : products.filter((product) => product.category === activeCategory);
 
-  // Helper to get current quantity in cart for a product
   const getQuantity = (productId) => {
     const item = cart.find((ci) => ci.id === productId);
     return item ? item.quantity : 0;
   };
 
-  const handleIncrease = (product) => {
-    addToCart(product, 1);
-  };
-
+  const handleIncrease = (product) => addToCart(product, 1);
   const handleDecrease = (product) => {
     const qty = getQuantity(product.id);
-    if (qty > 1) {
-      updateQuantity(product.id, qty - 1);
-    } else {
-      removeFromCart(product.id);
-    }
+    if (qty > 1) updateQuantity(product.id, qty - 1);
+    else removeFromCart(product.id);
   };
 
   const redirectToItemsPage = () => {
@@ -68,7 +65,7 @@ const ItemsHome = () => {
               <li key={category.name}>
                 <button
                   onClick={() => setActiveCategory(category.name)}
-                  className={`w-full cursor-pointer  flex items-center p-4 rounded-xl transition-transform transform hover:scale-105 ${
+                  className={`w-full cursor-pointer flex items-center p-4 rounded-xl transition-transform transform hover:scale-105 ${
                     activeCategory === category.name
                       ? "bg-white text-emerald-700 font-bold shadow-lg"
                       : "bg-emerald-700 hover:bg-emerald-500"
@@ -142,7 +139,7 @@ const ItemsHome = () => {
                     {qty === 0 ? (
                       <button
                         onClick={() => handleIncrease(product)}
-                        className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer  px-4 py-2 rounded-full flex items-center transition-shadow shadow-md hover:shadow-lg"
+                        className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-4 py-2 rounded-full flex items-center transition-shadow shadow-md hover:shadow-lg"
                       >
                         <FaShoppingCart className="mr-2" />
                         Add
@@ -151,14 +148,14 @@ const ItemsHome = () => {
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => handleDecrease(product)}
-                          className="p-2 cursor-pointer  bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200"
+                          className="p-2 cursor-pointer bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200"
                         >
                           <FaMinus />
                         </button>
                         <span className="font-bold">{qty}</span>
                         <button
                           onClick={() => handleIncrease(product)}
-                          className="p-2 cursor-pointer  bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200"
+                          className="p-2 cursor-pointer bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200"
                         >
                           <FaPlus />
                         </button>
