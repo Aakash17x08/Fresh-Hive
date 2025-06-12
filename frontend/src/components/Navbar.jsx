@@ -22,6 +22,16 @@ export default function Navbar() {
     setActiveTab(location.pathname);
     setIsOpen(false);
   }, [location]);
+  const [scrolled, setScrolled] = useState(false)
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const navItems = [
     { name: 'Home', path: '/', icon: <FiHome className="text-xl" /> },
@@ -30,7 +40,21 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 bg-black backdrop-blur-lg shadow-xl">
+    
+    <nav className={`fixed w-full z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-black/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] h-16"
+          : "bg-gradient-to-r from-black/80 via-slate-900/80 to-black/80 backdrop-blur-lg h-20"
+      }`}>
+      {/* Animated border gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+
+      {/* Animated particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="particle absolute w-24 h-24 rounded-full bg-emerald-500/5 -top-12 left-1/4 animate-float"></div>
+        <div className="particle absolute w-32 h-32 rounded-full bg-green-500/5 -bottom-16 left-2/3 animate-float-slow"></div>
+        <div className="particle absolute w-16 h-16 rounded-full bg-teal-500/5 -top-8 left-3/4 animate-float-slower"></div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
