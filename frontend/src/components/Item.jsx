@@ -45,7 +45,7 @@ const ProductCard = ({ item }) => {
           <h3 className="font-bold text-emerald-50 text-lg truncate max-w-[70%]">
             {item.name}
           </h3>
-          <span className="text-emerald-300 text-sm bg-emerald-800/50 px-2 py-1 rounded-full">
+          <span className="text-black text-sm bg-emerald-800/50 px-2 py-1 rounded-full">
             Organic
           </span>
         </div>

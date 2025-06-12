@@ -62,7 +62,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm sm:text-base">
               {['About Us', 'Our Products', 'Farmers Network', 'Delivery Information', 'Privacy Policy', 'Terms & Conditions'].map((item, idx) => (
                 <li key={idx}>
-                  <a href="#" className="flex items-center group hover:text-white">
+                  <a href="" className="flex items-center group hover:text-white">
                     <span className="inline-block w-2 h-2 bg-emerald-400 rounded-full mr-3 group-hover:bg-white transition-colors"></span>
                     {item}
                   </a>

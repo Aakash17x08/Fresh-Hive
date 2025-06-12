@@ -60,7 +60,7 @@ const ContactUs = () => {
       <div className="w-full max-w-md z-10">
         {/* Unified Heading */}
         <div className="flex flex-col items-center justify-center mt-15">
-          <h1 className="text-4xl sm:text-5xl font-bold text-center text-emerald-100 font-cursive whitespace-nowrap">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-center text-emerald-100 whitespace-nowrap">
             Contact FreshGrocers
           </h1>
           <div className="w-32 h-1 bg-gradient-to-r from-emerald-400 to-green-300 rounded-full mt-4"></div>

@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300 tracking-tight group-hover:scale-105 transition-transform">
+            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300 tracking-tight transition-transform">
               RushBasket
             </span>
           </Link>
