@@ -109,7 +109,7 @@ const Cart = () => {
 
                   <button
                     onClick={() => removeFromCart(item.id)}
-                    className="flex items-center text-emerald-300 hover:text-red-400 text-sm sm:text-base"
+                    className="flex items-center cursor-pointer text-emerald-300 hover:text-red-400 text-sm sm:text-base"
                   >
                     <FiTrash2 className="mr-1" />
                     Remove
@@ -148,7 +148,7 @@ const Cart = () => {
                 </div>
               </div>
 
-              <button className="mt-6 sm:mt-8 w-full bg-emerald-400 hover:bg-emerald-300 text-black font-bold py-3 sm:py-4 rounded-xl transition-all duration-300 text-sm sm:text-base">
+              <button className="mt-6 sm:mt-8 w-full bg-emerald-400 hover:bg-emerald-300 text-black font-bold py-3 sm:py-4 cursor-pointer rounded-xl transition-all duration-300 text-sm sm:text-base">
                 Proceed to Checkout
               </button>
 

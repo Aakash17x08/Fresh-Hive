@@ -61,7 +61,7 @@ const Login = () => {
       )}
 
       {/* Back to Home */}
-      <div className="absolute top-6 mt-14 left-4 sm:left-6 z-20">
+      <div className="absolute top-6 mt-16 left-4 sm:left-6 z-20">
         <Link
           to="/"
           className="flex items-center text-white hover:underline hover:text-emerald-600"
@@ -72,11 +72,8 @@ const Login = () => {
       </div>
 
       {/* Login Card */}
-      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg z-10 scroll-mt-36">
+      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg z-10 mb-22">
         <div className="login-card relative overflow-hidden rounded-3xl shadow-2xl">
-          {/* Internal Glow Circles */}
-          <div className="absolute -top-32 -left-32 w-64 h-64 bg-gradient-to-r from-emerald-500 to-transparent rounded-full opacity-20 animate-spin-slow"></div>
-          <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-gradient-to-l from-green-500 to-transparent rounded-full opacity-20 animate-spin-slow-reverse"></div>
 
           <div className="relative bg-gray-900 bg-opacity-80 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-emerald-700/30">
             {/* Logo Avatar */}
@@ -159,24 +156,8 @@ const Login = () => {
               </button>
             </form>
 
-            {/* Social Auth */}
-            <div className="flex items-center my-6">
-              <div className="flex-grow border-t border-gray-700"></div>
-              <span className="mx-3 text-gray-400 text-sm">Or continue with</span>
-              <div className="flex-grow border-t border-gray-700"></div>
-            </div>
-
-            <div className="flex justify-center space-x-6 mb-4">
-              <button className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition">
-                <FaGoogle className="text-white" />
-              </button>
-              <button className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition">
-                <FaGithub className="text-white" />
-              </button>
-            </div>
-
             {/* Footer */}
-            <p className="text-center text-white text-sm">
+            <p className="text-center mt-3 text-white text-sm">
               Don’t have an account?{' '}
               <Link
                 to="/signup"
