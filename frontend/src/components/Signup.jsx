@@ -70,63 +70,92 @@ const Signup = () => {
   };
 
   return (
-    <div className="relative w-full h-screen  bg-black flex items-center justify-center px-4">
+    <div className="relative w-full min-h-screen bg-black flex items-center justify-center p-4 sm:p-6">
       {/* Back to Login (top-left) */}
       <Link
         to="/login"
-        className="absolute top-4 left-4 mt-19 flex items-center text-white hover:text-emerald-600"
+        className="
+          absolute top-4 left-4 flex items-center 
+          text-white hover:text-emerald-600 z-10
+          text-sm sm:text-base mt-19
+        "
       >
-        <FiArrowLeft className="mr-2" /> Back to Login
+        <FiArrowLeft className="mr-2" /> 
+        <span className=" sm:inline">Back to Login</span>
+       
       </Link>
 
-      {/* Toast */}
+      {/* Toast - Responsive positioning */}
       {showToast && (
-        <div className="fixed top-6 right-6 z-50 animate-fadeIn">
-          <div className="bg-green-500 text-black px-4 py-3 rounded-xl shadow-lg flex items-center space-x-2 transition duration-300">
+        <div className="
+          fixed z-50 animate-fadeIn
+          top-4 inset-x-4 mx-auto max-w-max
+          sm:top-6 sm:right-6 sm:left-auto sm:mx-0
+        ">
+          <div className="bg-green-500 text-black px-4 py-3 rounded-xl shadow-lg flex items-center space-x-2">
             <FiCheckCircle className="text-lg" />
             <span className="font-medium text-sm">Account Created!</span>
           </div>
         </div>
       )}
 
-      {/* Signup Card */}
-      <div className="w-full max-w-md bg-gray-900 py-6 px-5 shadow-2xl mt-20 rounded-2xl border border-green-300">
+      {/* Responsive Signup Card */}
+      <div className="
+        w-full 
+        max-w-xs   /* Mobile */
+        sm:max-w-sm   /* Small tablets */
+        md:max-w-md   /* Tablets */
+        bg-gray-900 
+        py-5 sm:py-6 
+        px-4 sm:px-5 md:px-6 
+        shadow-2xl 
+        rounded-2xl 
+        border border-green-300
+        mt-25 sm:mt-20  md:mt-24  /* Center vertically */
+      ">
         <div className="text-center mb-5">
           <div className="mx-auto mb-3 flex justify-center">
-            <div className="bg-green-600 w-12 h-12 rounded-full flex items-center justify-center">
-              <FiUser className="text-white text-xl" />
+            <div className="
+              bg-green-600 
+              w-10 h-10 sm:w-12 sm:h-12 
+              rounded-full 
+              flex items-center justify-center
+            ">
+              <FiUser className="text-white text-lg sm:text-xl" />
             </div>
           </div>
-          <h2 className="text-xl font-bold text-green-600">Create Account</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-green-600">
+            Create Account
+          </h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           {[
             {
               id: 'name',
               label: 'Full Name',
-              icon: <FiUser />,
+              icon: <FiUser className="text-base sm:text-lg" />,
               type: 'text',
               placeholder: 'John Doe',
             },
             {
               id: 'email',
               label: 'Email',
-              icon: <FiMail />,
+              icon: <FiMail className="text-base sm:text-lg" />,
               type: 'email',
               placeholder: 'john@example.com',
             },
             {
               id: 'password',
               label: 'Password',
-              icon: <FiLock />,
+              icon: <FiLock className="text-base sm:text-lg" />,
               type: showPwd.password ? 'text' : 'password',
               placeholder: '••••••••',
             },
             {
               id: 'confirmPassword',
               label: 'Confirm Password',
-              icon: <FiLock />,
+              icon: <FiLock className="text-base sm:text-lg" />,
               type: showPwd.confirmPassword ? 'text' : 'password',
               placeholder: '••••••••',
             },
@@ -134,7 +163,7 @@ const Signup = () => {
             <div key={field.id}>
               <label
                 htmlFor={field.id}
-                className="block text-sm font-medium text-green-600 mb-1"
+                className="block text-xs sm:text-sm font-medium text-green-600 mb-1"
               >
                 {field.label}
               </label>
@@ -149,11 +178,24 @@ const Signup = () => {
                   placeholder={field.placeholder}
                   value={formData[field.id]}
                   onChange={handleChange}
-                  className={`bg-green-100 border ${
-                    errors[field.id]
+                  className={`
+                    w-full 
+                    pl-9 sm:pl-10 
+                    pr-10 
+                    py-2 sm:py-2.5 
+                    bg-green-100 
+                    border 
+                    ${errors[field.id]
                       ? 'border-red-500'
                       : 'border-green-300 focus:border-green-500'
-                  } text-green-700 rounded-xl focus:ring-2 focus:ring-green-500/30 block w-full pl-10 pr-10 py-2.5 transition-all`}
+                    } 
+                    text-green-700 
+                    rounded-lg sm:rounded-xl 
+                    focus:ring-2 focus:ring-green-500/30 
+                    block 
+                    transition-all
+                    text-sm sm:text-base
+                  `}
                 />
                 {field.id.includes('password') && (
                   <button
@@ -161,7 +203,10 @@ const Signup = () => {
                     onClick={() => toggleShow(field.id)}
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-green-500"
                   >
-                    {showPwd[field.id] ? <FiEyeOff /> : <FiEye />}
+                    {showPwd[field.id] ? 
+                      <FiEyeOff className="text-base sm:text-lg" /> : 
+                      <FiEye className="text-base sm:text-lg" />
+                    }
                   </button>
                 )}
               </div>
@@ -175,7 +220,20 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="w-full py-3 cursor-pointer rounded-xl bg-green-600 text-black font-medium focus:outline-none focus:ring-2 focus:ring-green-500/50 transition duration-200 hover:shadow-lg"
+            className="
+              w-full 
+              py-2.5 sm:py-3 
+              cursor-pointer 
+              rounded-lg sm:rounded-xl 
+              bg-green-600 
+              text-black 
+              font-medium 
+              focus:outline-none 
+              focus:ring-2 focus:ring-green-500/50 
+              transition duration-200 
+              hover:bg-green-500
+              text-sm sm:text-base
+            "
           >
             Create Account
           </button>
