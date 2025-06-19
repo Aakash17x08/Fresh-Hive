@@ -37,17 +37,13 @@ const ItemsHome = () => {
     );
   };
 
-  // Filter products by active category
-  const filteredProducts =
-    activeCategory === "All"
-      ? products
-      : products.filter((product) => product.category === activeCategory);
-  
-  // Apply search term filtering
+  // FIXED: Search across ALL products when search term exists
   const searchedProducts = searchTerm
-    ? filteredProducts.filter(product => 
+    ? products.filter(product => 
         productMatchesSearch(product, searchTerm))
-    : filteredProducts;
+    : (activeCategory === "All"
+        ? products
+        : products.filter((product) => product.category === activeCategory));
 
   const getQuantity = (productId) => {
     const item = cart.find((ci) => ci.id === productId);
@@ -96,9 +92,12 @@ const ItemsHome = () => {
               {categories.map((category) => (
                 <li key={category.name}>
                   <button
-                    onClick={() => setActiveCategory(category.name)}
+                    onClick={() => {
+                      setActiveCategory(category.name);
+                      setSearchTerm(''); // Clear search when changing category
+                    }}
                     className={`w-full cursor-pointer flex items-center p-4 rounded-xl transition-transform transform hover:scale-105 ${
-                      activeCategory === category.name
+                      activeCategory === category.name && !searchTerm
                         ? "bg-white text-emerald-700 font-bold shadow-lg"
                         : "bg-emerald-700 hover:bg-emerald-500"
                     }`}
@@ -122,9 +121,12 @@ const ItemsHome = () => {
               {categories.map((cat) => (
                 <button
                   key={cat.name}
-                  onClick={() => setActiveCategory(cat.name)}
+                  onClick={() => {
+                    setActiveCategory(cat.name);
+                    setSearchTerm(''); // Clear search when changing category
+                  }}
                   className={`whitespace-nowrap px-4 py-2 rounded-full border-2 transition-colors ${
-                    activeCategory === cat.name
+                    activeCategory === cat.name && !searchTerm
                       ? "bg-emerald-600 text-white border-emerald-600"
                       : "bg-white text-emerald-700 border-emerald-300"
                   }`}
@@ -152,15 +154,18 @@ const ItemsHome = () => {
             </div>
           )}
 
-          {/* Section Title */}
+          {/* Section Title - Updated to show correct title during search */}
           <div className="text-center mb-6">
             <h2
               className="text-3xl font-bold text-emerald-700 capitalize mb-2"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              {activeCategory === "All"
-                ? "Featured Products"
-                : `Best ${activeCategory}`}
+              {searchTerm 
+                ? "Search Results" 
+                : (activeCategory === "All"
+                    ? "Featured Products"
+                    : `Best ${activeCategory}`)
+              }
             </h2>
             <div className="w-32 h-1 bg-emerald-500 mx-auto rounded-full mb-6" />
           </div>
