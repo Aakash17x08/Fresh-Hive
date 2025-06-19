@@ -1,12 +1,14 @@
+// components/BannerHome.js
 import React, { useState } from 'react';
 import { FiSearch, FiShoppingCart, FiTruck, FiPercent, FiGift } from 'react-icons/fi';
 import BannerFood from '../assets/FoodBanner.png';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import {bannerStyles} from '../assets/dummyStyles'; // Import styles
 
 const BannerHome = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
- 
+  
   const handleSearch = (e) => setSearchTerm(e.target.value);
   
   const handleSubmit = (e) => {
@@ -15,11 +17,9 @@ const BannerHome = ({ onSearch }) => {
     
     if (trimmedTerm) {
       if (onSearch) {
-        // Enhanced search for ItemsHome page
         const searchWords = trimmedTerm.toLowerCase().split(/\s+/);
         onSearch(searchWords.join(' '));
       } else {
-        // Navigate to Items page with search query
         navigate(`/items?search=${encodeURIComponent(trimmedTerm)}`);
       }
       setSearchTerm('');
@@ -27,16 +27,16 @@ const BannerHome = ({ onSearch }) => {
   };
 
   const features = [
-    { icon: <FiTruck className="h-6 w-6" />, text: 'Fast Delivery' },
-    { icon: <FiPercent className="h-6 w-6" />, text: 'Best Prices' },
-    { icon: <FiShoppingCart className="h-6 w-6" />, text: 'Easy Returns' },
-    { icon: <FiGift className="h-6 w-6" />, text: 'Daily Deals' },
+    { icon: <FiTruck className={bannerStyles.featureIcon} />, text: 'Fast Delivery' },
+    { icon: <FiPercent className={bannerStyles.featureIcon} />, text: 'Best Prices' },
+    { icon: <FiShoppingCart className={bannerStyles.featureIcon} />, text: 'Easy Returns' },
+    { icon: <FiGift className={bannerStyles.featureIcon} />, text: 'Daily Deals' },
   ];
 
   return (
     <div className="relative overflow-hidden pt-16">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-mint-100 to-seafoam-100 z-0"></div>
+      <div className={bannerStyles.backgroundGradient}></div>
 
       {/* Decorative circles */}
       <div className="hidden sm:block absolute top-6 left-6 w-20 h-20 rounded-full bg-teal-100 opacity-30"></div>
@@ -47,35 +47,35 @@ const BannerHome = ({ onSearch }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-center">
           {/* Left Content */}
           <div className="text-center md:text-left">
-            <div className="inline-block bg-teal-50 text-teal-800 px-3 py-1 rounded-full mb-3 border border-teal-100">
+            <div className={bannerStyles.tag}>
               <span className="flex items-center text-sm sm:text-base">
                 <FiTruck className="mr-2" /> Free delivery on orders over ₹500
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className={bannerStyles.heading}>
               Fresh{' '}
-              <span className="font-serif italic text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-teal-700">
+              <span className={bannerStyles.headingItalic}>
                 Groceries
               </span>
               <br />Delivered to Your Door
             </h1>
 
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 mx-auto md:mx-0 max-w-md md:max-w-lg">
+            <p className={bannerStyles.paragraph}>
               Discover the freshest produce, top‐quality meats, and pantry essentials—all delivered within 30 minutes.
             </p>
 
-            <form onSubmit={handleSubmit} className="relative max-w-md mx-auto md:mx-0 mb-6">
+            <form onSubmit={handleSubmit} className={bannerStyles.form}>
               <input
                 type="text"
                 value={searchTerm}
                 onChange={handleSearch}
                 placeholder="Search for fruits, vegetables, meats, dairy..."
-                className="w-full py-3 sm:py-4 px-4 pr-12 rounded-2xl border border-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-300 shadow-sm"
+                className={bannerStyles.input}
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-teal-600 text-white p-2 rounded-full hover:bg-teal-700 transition-colors"
+                className={bannerStyles.searchButton}
               >
                 <FiSearch className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
@@ -85,10 +85,10 @@ const BannerHome = ({ onSearch }) => {
               {features.map((f, i) => (
                 <div
                   key={i}
-                  className="bg-white bg-opacity-80 backdrop-blur-sm rounded-xl p-2 sm:p-3 flex flex-col items-center shadow-sm border border-teal-50 hover:shadow-md transition-shadow"
+                  className={bannerStyles.featureItem}
                 >
                   <div className="text-teal-600 mb-1">{f.icon}</div>
-                  <span className="text-gray-700 font-medium text-xs sm:text-sm">
+                  <span className={bannerStyles.featureText}>
                     {f.text}
                   </span>
                 </div>
@@ -98,8 +98,8 @@ const BannerHome = ({ onSearch }) => {
 
           {/* Right Image */}
           <div className="relative flex justify-center">
-            <div className="z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md w-full transform transition-transform duration-500 hover:scale-[1.02]">
-              <div className="rounded-xl overflow-hidden w-full h-48 sm:h-56 md:h-64 lg:h-[350px] shadow-lg border-4 border-white">
+            <div className={bannerStyles.imageContainer}>
+              <div className={bannerStyles.imageInner}>
                 <img
                   src={BannerFood}
                   alt="Fresh Groceries"

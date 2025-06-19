@@ -1,10 +1,10 @@
-// src/pages/ItemsHome.jsx
 import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaChevronRight, FaMinus, FaPlus } from "react-icons/fa";
 import { categories, products } from "../components/dummyData.jsx";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
 import BannerHome from "../components/BannerHome";
+import { itemsHomeStyles } from "../assets/dummyStyles.js";
 
 const ItemsHome = () => {
   // 1) Initialize from localStorage (or "All" if nothing is stored)
@@ -67,16 +67,16 @@ const ItemsHome = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className={itemsHomeStyles.page}>
       {/* Banner at the top */}
       <BannerHome onSearch={handleSearch} />
       
       <div className="flex flex-col lg:flex-row flex-1">
         {/* Sidebar - hidden on small devices */}
-        <aside className="hidden lg:flex w-64 rounded-r-3xl bg-gradient-to-b from-emerald-600 to-emerald-800 text-white p-4 shadow-2xl flex-col">
-          <div className="text-center mb-8 mt-4">
+        <aside className={itemsHomeStyles.sidebar}>
+          <div className={itemsHomeStyles.sidebarHeader}>
             <h1
-              className="text-4xl font-bold tracking-tighter"
+              className={itemsHomeStyles.sidebarTitle}
               style={{
                 fontFamily: "'Playfair Display', serif",
                 textShadow: "2px 2px 4px rgba(0,0,0,0.2)",
@@ -84,10 +84,10 @@ const ItemsHome = () => {
             >
               FreshCart
             </h1>
-            <div className="w-32 h-1 bg-emerald-400 mx-auto mt-2 rounded-full" />
+            <div className={itemsHomeStyles.sidebarDivider} />
           </div>
 
-          <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-emerald-500 scrollbar-track-emerald-700">
+          <div className={itemsHomeStyles.categoryList}>
             <ul className="space-y-3">
               {categories.map((category) => (
                 <li key={category.name}>
@@ -96,16 +96,16 @@ const ItemsHome = () => {
                       setActiveCategory(category.name);
                       setSearchTerm(''); // Clear search when changing category
                     }}
-                    className={`w-full cursor-pointer flex items-center p-4 rounded-xl transition-transform transform hover:scale-105 ${
+                    className={`${itemsHomeStyles.categoryItem} ${
                       activeCategory === category.name && !searchTerm
-                        ? "bg-white text-emerald-700 font-bold shadow-lg"
-                        : "bg-emerald-700 hover:bg-emerald-500"
+                        ? itemsHomeStyles.activeCategory
+                        : itemsHomeStyles.inactiveCategory
                     }`}
                   >
-                    <div className="bg-emerald-500 p-3 rounded-full">
+                    <div className={itemsHomeStyles.categoryIcon}>
                       {category.icon}
                     </div>
-                    <span className="ml-4 text-lg">{category.name}</span>
+                    <span className={itemsHomeStyles.categoryName}>{category.name}</span>
                   </button>
                 </li>
               ))}
@@ -114,9 +114,9 @@ const ItemsHome = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className={itemsHomeStyles.mainContent}>
           {/* Mobile Category Scroll */}
-          <div className="lg:hidden mb-6 overflow-x-auto">
+          <div className={itemsHomeStyles.mobileCategories}>
             <div className="flex space-x-4">
               {categories.map((cat) => (
                 <button
@@ -125,10 +125,10 @@ const ItemsHome = () => {
                     setActiveCategory(cat.name);
                     setSearchTerm(''); // Clear search when changing category
                   }}
-                  className={`whitespace-nowrap px-4 py-2 rounded-full border-2 transition-colors ${
+                  className={`${itemsHomeStyles.mobileCategoryItem} ${
                     activeCategory === cat.name && !searchTerm
-                      ? "bg-emerald-600 text-white border-emerald-600"
-                      : "bg-white text-emerald-700 border-emerald-300"
+                      ? itemsHomeStyles.activeMobileCategory
+                      : itemsHomeStyles.inactiveMobileCategory
                   }`}
                 >
                   {cat.name}
@@ -139,7 +139,7 @@ const ItemsHome = () => {
 
           {/* Search Results Header - Added */}
           {searchTerm && (
-            <div className="text-center mb-6 bg-white rounded-xl p-4 shadow-sm max-w-2xl mx-auto">
+            <div className={itemsHomeStyles.searchResults}>
               <div className="flex items-center justify-center">
                 <span className="text-emerald-700 font-medium">
                   Search results for: <span className="font-bold">"{searchTerm}"</span>
@@ -157,7 +157,7 @@ const ItemsHome = () => {
           {/* Section Title - Updated to show correct title during search */}
           <div className="text-center mb-6">
             <h2
-              className="text-3xl font-bold text-emerald-700 capitalize mb-2"
+              className={itemsHomeStyles.sectionTitle}
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               {searchTerm 
@@ -167,24 +167,24 @@ const ItemsHome = () => {
                     : `Best ${activeCategory}`)
               }
             </h2>
-            <div className="w-32 h-1 bg-emerald-500 mx-auto rounded-full mb-6" />
+            <div className={itemsHomeStyles.sectionDivider} />
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
+          <div className={itemsHomeStyles.productsGrid}>
             {searchedProducts.length > 0 ? (
               searchedProducts.map((product) => {
                 const qty = getQuantity(product.id);
                 return (
                   <div
                     key={product.id}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 border border-gray-100 transform hover:-translate-y-1"
+                    className={itemsHomeStyles.productCard}
                   >
-                    <div className="w-full h-40 sm:h-52 bg-gray-100 flex items-center justify-center">
+                    <div className={itemsHomeStyles.imageContainer}>
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="max-h-full object-cover transition-transform duration-300"
+                        className={itemsHomeStyles.productImage}
                         onError={(e) => {
                           e.target.onerror = null;
                           e.target.parentNode.innerHTML = `
@@ -195,16 +195,16 @@ const ItemsHome = () => {
                       />
                     </div>
 
-                    <div className="p-5">
-                      <h3 className="font-bold text-lg text-gray-800 text-center mb-2 line-clamp-1">
+                    <div className={itemsHomeStyles.productContent}>
+                      <h3 className={itemsHomeStyles.productTitle}>
                         {product.name}
                       </h3>
-                      <div className="flex justify-between items-center mt-4">
+                      <div className={itemsHomeStyles.priceContainer}>
                         <div>
-                          <p className="text-emerald-600 font-bold text-xl">
+                          <p className={itemsHomeStyles.currentPrice}>
                             ₹{product.price.toFixed(2)}
                           </p>
-                          <span className="text-gray-500 text-sm line-through">
+                          <span className={itemsHomeStyles.oldPrice}>
                             ₹{(product.price * 1.2).toFixed(2)}
                           </span>
                         </div>
@@ -213,23 +213,23 @@ const ItemsHome = () => {
                         {qty === 0 ? (
                           <button
                             onClick={() => handleIncrease(product)}
-                            className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-4 py-2 rounded-full flex items-center transition-shadow shadow-md hover:shadow-lg"
+                            className={itemsHomeStyles.addButton}
                           >
                             <FaShoppingCart className="mr-2" />
                             Add
                           </button>
                         ) : (
-                          <div className="flex items-center space-x-2">
+                          <div className={itemsHomeStyles.quantityControls}>
                             <button
                               onClick={() => handleDecrease(product)}
-                              className="p-2 cursor-pointer bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200"
+                              className={itemsHomeStyles.quantityButton}
                             >
                               <FaMinus />
                             </button>
                             <span className="font-bold">{qty}</span>
                             <button
                               onClick={() => handleIncrease(product)}
-                              className="p-2 cursor-pointer bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200"
+                              className={itemsHomeStyles.quantityButton}
                             >
                               <FaPlus />
                             </button>
@@ -241,13 +241,13 @@ const ItemsHome = () => {
                 );
               })
             ) : (
-              <div className="col-span-full text-center py-12">
-                <div className="text-emerald-600 font-medium text-xl mb-4">
+              <div className={itemsHomeStyles.noProducts}>
+                <div className={itemsHomeStyles.noProductsText}>
                   No products found
                 </div>
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-colors"
+                  className={itemsHomeStyles.clearSearchButton}
                 >
                   Clear Search
                 </button>
@@ -260,7 +260,7 @@ const ItemsHome = () => {
             <div className="text-center">
               <button
                 onClick={redirectToItemsPage}
-                className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-transform duration-300 inline-flex items-center text-lg"
+                className={itemsHomeStyles.viewAllButton}
               >
                 View All {activeCategory === "All" ? "Products" : activeCategory}
                 <FaChevronRight className="ml-3" />

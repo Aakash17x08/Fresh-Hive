@@ -8,6 +8,7 @@ import {
   FaCheck,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { loginStyles } from "../assets/dummyStyles";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +32,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.remember) {
-      setError("You must agree to “Remember me” before signing in.");
+      setError("You must agree to \"Remember me\" before signing in.");
       return;
     }
     setError("");
@@ -43,16 +44,11 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="
-        relative w-full h-screen bg-black flex items-center justify-center
-        overflow-hidden px-4 sm:px-6 md:px-8 lg:px-4
-      "
-    >
+    <div className={loginStyles.page}>
       {/* Back to Home */}
       <Link
         to="/"
-        className="absolute top-4 left-4 mt-19 flex items-center text-white hover:text-emerald-400 z-20"
+        className={loginStyles.backLink}
       >
         <FaArrowLeft className="mr-2" />
         Back to Home
@@ -60,59 +56,31 @@ const Login = () => {
 
       {/* Toast Notification */}
       {showToast && (
-        <div
-          className="
-            fixed top-16 right-6 bg-green-600 text-black inline-flex items-center
-            px-4 py-2 rounded-lg shadow-lg z-50
-          "
-        >
+        <div className={loginStyles.toast}>
           <FaCheck className="mr-2" />
           Login successful!
         </div>
       )}
 
       {/* Login Card */}
-      <div
-        className="
-          mt-29 md:mt-24 lg:mt-0         
-          sm:max-w-xs
-          md:max-w-md
-          lg:max-w-sm
-          bg-gray-900 bg-opacity-80 backdrop-blur-sm
-          p-6 sm:p-8 md:p-10 lg:p-6
-          rounded-2xl border border-green-700/30 shadow-lg
-          flex-shrink-0
-        "
-      >
+      <div className={loginStyles.loginCard}>
         {/* Logo Avatar */}
-        <div className="flex justify-center mb-6">
-          <div
-            className="
-              w-16 h-16 sm:w-20 sm:h-20 rounded-full
-              bg-gradient-to-br from-emerald-500 to-green-500
-              flex items-center justify-center shadow-lg
-            "
-          >
-            <div
-              className="
-                w-12 h-12 sm:w-16 sm:h-16
-                bg-emerald-800 rounded-full
-                flex items-center justify-center
-              "
-            >
-              <FaUser className="text-xl sm:text-3xl text-emerald-400" />
+        <div className={loginStyles.logoContainer}>
+          <div className={loginStyles.logoOuter}>
+            <div className={loginStyles.logoInner}>
+              <FaUser className={loginStyles.logoIcon} />
             </div>
           </div>
         </div>
 
-        <h2 className="text-center text-lg sm:text-xl font-semibold text-white mb-4">
+        <h2 className={loginStyles.title}>
           Welcome Back
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className={loginStyles.form}>
           {/* Email */}
-          <div className="relative">
-            <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <div className={loginStyles.inputContainer}>
+            <FaUser className={loginStyles.inputIcon} />
             <input
               type="email"
               name="email"
@@ -120,17 +88,13 @@ const Login = () => {
               onChange={handleChange}
               placeholder="Email Address"
               required
-              className="
-                w-full pl-10 pr-3 py-2.5
-                bg-gray-800 text-white rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-green-500
-              "
+              className={loginStyles.input}
             />
           </div>
 
           {/* Password */}
-          <div className="relative">
-            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <div className={loginStyles.inputContainer}>
+            <FaLock className={loginStyles.inputIcon} />
             <input
               type={showPassword ? "text" : "password"}
               name="password"
@@ -138,16 +102,12 @@ const Login = () => {
               onChange={handleChange}
               placeholder="Password"
               required
-              className="
-                w-full pl-10 pr-10 py-2.5
-                bg-gray-800 text-white rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-green-500
-              "
+              className={loginStyles.passwordInput}
             />
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              className={loginStyles.toggleButton}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -155,43 +115,36 @@ const Login = () => {
           </div>
 
           {/* Remember + Forgot */}
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center text-white">
+          <div className={loginStyles.rememberContainer}>
+            <label className={loginStyles.rememberLabel}>
               <input
                 type="checkbox"
                 name="remember"
                 checked={formData.remember}
                 onChange={handleChange}
-                className="
-                  mr-2 h-4 w-4 cursor-pointer
-                  text-green-500 bg-gray-800 border-gray-600 rounded
-                  focus:ring-green-500
-                "
+                className={loginStyles.rememberCheckbox}
                 required
               />
               Remember me
             </label>
-            <Link to="#" className="text-green-400 hover:underline">
+            <Link to="#" className={loginStyles.forgotLink}>
               Forgot?
             </Link>
           </div>
 
-          {error && <p className="text-xs text-red-500">{error}</p>}
+          {error && <p className={loginStyles.error}>{error}</p>}
 
           <button
             type="submit"
-            className="
-              w-full py-2.5 bg-green-500 hover:bg-green-600
-              text-black font-medium rounded-lg transition
-            "
+            className={loginStyles.submitButton}
           >
             Sign In
           </button>
         </form>
 
-        <p className="text-center text-sm text-white mt-6">
-          Don’t have an account?{" "}
-          <Link to="/signup" className="text-green-400 hover:underline">
+        <p className={loginStyles.signupText}>
+          Don't have an account?{" "}
+          <Link to="/signup" className={loginStyles.signupLink}>
             Sign Up
           </Link>
         </p>

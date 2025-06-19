@@ -3,6 +3,7 @@ import { FiArrowLeft, FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiX, FiSearch
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../CartContext';
 import { groceryData } from './dummyDataItem';
+import { itemsPageStyles } from '../assets/dummyStyles';
 
 const ProductCard = ({ item }) => {
   const { addToCart, removeFromCart, updateQuantity, cart } = useCart();
@@ -32,50 +33,50 @@ const ProductCard = ({ item }) => {
   };
 
   return (
-    <div className="bg-emerald-900 rounded-2xl overflow-hidden shadow-2xl shadow-emerald-950 hover:shadow-emerald-900/50 transition-all duration-300 hover:-translate-y-1 border-2 border-emerald-700">
-      <div className="h-48 relative overflow-hidden bg-emerald-950 flex items-center justify-center">
+    <div className={itemsPageStyles.productCard}>
+      <div className={itemsPageStyles.imageContainer}>
         <img 
           src={item.image} 
-          className="object-contain w-full h-full transition-transform duration-500" 
+          className={itemsPageStyles.productImage} 
           alt={item.name}
         />
       </div>
-      <div className="p-5">
-        <div className="flex justify-between items-start">
-          <h3 className="font-bold text-emerald-50 text-lg truncate max-w-[70%]">
+      <div className={itemsPageStyles.cardContent}>
+        <div className={itemsPageStyles.titleContainer}>
+          <h3 className={itemsPageStyles.productTitle}>
             {item.name}
           </h3>
-          <span className="text-black text-sm bg-emerald-400 px-2 py-1 rounded-full">
+          <span className={itemsPageStyles.organicTag}>
             Organic
           </span>
         </div>
         
-        <p className="mt-2 text-emerald-200 text-sm h-12 overflow-hidden">
+        <p className={itemsPageStyles.productDescription}>
           {item.description || `Fresh organic ${item.name.toLowerCase()} sourced locally`}
         </p>
         
-        <div className="mt-4 flex justify-between items-center">
-          <span className="text-emerald-50 font-bold text-xl">
+        <div className={itemsPageStyles.priceContainer}>
+          <span className={itemsPageStyles.currentPrice}>
             ₹{item.price.toFixed(2)}
           </span>
-          <span className="text-emerald-300 line-through text-sm">
+          <span className={itemsPageStyles.oldPrice}>
             ₹{(item.price * 1.15).toFixed(2)}
           </span>
         </div>
         
         <div className="mt-3">
           {quantity > 0 ? (
-            <div className="flex items-center justify-between bg-emerald-400 text-black rounded-full">
+            <div className={itemsPageStyles.quantityControls}>
               <button 
                 onClick={handleDecrement}
-                className="p-3 cursor-pointer rounded-l-full hover:bg-emerald-300 transition-colors"
+                className={`${itemsPageStyles.quantityButton} ${itemsPageStyles.quantityButtonLeft}`}
               >
                 <FiMinus />
               </button>
-              <span className="font-bold">{quantity}</span>
+              <span className={itemsPageStyles.quantityValue}>{quantity}</span>
               <button 
                 onClick={handleIncrement}
-                className="p-3 cursor-pointer rounded-r-full hover:bg-emerald-300 transition-colors"
+                className={`${itemsPageStyles.quantityButton} ${itemsPageStyles.quantityButtonRight}`}
               >
                 <FiPlus />
               </button>
@@ -83,10 +84,10 @@ const ProductCard = ({ item }) => {
           ) : (
             <button 
               onClick={handleAddToCart}
-              className="w-full bg-emerald-400 hover:bg-emerald-300 text-black cursor-pointer py-3 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-[1.02] group font-bold shadow-lg shadow-emerald-900/20"
+              className={itemsPageStyles.addButton}
             >
               <span>Add to Cart</span>
-              <span className="ml-2 text-xl transform group-hover:translate-x-1 transition-transform">
+              <span className={itemsPageStyles.addButtonArrow}>
                 →
               </span>
             </button>
@@ -165,47 +166,45 @@ const Items = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 to-emerald-950">
-      <div className="container mx-auto px-4 py-8">
-        <header className="mb-12 text-center py-8 relative">
-          <Link to="/" className="absolute top-5 left-0 flex items-center text-emerald-300 hover:text-emerald-100 cursor-pointer transition-colors">
+    <div className={itemsPageStyles.page}>
+      <div className={itemsPageStyles.container}>
+        <header className={itemsPageStyles.header}>
+          <Link to="/" className={itemsPageStyles.backLink}>
             <FiArrowLeft className="mr-2" />
             <span>Back</span>
           </Link>
           
-          <h1 className="text-5xl font-bold text-emerald-100 mt-7 ">
-            <span className="text-emerald-400 font-playfair">ORGANIC</span> PANTRY
+          <h1 className={itemsPageStyles.mainTitle}>
+            <span className={itemsPageStyles.titleSpan}>ORGANIC</span> PANTRY
           </h1>
           
-         
-          
-          <p className="text-emerald-300 mt-4 max-w-2xl mx-auto text-lg">
+          <p className={itemsPageStyles.subtitle}>
             Premium quality groceries sourced from local organic farms
           </p>
           
-          <div className="mt-8 flex justify-center">
-            <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></div>
+          <div className={itemsPageStyles.titleDivider}>
+            <div className={itemsPageStyles.dividerLine}></div>
           </div>
         </header>
 
         {/* Search Bar */}
-        <div className="mb-10 max-w-2xl mx-auto">
+        <div className={itemsPageStyles.searchContainer}>
           <form onSubmit={(e) => {
             e.preventDefault();
             if (searchTerm.trim()) {
               navigate(`/items?search=${encodeURIComponent(searchTerm)}`);
             }
-          }} className="relative">
+          }} className={itemsPageStyles.searchForm}>
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search fruits, vegetables, meats..."
-              className="w-full py-3 px-4 pr-12 rounded-2xl bg-emerald-800 text-emerald-100 border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-inner"
+              className={itemsPageStyles.searchInput}
             />
             <button
               type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white p-2 rounded-full"
+              className={itemsPageStyles.searchButton}
             >
               <FiSearch className="h-5 w-5" />
             </button>
@@ -215,7 +214,7 @@ const Items = () => {
         <div className="flex justify-center mb-10">
           <button 
             onClick={toggleAllCategories}
-            className="flex items-center bg-emerald-800 hover:bg-emerald-700 cursor-pointer text-emerald-200 py-3 px-6 rounded-full transition-all shadow-lg shadow-emerald-950 hover:shadow-emerald-900/50"
+            className={itemsPageStyles.expandButton}
           >
             <span className="mr-2 font-medium">{allExpanded ? 'Collapse All' : 'Expand All'}</span>
             {allExpanded ? <FiMinus className="text-lg" /> : <FiPlus className="text-lg" />}
@@ -229,14 +228,14 @@ const Items = () => {
             const hasMoreItems = category.items.length > 4;
             
             return (
-              <section key={category.id} className="mb-16">
-                <div className="flex items-center mb-8">
-                  <div className="w-3 h-8 bg-emerald-400 rounded-full mr-3"></div>
-                  <h2 className="text-3xl font-bold text-emerald-100">{category.name}</h2>
-                  <div className="ml-4 flex-1 h-px bg-gradient-to-r from-emerald-700 to-transparent"></div>
+              <section key={category.id} className={itemsPageStyles.categorySection}>
+                <div className={itemsPageStyles.categoryHeader}>
+                  <div className={itemsPageStyles.categoryIcon}></div>
+                  <h2 className={itemsPageStyles.categoryTitle}>{category.name}</h2>
+                  <div className={itemsPageStyles.categoryDivider}></div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div className={itemsPageStyles.productsGrid}>
                   {visibleItems.map(item => (
                     <ProductCard key={item.id} item={item} />
                   ))}
@@ -246,7 +245,7 @@ const Items = () => {
                   <div className="mt-8 flex justify-center">
                     <button 
                       onClick={() => toggleCategory(category.id)}
-                      className="flex items-center bg-emerald-600 hover:bg-emerald-500 text-black py-3 px-6 rounded-full transition-all shadow-lg cursor-pointer shadow-emerald-950 hover:shadow-emerald-900/50"
+                      className={itemsPageStyles.showMoreButton}
                     >
                       <span className="mr-2 font-medium">
                         {isExpanded 
@@ -262,20 +261,20 @@ const Items = () => {
             );
           })
         ) : (
-          <div className="text-center py-16">
-            <div className="bg-emerald-800 p-8 rounded-2xl max-w-md mx-auto">
-              <div className="text-emerald-400 mb-4">
+          <div className={itemsPageStyles.noProductsContainer}>
+            <div className={itemsPageStyles.noProductsCard}>
+              <div className={itemsPageStyles.noProductsIcon}>
                 <FiSearch className="mx-auto h-16 w-16" />
               </div>
-              <h3 className="text-xl font-bold text-emerald-100 mb-2">
+              <h3 className={itemsPageStyles.noProductsTitle}>
                 No products found
               </h3>
-              <p className="text-emerald-300 mb-6">
+              <p className={itemsPageStyles.noProductsText}>
                 We couldn't find any items matching "{searchTerm}"
               </p>
               <button
                 onClick={clearSearch}
-                className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-colors"
+                className={itemsPageStyles.clearSearchButton}
               >
                 Clear Search
               </button>
