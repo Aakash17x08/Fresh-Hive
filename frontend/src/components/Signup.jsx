@@ -1,46 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
-  FiUser,
-  FiMail,
-  FiLock,
-  FiArrowLeft,
-  FiCheckCircle,
-  FiEye,
-  FiEyeOff,
-} from 'react-icons/fi';
+  FaUser,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+  FaCheck,
+  FaArrowLeft,
+  FaEnvelope,
+} from 'react-icons/fa';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
+    remember: true,
   });
   const [errors, setErrors] = useState({});
   const [showToast, setShowToast] = useState(false);
-  const [showPwd, setShowPwd] = useState({
-    password: false,
-    confirmPassword: false,
-  });
 
   useEffect(() => {
-    let timer;
     if (showToast) {
-      timer = setTimeout(() => {
+      const timer = setTimeout(() => {
         setShowToast(false);
         navigate('/login');
       }, 2000);
+      return () => clearTimeout(timer);
     }
-    return () => clearTimeout(timer);
   }, [showToast, navigate]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((f) => ({ ...f, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+    
     if (errors[name]) {
-      setErrors((errs) => ({ ...errs, [name]: '' }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
@@ -48,196 +52,169 @@ const Signup = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = 'Invalid email format';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
     if (!formData.password) newErrors.password = 'Password is required';
-    else if (formData.password.length < 6)
-      newErrors.password = 'Password must be at least 6 characters';
-    if (formData.password !== formData.confirmPassword)
-      newErrors.confirmPassword = 'Passwords do not match';
-
+    else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) setShowToast(true);
+    if (validate()) {
+      setShowToast(true);
+    }
   };
 
-  const toggleShow = (field) => {
-    setShowPwd((p) => ({ ...p, [field]: !p[field] }));
+  const togglePasswordVisibility = (field) => {
+    setShowPassword(prev => ({
+      ...prev,
+      [field]: !prev[field]
+    }));
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-black flex items-center justify-center p-4 sm:p-6">
-      {/* Back to Login (top-left) */}
+    <div className="relative w-full  h-screen bg-black flex items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8 lg:px-4">
+      {/* Back to Login */}
       <Link
         to="/login"
-        className="
-          absolute top-4 left-4 flex items-center 
-          text-white hover:text-emerald-600 z-10
-          text-sm sm:text-base mt-19
-        "
+        className="absolute top-4 left-4 mt-19 flex items-center text-white hover:text-emerald-400 z-20"
       >
-        <FiArrowLeft className="mr-2" /> 
-        <span className=" sm:inline">Back to Login</span>
-       
+        <FaArrowLeft className="mr-2" />
+        Back to Login
       </Link>
 
-      {/* Toast - Responsive positioning */}
+      {/* Toast Notification */}
       {showToast && (
-        <div className="
-          fixed z-50 animate-fadeIn
-          top-4 inset-x-4 mx-auto max-w-max
-          sm:top-6 sm:right-6 sm:left-auto sm:mx-0
-        ">
-          <div className="bg-green-500 text-black px-4 py-3 rounded-xl shadow-lg flex items-center space-x-2">
-            <FiCheckCircle className="text-lg" />
-            <span className="font-medium text-sm">Account Created!</span>
-          </div>
+        <div className="fixed top-16 right-6 bg-green-600 text-black inline-flex items-center px-4 py-2 rounded-lg shadow-lg z-50">
+          <FaCheck className="mr-2" />
+          Account created successfully!
         </div>
       )}
 
-      {/* Responsive Signup Card */}
-      <div className="
-        w-full 
-        max-w-xs   /* Mobile */
-        sm:max-w-sm   /* Small tablets */
-        md:max-w-md   /* Tablets */
-        bg-gray-900 
-        py-5 sm:py-6 
-        px-4 sm:px-5 md:px-6 
-        shadow-2xl 
-        rounded-2xl 
-        border border-green-300
-        mt-25 sm:mt-20  md:mt-24  /* Center vertically */
-      ">
-        <div className="text-center mb-5">
-          <div className="mx-auto mb-3 flex justify-center">
-            <div className="
-              bg-green-600 
-              w-10 h-10 sm:w-12 sm:h-12 
-              rounded-full 
-              flex items-center justify-center
-            ">
-              <FiUser className="text-white text-lg sm:text-xl" />
+      {/* Signup Card - Matching Login UI */}
+      <div className="mt-29 md:mt-24 lg:mt-10 sm:max-w-xs md:max-w-md lg:max-w-sm bg-gray-900 bg-opacity-80 backdrop-blur-sm p-6 sm:p-8 md:p-10 lg:p-6 rounded-2xl border border-green-700/30 shadow-lg flex-shrink-0">
+        {/* Logo Avatar - Same as Login */}
+        <div className="flex justify-center mb-6">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-emerald-800 rounded-full flex items-center justify-center">
+              <FaUser className="text-xl sm:text-3xl text-emerald-400" />
             </div>
           </div>
-          <h2 className="text-lg sm:text-xl font-bold text-green-600">
-            Create Account
-          </h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-          {[
-            {
-              id: 'name',
-              label: 'Full Name',
-              icon: <FiUser className="text-base sm:text-lg" />,
-              type: 'text',
-              placeholder: 'John Doe',
-            },
-            {
-              id: 'email',
-              label: 'Email',
-              icon: <FiMail className="text-base sm:text-lg" />,
-              type: 'email',
-              placeholder: 'john@example.com',
-            },
-            {
-              id: 'password',
-              label: 'Password',
-              icon: <FiLock className="text-base sm:text-lg" />,
-              type: showPwd.password ? 'text' : 'password',
-              placeholder: '••••••••',
-            },
-            {
-              id: 'confirmPassword',
-              label: 'Confirm Password',
-              icon: <FiLock className="text-base sm:text-lg" />,
-              type: showPwd.confirmPassword ? 'text' : 'password',
-              placeholder: '••••••••',
-            },
-          ].map((field) => (
-            <div key={field.id}>
-              <label
-                htmlFor={field.id}
-                className="block text-xs sm:text-sm font-medium text-green-600 mb-1"
-              >
-                {field.label}
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-green-500">
-                  {field.icon}
-                </div>
-                <input
-                  id={field.id}
-                  name={field.id}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  value={formData[field.id]}
-                  onChange={handleChange}
-                  className={`
-                    w-full 
-                    pl-9 sm:pl-10 
-                    pr-10 
-                    py-2 sm:py-2.5 
-                    bg-green-100 
-                    border 
-                    ${errors[field.id]
-                      ? 'border-red-500'
-                      : 'border-green-300 focus:border-green-500'
-                    } 
-                    text-green-700 
-                    rounded-lg sm:rounded-xl 
-                    focus:ring-2 focus:ring-green-500/30 
-                    block 
-                    transition-all
-                    text-sm sm:text-base
-                  `}
-                />
-                {field.id.includes('password') && (
-                  <button
-                    type="button"
-                    onClick={() => toggleShow(field.id)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-green-500"
-                  >
-                    {showPwd[field.id] ? 
-                      <FiEyeOff className="text-base sm:text-lg" /> : 
-                      <FiEye className="text-base sm:text-lg" />
-                    }
-                  </button>
-                )}
-              </div>
-              {errors[field.id] && (
-                <p className="mt-1 text-xs text-red-500">
-                  • {errors[field.id]}
-                </p>
-              )}
-            </div>
-          ))}
+        <h2 className="text-center text-lg sm:text-xl font-semibold text-white mb-4">
+          Create Account
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Name Field */}
+          <div className="relative">
+            <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Full Name"
+              required
+              className="w-full pl-10 pr-3 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
+          </div>
+
+          {/* Email Field */}
+          <div className="relative">
+            <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email Address"
+              required
+              className="w-full pl-10 pr-3 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+          </div>
+
+          {/* Password Field */}
+          <div className="relative">
+            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type={showPassword.password ? "text" : "password"}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+              className="w-full pl-10 pr-10 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            <button
+              type="button"
+              onClick={() => togglePasswordVisibility('password')}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              aria-label={showPassword.password ? "Hide password" : "Show password"}
+            >
+              {showPassword.password ? <FaEyeSlash /> : <FaEye />}
+            </button>
+            {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
+          </div>
+
+          {/* Confirm Password Field */}
+          <div className="relative">
+            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type={showPassword.confirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm Password"
+              required
+              className="w-full pl-10 pr-10 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            <button
+              type="button"
+              onClick={() => togglePasswordVisibility('confirmPassword')}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              aria-label={showPassword.confirmPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword.confirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+            {errors.confirmPassword && <p className="text-xs text-red-500 mt-1">{errors.confirmPassword}</p>}
+          </div>
+
+          {/* Terms Agreement */}
+          <div className="flex items-center text-sm">
+            <label className="flex items-center text-white">
+              <input
+                type="checkbox"
+                name="remember"
+                checked={formData.remember}
+                onChange={handleChange}
+                className="mr-2 h-4 w-4 cursor-pointer text-green-500 bg-gray-800 border-gray-600 rounded focus:ring-green-500"
+                required
+              />
+              I agree to the Terms and Conditions
+            </label>
+          </div>
 
           <button
             type="submit"
-            className="
-              w-full 
-              py-2.5 sm:py-3 
-              cursor-pointer 
-              rounded-lg sm:rounded-xl 
-              bg-green-600 
-              text-black 
-              font-medium 
-              focus:outline-none 
-              focus:ring-2 focus:ring-green-500/50 
-              transition duration-200 
-              hover:bg-green-500
-              text-sm sm:text-base
-            "
+            className="w-full py-2.5 bg-green-500 hover:bg-green-600 text-black font-medium rounded-lg transition"
           >
-            Create Account
+            Sign Up
           </button>
         </form>
+
+        <p className="text-center text-sm text-white mt-6">
+          Already have an account?{" "}
+          <Link to="/login" className="text-green-400 hover:underline">
+            Sign In
+          </Link>
+        </p>
       </div>
     </div>
   );

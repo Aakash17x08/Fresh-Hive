@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
 import { FiSearch, FiShoppingCart, FiTruck, FiPercent, FiGift } from 'react-icons/fi';
 import BannerFood from '../assets/FoodBanner.png';
+import { useNavigate } from 'react-router-dom'; 
 
 const BannerHome = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = (e) => setSearchTerm(e.target.value);
+  const navigate = useNavigate();
+ 
+    const handleSearch = (e) => setSearchTerm(e.target.value);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      onSearch?.(searchTerm);
+      // If onSearch prop exists (ItemsHome page), use it
+      // Otherwise navigate to Items page with search query
+      if (onSearch) {
+        onSearch(searchTerm);
+      } else {
+        navigate(`/items?search=${encodeURIComponent(searchTerm)}`);
+      }
       setSearchTerm('');
     }
   };
+
 
   const features = [
     { icon: <FiTruck className="h-6 w-6" />, text: 'Fast Delivery' },

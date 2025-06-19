@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <>
             <Navbar />
-            <BannerHome/>
+            
             <ItemsHome/>
             <Footer/>
         </>
