@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiArrowLeft, FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiX, FiSearch } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../CartContext';
-import { groceryData } from './dummyDataItem';
+import { groceryData } from '../assets/dummyDataItem';
 import { itemsPageStyles } from '../assets/dummyStyles';
 
 const ProductCard = ({ item }) => {

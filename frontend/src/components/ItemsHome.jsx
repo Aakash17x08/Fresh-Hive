@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaChevronRight, FaMinus, FaPlus } from "react-icons/fa";
-import { categories, products } from "../components/dummyData.jsx";
+import { categories, products } from "../assets/dummyData.jsx";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
 import BannerHome from "../components/BannerHome";

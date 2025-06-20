@@ -3,18 +3,18 @@ import React, { useState } from 'react';
 import { FiSearch, FiShoppingCart, FiTruck, FiPercent, FiGift } from 'react-icons/fi';
 import BannerFood from '../assets/FoodBanner.png';
 import { useNavigate } from 'react-router-dom';
-import {bannerStyles} from '../assets/dummyStyles'; // Import styles
+import { bannerStyles } from '../assets/dummyStyles'; // Import styles
 
 const BannerHome = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  
+
   const handleSearch = (e) => setSearchTerm(e.target.value);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const trimmedTerm = searchTerm.trim();
-    
+
     if (trimmedTerm) {
       if (onSearch) {
         const searchWords = trimmedTerm.toLowerCase().split(/\s+/);
