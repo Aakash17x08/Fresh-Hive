@@ -21,6 +21,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const prevCartCountRef = useRef(cartCount);
   const [cartBounce, setCartBounce] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Sync active tab and close menu on route change
   useEffect(() => {
@@ -46,6 +47,25 @@ export default function Navbar() {
     }
     prevCartCountRef.current = cartCount;
   }, [cartCount]);
+
+  // Check login status on mount and when location changes
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    setIsLoggedIn(!!token);
+  }, [location]);
+
+  // Listen for auth state changes from other components
+  useEffect(() => {
+    const handleAuthChange = () => {
+      const token = localStorage.getItem('authToken');
+      setIsLoggedIn(!!token);
+    };
+
+    window.addEventListener('authStateChanged', handleAuthChange);
+    return () => {
+      window.removeEventListener('authStateChanged', handleAuthChange);
+    };
+  }, []);
 
   const navItems = [
     { name: 'Home', path: '/', icon: <FiHome className="text-xl" /> },
@@ -118,12 +138,19 @@ export default function Navbar() {
 
           {/* Icons & Hamburger */}
           <div className={navbarStyles.iconsContainer}>
-            {/* Login */}
+            {/* Login with indicator */}
             <Link
               to="/login"
               className={navbarStyles.loginLink}
             >
-              <FiUser className={navbarStyles.loginIcon} />
+              <div className="relative">
+                <FiUser className={navbarStyles.loginIcon} />
+                {isLoggedIn && (
+
+                  <span className="absolute -top-1 -right-1 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white "></span>
+
+                )}
+              </div>
             </Link>
             {/* Cart with bounce animation */}
             <Link
@@ -207,7 +234,12 @@ export default function Navbar() {
                 className={navbarStyles.loginButton}
                 onClick={() => setIsOpen(false)}
               >
-                <FiUser className={navbarStyles.loginButtonIcon} />
+                <div className="relative">
+                  <FiUser className={navbarStyles.loginButtonIcon} />
+                  {isLoggedIn && (
+                    <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white"></span>
+                  )}
+                </div>
                 Account
               </Link>
             </div>

@@ -35,8 +35,24 @@ const Login = () => {
       setError("You must agree to \"Remember me\" before signing in.");
       return;
     }
+    
+    // Generate mock token and store user data
+    const token = `mock_token_${Math.random().toString(36).substr(2)}`;
+    const userData = {
+      email: formData.email,
+      token: token,
+      timestamp: new Date().toISOString()
+    };
+    
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('userData', JSON.stringify(userData));
+    
     setError("");
     setShowToast(true);
+    
+    // Notify other components about auth change
+    window.dispatchEvent(new Event('authStateChanged'));
+    
     setTimeout(() => {
       setShowToast(false);
       navigate("/");
