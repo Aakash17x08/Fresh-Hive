@@ -6,10 +6,10 @@ import Item from '../components/Item';
 const Items = () => {
     return (
         <div>
-            <Navbar/>
-            <Item/>
-            <Footer/>
-            </div>
+            <Navbar />
+            <Item />
+            <Footer />
+        </div>
     )
 }
 

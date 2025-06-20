@@ -24,26 +24,26 @@ const ItemsHome = () => {
   // Enhanced search function
   const productMatchesSearch = (product, term) => {
     if (!term) return true;
-    
+
     // Remove extra spaces and convert to lowercase
     const cleanTerm = term.trim().toLowerCase();
-    
+
     // Split into individual words
     const searchWords = cleanTerm.split(/\s+/);
-    
+
     // Check if all search words appear in the product name
-    return searchWords.every(word => 
+    return searchWords.every(word =>
       product.name.toLowerCase().includes(word)
     );
   };
 
   // FIXED: Search across ALL products when search term exists
   const searchedProducts = searchTerm
-    ? products.filter(product => 
-        productMatchesSearch(product, searchTerm))
+    ? products.filter(product =>
+      productMatchesSearch(product, searchTerm))
     : (activeCategory === "All"
-        ? products
-        : products.filter((product) => product.category === activeCategory));
+      ? products
+      : products.filter((product) => product.category === activeCategory));
 
   const getQuantity = (productId) => {
     const item = cart.find((ci) => ci.id === productId);
@@ -70,7 +70,7 @@ const ItemsHome = () => {
     <div className={itemsHomeStyles.page}>
       {/* Banner at the top */}
       <BannerHome onSearch={handleSearch} />
-      
+
       <div className="flex flex-col lg:flex-row flex-1">
         {/* Sidebar - hidden on small devices */}
         <aside className={itemsHomeStyles.sidebar}>
@@ -96,11 +96,10 @@ const ItemsHome = () => {
                       setActiveCategory(category.name);
                       setSearchTerm(''); // Clear search when changing category
                     }}
-                    className={`${itemsHomeStyles.categoryItem} ${
-                      activeCategory === category.name && !searchTerm
+                    className={`${itemsHomeStyles.categoryItem} ${activeCategory === category.name && !searchTerm
                         ? itemsHomeStyles.activeCategory
                         : itemsHomeStyles.inactiveCategory
-                    }`}
+                      }`}
                   >
                     <div className={itemsHomeStyles.categoryIcon}>
                       {category.icon}
@@ -125,11 +124,10 @@ const ItemsHome = () => {
                     setActiveCategory(cat.name);
                     setSearchTerm(''); // Clear search when changing category
                   }}
-                  className={`${itemsHomeStyles.mobileCategoryItem} ${
-                    activeCategory === cat.name && !searchTerm
+                  className={`${itemsHomeStyles.mobileCategoryItem} ${activeCategory === cat.name && !searchTerm
                       ? itemsHomeStyles.activeMobileCategory
                       : itemsHomeStyles.inactiveMobileCategory
-                  }`}
+                    }`}
                 >
                   {cat.name}
                 </button>
@@ -144,7 +142,7 @@ const ItemsHome = () => {
                 <span className="text-emerald-700 font-medium">
                   Search results for: <span className="font-bold">"{searchTerm}"</span>
                 </span>
-                <button 
+                <button
                   onClick={() => setSearchTerm('')}
                   className="ml-4 text-emerald-500 hover:text-emerald-700 p-1 rounded-full transition-colors"
                 >
@@ -160,11 +158,11 @@ const ItemsHome = () => {
               className={itemsHomeStyles.sectionTitle}
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              {searchTerm 
-                ? "Search Results" 
+              {searchTerm
+                ? "Search Results"
                 : (activeCategory === "All"
-                    ? "Featured Products"
-                    : `Best ${activeCategory}`)
+                  ? "Featured Products"
+                  : `Best ${activeCategory}`)
               }
             </h2>
             <div className={itemsHomeStyles.sectionDivider} />

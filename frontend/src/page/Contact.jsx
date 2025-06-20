@@ -6,10 +6,10 @@ import ContactUs from '../components/ContactUs';
 const Contact = () => {
     return (
         <div>
-           <Navbar/>
-           <ContactUs/>
-           <Footer/>
-            </div>
+            <Navbar />
+            <ContactUs />
+            <Footer />
+        </div>
     )
 }
 

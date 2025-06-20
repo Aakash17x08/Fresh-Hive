@@ -6,9 +6,9 @@ import CartPage from '../components/CartPage'
 const Cart = () => {
     return (
         <div>
-            <Navbar/>
-            <CartPage/>
-            <Footer/>
+            <Navbar />
+            <CartPage />
+            <Footer />
         </div>
     )
 }

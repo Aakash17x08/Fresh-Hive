@@ -9,7 +9,7 @@ import TomatoesImg from '../assets/Rambutan.png';
 import PeppersImg from '../assets/Mangosteen.png';
 import SpinachImg from '../assets/Pomelo.png';
 
- import MilkImg from '../assets/Truffle Brie.png';
+import MilkImg from '../assets/Truffle Brie.png';
 import EggsImg from '../assets/Aged Gouda.png';
 import YogurtImg from '../assets/Smoked Blue.png';
 import CheeseImg from '../assets/Himalayan Yak.png';
@@ -18,8 +18,8 @@ import ButterImg from '../assets/Whiskey Cheddar.png';
 import CreamImg from '../assets/Cave-Aged Gruyère.png';
 import LassiImg from '../assets/Lavender Goat.png';
 
-  import CroissantImg from '../assets/Turkish Simit.png';
-  import BreadImg from '../assets/Sourdough Focaccia.png';
+import CroissantImg from '../assets/Turkish Simit.png';
+import BreadImg from '../assets/Sourdough Focaccia.png';
 import MuffinImg from '../assets/Japanese Milk Bread.png';
 import BagelImg from '../assets/Indian Naan.png';
 import SconeImg from '../assets/Mexican Concha.png';
@@ -79,66 +79,66 @@ export const groceryData = [
       { id: 308, name: "Ethiopian Injera", price: 130, image: BriocheImg, description: "Sourdough flatbread with spongy texture" },
     ],
   },
- {
-  id: 4,
-  name: "Artisan Chocolates & Confections",
-  items: [
-    { 
-      id: 401, 
-      name: "Salted Caramel Truffles", 
-      price: 320, 
-      image: ChocolateImg, 
-      description: "Dark chocolate ganache with sea salt caramel core" 
-    },
-    { 
-      id: 402, 
-      name: "Single-Origin Chocolate Bar", 
-      price: 280, 
-      image: ChocolateBarImg, 
-      description: "72% Venezuelan dark chocolate, stone ground" 
-    },
-    { 
-      id: 403, 
-      name: "Honeycomb Crunch Brittle", 
-      price: 190, 
-      image: BrittleImg, 
-      description: "Golden honeycomb enrobed in milk chocolate" 
-    },
-    { 
-      id: 404, 
-      name: "Pistachio Marzipan Logs", 
-      price: 240, 
-      image: MarzipanImg, 
-      description: "Hand-rolled Sicilian pistachio marzipan" 
-    },
-    { 
-      id: 405, 
-      name: "Espresso Bean Clusters", 
-      price: 210, 
-      image: CoffeeChocolateImg, 
-      description: "Dark chocolate covered arabica coffee beans" 
-    },
-    { 
-      id: 406, 
-      name: "Raspberry Rose Bonbons", 
-      price: 260, 
-      image: BonbonImg, 
-      description: "White chocolate shells with raspberry-rose filling" 
-    },
-    { 
-      id: 407, 
-      name: "Spiced Orange Chocolate Bark", 
-      price: 180, 
-      image: BarkImg, 
-      description: "Dark chocolate with candied orange and cardamom" 
-    },
-    { 
-      id: 408, 
-      name: "Tahini Halva Squares", 
-      price: 220, 
-      image: HalvaImg, 
-      description: "Sesame halva with pistachios and dark chocolate" 
-    },
-  ],
-},
+  {
+    id: 4,
+    name: "Artisan Chocolates & Confections",
+    items: [
+      {
+        id: 401,
+        name: "Salted Caramel Truffles",
+        price: 320,
+        image: ChocolateImg,
+        description: "Dark chocolate ganache with sea salt caramel core"
+      },
+      {
+        id: 402,
+        name: "Single-Origin Chocolate Bar",
+        price: 280,
+        image: ChocolateBarImg,
+        description: "72% Venezuelan dark chocolate, stone ground"
+      },
+      {
+        id: 403,
+        name: "Honeycomb Crunch Brittle",
+        price: 190,
+        image: BrittleImg,
+        description: "Golden honeycomb enrobed in milk chocolate"
+      },
+      {
+        id: 404,
+        name: "Pistachio Marzipan Logs",
+        price: 240,
+        image: MarzipanImg,
+        description: "Hand-rolled Sicilian pistachio marzipan"
+      },
+      {
+        id: 405,
+        name: "Espresso Bean Clusters",
+        price: 210,
+        image: CoffeeChocolateImg,
+        description: "Dark chocolate covered arabica coffee beans"
+      },
+      {
+        id: 406,
+        name: "Raspberry Rose Bonbons",
+        price: 260,
+        image: BonbonImg,
+        description: "White chocolate shells with raspberry-rose filling"
+      },
+      {
+        id: 407,
+        name: "Spiced Orange Chocolate Bark",
+        price: 180,
+        image: BarkImg,
+        description: "Dark chocolate with candied orange and cardamom"
+      },
+      {
+        id: 408,
+        name: "Tahini Halva Squares",
+        price: 220,
+        image: HalvaImg,
+        description: "Sesame halva with pistachios and dark chocolate"
+      },
+    ],
+  },
 ];

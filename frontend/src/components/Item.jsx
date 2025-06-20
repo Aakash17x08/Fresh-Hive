@@ -7,15 +7,15 @@ import { itemsPageStyles } from '../assets/dummyStyles';
 
 const ProductCard = ({ item }) => {
   const { addToCart, removeFromCart, updateQuantity, cart } = useCart();
-  
+
   // Get current quantity in cart
   const cartItem = cart.find(cartItem => cartItem.id === item.id);
   const quantity = cartItem ? cartItem.quantity : 0;
-  
+
   const handleAddToCart = () => {
     addToCart(item);
   };
-  
+
   const handleIncrement = () => {
     if (quantity === 0) {
       addToCart(item);
@@ -23,7 +23,7 @@ const ProductCard = ({ item }) => {
       updateQuantity(item.id, quantity + 1);
     }
   };
-  
+
   const handleDecrement = () => {
     if (quantity === 1) {
       removeFromCart(item.id);
@@ -35,9 +35,9 @@ const ProductCard = ({ item }) => {
   return (
     <div className={itemsPageStyles.productCard}>
       <div className={itemsPageStyles.imageContainer}>
-        <img 
-          src={item.image} 
-          className={itemsPageStyles.productImage} 
+        <img
+          src={item.image}
+          className={itemsPageStyles.productImage}
           alt={item.name}
         />
       </div>
@@ -50,11 +50,11 @@ const ProductCard = ({ item }) => {
             Organic
           </span>
         </div>
-        
+
         <p className={itemsPageStyles.productDescription}>
           {item.description || `Fresh organic ${item.name.toLowerCase()} sourced locally`}
         </p>
-        
+
         <div className={itemsPageStyles.priceContainer}>
           <span className={itemsPageStyles.currentPrice}>
             ₹{item.price.toFixed(2)}
@@ -63,18 +63,18 @@ const ProductCard = ({ item }) => {
             ₹{(item.price * 1.15).toFixed(2)}
           </span>
         </div>
-        
+
         <div className="mt-3">
           {quantity > 0 ? (
             <div className={itemsPageStyles.quantityControls}>
-              <button 
+              <button
                 onClick={handleDecrement}
                 className={`${itemsPageStyles.quantityButton} ${itemsPageStyles.quantityButtonLeft}`}
               >
                 <FiMinus />
               </button>
               <span className={itemsPageStyles.quantityValue}>{quantity}</span>
-              <button 
+              <button
                 onClick={handleIncrement}
                 className={`${itemsPageStyles.quantityButton} ${itemsPageStyles.quantityButtonRight}`}
               >
@@ -82,7 +82,7 @@ const ProductCard = ({ item }) => {
               </button>
             </div>
           ) : (
-            <button 
+            <button
               onClick={handleAddToCart}
               className={itemsPageStyles.addButton}
             >
@@ -117,15 +117,15 @@ const Items = () => {
   // Enhanced search function
   const itemMatchesSearch = (item, term) => {
     if (!term) return true;
-    
+
     // Remove extra spaces and convert to lowercase
     const cleanTerm = term.trim().toLowerCase();
-    
+
     // Split into individual words
     const searchWords = cleanTerm.split(/\s+/);
-    
+
     // Check if all search words appear in the item name
-    return searchWords.every(word => 
+    return searchWords.every(word =>
       item.name.toLowerCase().includes(word)
     );
   };
@@ -133,10 +133,10 @@ const Items = () => {
   // Filter items based on search term
   const filteredData = searchTerm
     ? groceryData.map(category => ({
-        ...category,
-        items: category.items.filter(item => 
-          itemMatchesSearch(item, searchTerm))
-      })).filter(category => category.items.length > 0)
+      ...category,
+      items: category.items.filter(item =>
+        itemMatchesSearch(item, searchTerm))
+    })).filter(category => category.items.length > 0)
     : groceryData;
 
   // Clear search handler
@@ -151,7 +151,7 @@ const Items = () => {
       [categoryId]: !prev[categoryId]
     }));
   };
-  
+
   const toggleAllCategories = () => {
     if (allExpanded) {
       setExpandedCategories({});
@@ -173,15 +173,15 @@ const Items = () => {
             <FiArrowLeft className="mr-2" />
             <span>Back</span>
           </Link>
-          
+
           <h1 className={itemsPageStyles.mainTitle}>
             <span className={itemsPageStyles.titleSpan}>ORGANIC</span> PANTRY
           </h1>
-          
+
           <p className={itemsPageStyles.subtitle}>
             Premium quality groceries sourced from local organic farms
           </p>
-          
+
           <div className={itemsPageStyles.titleDivider}>
             <div className={itemsPageStyles.dividerLine}></div>
           </div>
@@ -212,7 +212,7 @@ const Items = () => {
         </div>
 
         <div className="flex justify-center mb-10">
-          <button 
+          <button
             onClick={toggleAllCategories}
             className={itemsPageStyles.expandButton}
           >
@@ -226,7 +226,7 @@ const Items = () => {
             const isExpanded = expandedCategories[category.id] || allExpanded;
             const visibleItems = isExpanded ? category.items : category.items.slice(0, 4);
             const hasMoreItems = category.items.length > 4;
-            
+
             return (
               <section key={category.id} className={itemsPageStyles.categorySection}>
                 <div className={itemsPageStyles.categoryHeader}>
@@ -240,16 +240,16 @@ const Items = () => {
                     <ProductCard key={item.id} item={item} />
                   ))}
                 </div>
-                
+
                 {hasMoreItems && (
                   <div className="mt-8 flex justify-center">
-                    <button 
+                    <button
                       onClick={() => toggleCategory(category.id)}
                       className={itemsPageStyles.showMoreButton}
                     >
                       <span className="mr-2 font-medium">
-                        {isExpanded 
-                          ? `Show Less ${category.name}` 
+                        {isExpanded
+                          ? `Show Less ${category.name}`
                           : `Show More ${category.name} (${category.items.length - 4}+)`
                         }
                       </span>

@@ -54,9 +54,8 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`${navbarStyles.nav} ${
-      scrolled ? navbarStyles.scrolledNav : navbarStyles.unscrolledNav
-    }`}>
+    <nav className={`${navbarStyles.nav} ${scrolled ? navbarStyles.scrolledNav : navbarStyles.unscrolledNav
+      }`}>
       {/* Animated border gradient */}
       <div className={navbarStyles.borderGradient}></div>
 
@@ -66,20 +65,19 @@ export default function Navbar() {
         <div className={`${navbarStyles.particle} w-32 h-32 bg-green-500/5 -bottom-16 left-2/3 ${navbarStyles.floatSlowAnimation}`}></div>
         <div className={`${navbarStyles.particle} w-16 h-16 bg-teal-500/5 -top-8 left-3/4 ${navbarStyles.floatSlowerAnimation}`}></div>
       </div>
-      
+
       <div className={navbarStyles.container}>
         <div className={navbarStyles.innerContainer}>
           {/* Logo with heading */}
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className={navbarStyles.logoLink}
           >
-            <img 
-              src={logo} 
-              alt="RushBasket Logo" 
-              className={`${navbarStyles.logoImage} ${
-                scrolled ? "h-10 w-10" : "h-12 w-12"
-              }`} 
+            <img
+              src={logo}
+              alt="RushBasket Logo"
+              className={`${navbarStyles.logoImage} ${scrolled ? "h-10 w-10" : "h-12 w-12"
+                }`}
             />
             <span className={navbarStyles.logoText}>
               RushBasket
@@ -92,30 +90,27 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`${navbarStyles.navItem} ${
-                  activeTab === item.path
+                className={`${navbarStyles.navItem} ${activeTab === item.path
                     ? navbarStyles.activeNavItem
                     : navbarStyles.inactiveNavItem
-                }`}
+                  }`}
               >
                 <div className="flex items-center">
                   <span
-                    className={`${navbarStyles.navIcon} ${
-                      activeTab === item.path 
-                        ? navbarStyles.activeNavIcon 
+                    className={`${navbarStyles.navIcon} ${activeTab === item.path
+                        ? navbarStyles.activeNavIcon
                         : navbarStyles.inactiveNavIcon
-                    }`}
+                      }`}
                   >
                     {item.icon}
                   </span>
                   <span>{item.name}</span>
                 </div>
                 <div
-                  className={`${navbarStyles.navIndicator} ${
-                    activeTab === item.path
+                  className={`${navbarStyles.navIndicator} ${activeTab === item.path
                       ? navbarStyles.activeIndicator
                       : navbarStyles.inactiveIndicator
-                  }`}
+                    }`}
                 />
               </Link>
             ))}
@@ -135,8 +130,8 @@ export default function Navbar() {
               to="/cart"
               className={navbarStyles.cartLink}
             >
-              <FaOpencart 
-                className={`${navbarStyles.cartIcon} ${cartBounce ? 'animate-bounce' : ''}`} 
+              <FaOpencart
+                className={`${navbarStyles.cartIcon} ${cartBounce ? 'animate-bounce' : ''}`}
               />
               {cartCount > 0 && (
                 <span className={navbarStyles.cartBadge}>
@@ -158,31 +153,29 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`${navbarStyles.mobileOverlay} ${
-          isOpen ? 'pointer-events-auto' : 'pointer-events-none'
-        }`}
+        className={`${navbarStyles.mobileOverlay} ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'
+          }`}
         onClick={() => setIsOpen(false)}
       >
         {/* Side Panel */}
         <div
-          className={`${navbarStyles.mobilePanel} ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+          className={`${navbarStyles.mobilePanel} ${isOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
           onClick={e => e.stopPropagation()}
         >
           <div className={navbarStyles.mobileHeader}>
             <div className={navbarStyles.mobileLogo}>
-              <img 
-                src={logo} 
-                alt="RushBasket Logo" 
+              <img
+                src={logo}
+                alt="RushBasket Logo"
                 className={navbarStyles.mobileLogoImage}
               />
               <span className={navbarStyles.mobileLogoText}>
                 RushBasket
               </span>
             </div>
-            <button 
-              onClick={() => setIsOpen(false)} 
+            <button
+              onClick={() => setIsOpen(false)}
               className={navbarStyles.closeButton}
               aria-label="Close menu"
             >

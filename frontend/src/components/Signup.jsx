@@ -43,7 +43,7 @@ const Signup = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
-    
+
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -57,7 +57,7 @@ const Signup = () => {
     if (!formData.password) newErrors.password = 'Password is required';
     else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
