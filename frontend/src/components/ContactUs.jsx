@@ -12,6 +12,9 @@ const ContactUs = () => {
   });
   const [showToast, setShowToast] = useState(false);
 
+  // Replace with your WhatsApp number (with country code, no '+' or dashes)
+  const whatsappNumber = '8299431275';
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -19,22 +22,31 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
+    const { name, email, phone, subject, message } = formData;
+    if (!name || !email || !phone || !subject || !message) {
       alert('Please fill all fields');
       return;
     }
-    
-    console.log("Form submitted with data:", formData);
+
+    // Build WhatsApp message
+    const text = 
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${phone}\n` +
+      `Subject: ${subject}\n` +
+      `Message: ${message}`;
+
+    // Open WhatsApp Web with pre-filled message
+    const url = 
+      `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+
+    // Show confirmation toast
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2000);
 
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
+    // Reset form
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
   };
 
   return (
@@ -44,7 +56,7 @@ const ContactUs = () => {
         <div className="toast-notification">
           <div className={contactStyles.toast}>
             <FaCheck className="mr-2" />
-            Form submitted successfully!
+            Message opened in WhatsApp!
           </div>
         </div>
       )}
@@ -83,7 +95,6 @@ const ContactUs = () => {
                 />
               </div>
             </div>
-            
             {/* Email Field */}
             <div className={contactStyles.formField}>
               <div className={contactStyles.inputContainer}>
@@ -102,7 +113,6 @@ const ContactUs = () => {
                 />
               </div>
             </div>
-            
             {/* Phone Field */}
             <div className={contactStyles.formField}>
               <div className={contactStyles.inputContainer}>
@@ -121,7 +131,6 @@ const ContactUs = () => {
                 />
               </div>
             </div>
-            
             {/* Subject Field */}
             <div className={contactStyles.formField}>
               <div className={contactStyles.inputContainer}>
@@ -140,7 +149,6 @@ const ContactUs = () => {
                 />
               </div>
             </div>
-            
             {/* Message Field */}
             <div className={contactStyles.formField}>
               <div className={contactStyles.inputContainer}>
@@ -159,7 +167,6 @@ const ContactUs = () => {
                 ></textarea>
               </div>
             </div>
-            
             {/* Submit Button */}
               <button
               type="submit"

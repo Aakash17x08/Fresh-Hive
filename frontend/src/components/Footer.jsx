@@ -60,7 +60,7 @@ const Footer = () => {
             <ul className={footerStyles.linkList}>
               {['Home', 'Items', 'Contact'].map((item, idx) => (
                 <li key={idx}>
-                  <a href={`/${item}`} className={footerStyles.linkItem}>
+                  <a href={`/${item.toLowerCase()}`} className={footerStyles.linkItem}>
                     <span className={footerStyles.linkBullet}></span>
                     {item}
                   </a>
