@@ -13,15 +13,11 @@ import { signupStyles } from '../assets/dummyStyles';
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState({
-    password: false,
-    confirmPassword: false,
-  });
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
     remember: true,
   });
   const [errors, setErrors] = useState({});
@@ -55,8 +51,6 @@ const Signup = () => {
     if (!formData.email.trim()) newErrors.email = 'Email is required';
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
     if (!formData.password) newErrors.password = 'Password is required';
-    else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -162,29 +156,6 @@ const Signup = () => {
               {showPassword.password ? <FaEyeSlash /> : <FaEye />}
             </button>
             {errors.password && <p className={signupStyles.error}>{errors.password}</p>}
-          </div>
-
-          {/* Confirm Password Field */}
-          <div className={signupStyles.inputContainer}>
-            <FaLock className={signupStyles.inputIcon} />
-            <input
-              type={showPassword.confirmPassword ? "text" : "password"}
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-              required
-              className={signupStyles.passwordInput}
-            />
-            <button
-              type="button"
-              onClick={() => togglePasswordVisibility('confirmPassword')}
-              className={signupStyles.toggleButton}
-              aria-label={showPassword.confirmPassword ? "Hide password" : "Show password"}
-            >
-              {showPassword.confirmPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-            {errors.confirmPassword && <p className={signupStyles.error}>{errors.confirmPassword}</p>}
           </div>
 
           {/* Terms Agreement */}

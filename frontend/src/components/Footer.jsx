@@ -17,27 +17,21 @@ import {
 import { BiMailSend } from 'react-icons/bi';
 import { BsTelephone } from 'react-icons/bs';
 import { FiLink, FiBookmark, FiMail } from 'react-icons/fi';
-import {footerStyles} from "../assets/dummyStyles";
+import { footerStyles } from "../assets/dummyStyles";
 
 const Footer = () => {
   return (
     <footer className={footerStyles.footer}>
       {/* Decorative backgrounds - hide on small screens */}
       <div className={footerStyles.topBorder}></div>
-      
+
       {/* Floating shapes */}
       <div className={`${footerStyles.floatingShape} -top-24 -right-24 w-80 h-80 opacity-20`}></div>
       <div className={`${footerStyles.floatingShape} -bottom-40 -left-24 w-96 h-96 opacity-15 animation-delay-2000`}></div>
       <div className={`${footerStyles.floatingShape} top-1/4 left-1/3 w-64 h-64 bg-emerald-600 opacity-10 animate-pulse animation-delay-1000`}></div>
 
       {/* Pattern */}
-      <div 
-        className={footerStyles.pattern} 
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z' fill='%23137b50'/%3E%3C/svg%3E")`,
-          backgroundSize: '60px'
-        }}
-      />
+
 
       <div className={footerStyles.container}>
         <div className={footerStyles.grid}>
@@ -64,9 +58,9 @@ const Footer = () => {
               <FiLink className={footerStyles.sectionIcon} /> Quick Links
             </h3>
             <ul className={footerStyles.linkList}>
-              {['About Us', 'Our Products', 'Farmers Network', 'Delivery Information', 'Privacy Policy', 'Terms & Conditions'].map((item, idx) => (
+              {['Home', 'Items', 'Contact'].map((item, idx) => (
                 <li key={idx}>
-                  <a href="" className={footerStyles.linkItem}>
+                  <a href={`/${item}`} className={footerStyles.linkItem}>
                     <span className={footerStyles.linkBullet}></span>
                     {item}
                   </a>
@@ -94,7 +88,7 @@ const Footer = () => {
                   <FaPhone className={footerStyles.contactIcon} />
                 </div>
                 <div>
-                  <p>+91 (123) LUCKNOW</p>
+                  <p>+01 0894561230</p>
                 </div>
               </li>
               <li className={footerStyles.contactItem}>
@@ -159,9 +153,8 @@ const Footer = () => {
             <span className={footerStyles.attributionText}>
               Designed by{' '}
               <a
-                href="https://hexagondigitalservices.com/"
+                href="https://hexagondigitalservices.com"
                 target="_blank"
-                rel="noopener noreferrer"
                 className={footerStyles.attributionLink}
               >
                 Hexagon Digital Services
