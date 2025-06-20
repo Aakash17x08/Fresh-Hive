@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaShoppingCart, FaChevronRight, FaMinus, FaPlus } from "react-icons/fa";
+import { FaShoppingCart, FaChevronRight, FaMinus, FaPlus, FaThList } from "react-icons/fa";
 import { categories, products } from "../assets/dummyData.jsx";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
@@ -66,6 +66,16 @@ const ItemsHome = () => {
     setSearchTerm(term);
   };
 
+  // Create sidebar categories with "All Items" as first item
+  const sidebarCategories = [
+    { 
+      name: "All Items", 
+      icon: <FaThList className="text-lg" />,
+      value: "All"
+    },
+    ...categories
+  ];
+
   return (
     <div className={itemsHomeStyles.page}>
       {/* Banner at the top */}
@@ -89,14 +99,14 @@ const ItemsHome = () => {
 
           <div className={itemsHomeStyles.categoryList}>
             <ul className="space-y-3">
-              {categories.map((category) => (
+              {sidebarCategories.map((category) => (
                 <li key={category.name}>
                   <button
                     onClick={() => {
-                      setActiveCategory(category.name);
+                      setActiveCategory(category.value || category.name);
                       setSearchTerm(''); // Clear search when changing category
                     }}
-                    className={`${itemsHomeStyles.categoryItem} ${activeCategory === category.name && !searchTerm
+                    className={`${itemsHomeStyles.categoryItem} ${(activeCategory === (category.value || category.name)) && !searchTerm
                         ? itemsHomeStyles.activeCategory
                         : itemsHomeStyles.inactiveCategory
                       }`}
@@ -117,14 +127,14 @@ const ItemsHome = () => {
           {/* Mobile Category Scroll */}
           <div className={itemsHomeStyles.mobileCategories}>
             <div className="flex space-x-4">
-              {categories.map((cat) => (
+              {sidebarCategories.map((cat) => (
                 <button
                   key={cat.name}
                   onClick={() => {
-                    setActiveCategory(cat.name);
+                    setActiveCategory(cat.value || cat.name);
                     setSearchTerm(''); // Clear search when changing category
                   }}
-                  className={`${itemsHomeStyles.mobileCategoryItem} ${activeCategory === cat.name && !searchTerm
+                  className={`${itemsHomeStyles.mobileCategoryItem} ${activeCategory === (cat.value || cat.name) && !searchTerm
                       ? itemsHomeStyles.activeMobileCategory
                       : itemsHomeStyles.inactiveMobileCategory
                     }`}
