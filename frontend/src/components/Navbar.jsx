@@ -1,5 +1,6 @@
+// src/components/Navbar.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   FiHome,
   FiShoppingBag,
@@ -15,30 +16,34 @@ import { navbarStyles } from '../assets/dummyStyles';
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { cartCount } = useCart();
+
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(location.pathname);
-  const { cartCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const prevCartCountRef = useRef(cartCount);
   const [cartBounce, setCartBounce] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Sync active tab and close menu on route change
+  // Auth state
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    Boolean(localStorage.getItem('authToken'))
+  );
+
+  // Sync active tab & close mobile menu on route change
   useEffect(() => {
     setActiveTab(location.pathname);
     setIsOpen(false);
   }, [location]);
 
-  // Handle scroll effect
+  // Scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Cart animation effect
+  // Bounce cart icon when new item added
   useEffect(() => {
     if (cartCount > prevCartCountRef.current) {
       setCartBounce(true);
@@ -48,24 +53,22 @@ export default function Navbar() {
     prevCartCountRef.current = cartCount;
   }, [cartCount]);
 
-  // Check login status on mount and when location changes
+  // Listen for auth changes
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    setIsLoggedIn(!!token);
-  }, [location]);
-
-  // Listen for auth state changes from other components
-  useEffect(() => {
-    const handleAuthChange = () => {
-      const token = localStorage.getItem('authToken');
-      setIsLoggedIn(!!token);
+    const handler = () => {
+      setIsLoggedIn(Boolean(localStorage.getItem('authToken')));
     };
-
-    window.addEventListener('authStateChanged', handleAuthChange);
-    return () => {
-      window.removeEventListener('authStateChanged', handleAuthChange);
-    };
+    window.addEventListener('authStateChanged', handler);
+    return () => window.removeEventListener('authStateChanged', handler);
   }, []);
+
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userData');
+    window.dispatchEvent(new Event('authStateChanged'));
+    navigate('/login');
+  };
 
   const navItems = [
     { name: 'Home', path: '/', icon: <FiHome className="text-xl" /> },
@@ -74,34 +77,35 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`${navbarStyles.nav} ${scrolled ? navbarStyles.scrolledNav : navbarStyles.unscrolledNav
-      }`}>
-      {/* Animated border gradient */}
-      <div className={navbarStyles.borderGradient}></div>
-
-      {/* Animated particles */}
+    <nav
+      className={`
+        ${navbarStyles.nav}
+        ${scrolled ? navbarStyles.scrolledNav : navbarStyles.unscrolledNav}
+      `}
+    >
+      <div className={navbarStyles.borderGradient} />
       <div className={navbarStyles.particlesContainer}>
-        <div className={`${navbarStyles.particle} w-24 h-24 bg-emerald-500/5 -top-12 left-1/4 ${navbarStyles.floatAnimation}`}></div>
-        <div className={`${navbarStyles.particle} w-32 h-32 bg-green-500/5 -bottom-16 left-2/3 ${navbarStyles.floatSlowAnimation}`}></div>
-        <div className={`${navbarStyles.particle} w-16 h-16 bg-teal-500/5 -top-8 left-3/4 ${navbarStyles.floatSlowerAnimation}`}></div>
+        <div
+          className={`${navbarStyles.particle} w-24 h-24 bg-emerald-500/5 -top-12 left-1/4 ${navbarStyles.floatAnimation}`}
+        />
+        <div
+          className={`${navbarStyles.particle} w-32 h-32 bg-green-500/5 -bottom-16 left-2/3 ${navbarStyles.floatSlowAnimation}`}
+        />
+        <div
+          className={`${navbarStyles.particle} w-16 h-16 bg-teal-500/5 -top-8 left-3/4 ${navbarStyles.floatSlowerAnimation}`}
+        />
       </div>
 
       <div className={navbarStyles.container}>
         <div className={navbarStyles.innerContainer}>
-          {/* Logo with heading */}
-          <Link
-            to="/"
-            className={navbarStyles.logoLink}
-          >
+          {/* Logo */}
+          <Link to="/" className={navbarStyles.logoLink}>
             <img
               src={logo}
               alt="RushBasket Logo"
-              className={`${navbarStyles.logoImage} ${scrolled ? "h-10 w-10" : "h-12 w-12"
-                }`}
+              className={`${navbarStyles.logoImage} ${scrolled ? 'h-10 w-10' : 'h-12 w-12'}`}
             />
-            <span className={navbarStyles.logoText}>
-              RushBasket
-            </span>
+            <span className={navbarStyles.logoText}>RushBasket</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -110,27 +114,36 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`${navbarStyles.navItem} ${activeTab === item.path
+                className={`
+                  ${navbarStyles.navItem}
+                  ${activeTab === item.path
                     ? navbarStyles.activeNavItem
                     : navbarStyles.inactiveNavItem
-                  }`}
+                  }
+                `}
               >
                 <div className="flex items-center">
                   <span
-                    className={`${navbarStyles.navIcon} ${activeTab === item.path
+                    className={`
+                      ${navbarStyles.navIcon}
+                      ${activeTab === item.path
                         ? navbarStyles.activeNavIcon
                         : navbarStyles.inactiveNavIcon
-                      }`}
+                      }
+                    `}
                   >
                     {item.icon}
                   </span>
                   <span>{item.name}</span>
                 </div>
                 <div
-                  className={`${navbarStyles.navIndicator} ${activeTab === item.path
+                  className={`
+                    ${navbarStyles.navIndicator}
+                    ${activeTab === item.path
                       ? navbarStyles.activeIndicator
                       : navbarStyles.inactiveIndicator
-                    }`}
+                    }
+                  `}
                 />
               </Link>
             ))}
@@ -138,41 +151,45 @@ export default function Navbar() {
 
           {/* Icons & Hamburger */}
           <div className={navbarStyles.iconsContainer}>
-            {/* Login with indicator */}
-            <Link
-              to="/login"
-              className={navbarStyles.loginLink}
-            >
-              <div className="relative">
+            {isLoggedIn ? (
+              // Logout button when logged in
+              <button
+                onClick={handleLogout}
+                className={navbarStyles.loginLink}
+                aria-label="Logout"
+              >
                 <FiUser className={navbarStyles.loginIcon} />
-                {isLoggedIn && (
+                <span className="ml-1 text-white">Logout</span>
+              </button>
+            ) : (
+              // Login link when not logged in
+              <Link to="/login" className={navbarStyles.loginLink}>
+                <FiUser className={navbarStyles.loginIcon} />
+                <span className="ml-1 text-white">Login</span>
+              </Link>
+            )}
 
-                  <span className="absolute -top-1 -right-1 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white "></span>
-
-                )}
-              </div>
-            </Link>
-            {/* Cart with bounce animation */}
-            <Link
-              to="/cart"
-              className={navbarStyles.cartLink}
-            >
+            <Link to="/cart" className={navbarStyles.cartLink}>
               <FaOpencart
-                className={`${navbarStyles.cartIcon} ${cartBounce ? 'animate-bounce' : ''}`}
+                className={`${navbarStyles.cartIcon} ${
+                  cartBounce ? 'animate-bounce' : ''
+                }`}
               />
               {cartCount > 0 && (
-                <span className={navbarStyles.cartBadge}>
-                  {cartCount}
-                </span>
+                <span className={navbarStyles.cartBadge}>{cartCount}</span>
               )}
             </Link>
-            {/* Hamburger */}
+
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={navbarStyles.hamburgerButton}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
-              {isOpen ? <FiX className="h-6 w-6 text-white" /> : <FiMenu className="h-6 w-6 text-white" />}
+              {isOpen ? (
+                <FiX className="h-6 w-6 text-white" />
+              ) : (
+                <FiMenu className="h-6 w-6 text-white" />
+              )}
             </button>
           </div>
         </div>
@@ -180,14 +197,17 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`${navbarStyles.mobileOverlay} ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'
-          }`}
+        className={`
+          ${navbarStyles.mobileOverlay}
+          ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}
+        `}
         onClick={() => setIsOpen(false)}
       >
-        {/* Side Panel */}
         <div
-          className={`${navbarStyles.mobilePanel} ${isOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
+          className={`
+            ${navbarStyles.mobilePanel}
+            ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+          `}
           onClick={e => e.stopPropagation()}
         >
           <div className={navbarStyles.mobileHeader}>
@@ -197,9 +217,7 @@ export default function Navbar() {
                 alt="RushBasket Logo"
                 className={navbarStyles.mobileLogoImage}
               />
-              <span className={navbarStyles.mobileLogoText}>
-                RushBasket
-              </span>
+              <span className={navbarStyles.mobileLogoText}>RushBasket</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -211,15 +229,15 @@ export default function Navbar() {
           </div>
 
           <div className={navbarStyles.mobileItemsContainer}>
-            {navItems.map((item, index) => (
+            {navItems.map((item, idx) => (
               <Link
                 key={item.name}
                 to={item.path}
                 className={navbarStyles.mobileItem}
                 style={{
-                  transitionDelay: isOpen ? `${index * 100}ms` : '0ms',
+                  transitionDelay: isOpen ? `${idx * 100}ms` : '0ms',
                   opacity: isOpen ? 1 : 0,
-                  transform: `translateX(${isOpen ? 0 : '20px'})`
+                  transform: `translateX(${isOpen ? 0 : '20px'})`,
                 }}
                 onClick={() => setIsOpen(false)}
               >
@@ -229,19 +247,27 @@ export default function Navbar() {
             ))}
 
             <div className={navbarStyles.mobileButtons}>
-              <Link
-                to="/login"
-                className={navbarStyles.loginButton}
-                onClick={() => setIsOpen(false)}
-              >
-                <div className="relative">
+              {isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsOpen(false);
+                  }}
+                  className={navbarStyles.loginButton}
+                >
                   <FiUser className={navbarStyles.loginButtonIcon} />
-                  {isLoggedIn && (
-                    <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white"></span>
-                  )}
-                </div>
-                Account
-              </Link>
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className={navbarStyles.loginButton}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FiUser className={navbarStyles.loginButtonIcon} />
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         </div>

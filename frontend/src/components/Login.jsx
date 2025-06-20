@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaArrowLeft,
   FaUser,
@@ -9,8 +9,13 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { loginStyles } from "../assets/dummyStyles";
+import Logout from "./Logout";
 
 const Login = () => {
+  // Hook declarations must be before any return
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem("authToken"))
+  );
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -21,6 +26,21 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Listen for auth changes
+  useEffect(() => {
+    const handler = () => {
+      setIsAuthenticated(Boolean(localStorage.getItem("authToken")));
+    };
+    window.addEventListener("authStateChanged", handler);
+    return () => window.removeEventListener("authStateChanged", handler);
+  }, []);
+
+  // If already logged in, just show <Logout />
+  if (isAuthenticated) {
+    return <Logout />;
+  }
+
+  // Form handlers
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -32,40 +52,36 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.remember) {
-      setError("You must agree to \"Remember me\" before signing in.");
+      setError('You must agree to "Remember me" before signing in.');
       return;
     }
-    
+
     // Generate mock token and store user data
-    const token = `mock_token_${Math.random().toString(36).substr(2)}`;
+    const token = 'mock_token';
     const userData = {
       email: formData.email,
-      token: token,
-      timestamp: new Date().toISOString()
+      token,
+      timestamp: new Date().toISOString(),
     };
-    
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('userData', JSON.stringify(userData));
-    
+
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("userData", JSON.stringify(userData));
+
     setError("");
     setShowToast(true);
-    
+
     // Notify other components about auth change
-    window.dispatchEvent(new Event('authStateChanged'));
-    
+    window.dispatchEvent(new Event("authStateChanged"));
+
     setTimeout(() => {
-      setShowToast(false);
       navigate("/");
-    }, 2000);
+    });
   };
 
   return (
     <div className={loginStyles.page}>
       {/* Back to Home */}
-      <Link
-        to="/"
-        className={loginStyles.backLink}
-      >
+      <Link to="/" className={loginStyles.backLink}>
         <FaArrowLeft className="mr-2" />
         Back to Home
       </Link>
@@ -89,9 +105,7 @@ const Login = () => {
           </div>
         </div>
 
-        <h2 className={loginStyles.title}>
-          Welcome Back
-        </h2>
+        <h2 className={loginStyles.title}>Welcome Back</h2>
 
         <form onSubmit={handleSubmit} className={loginStyles.form}>
           {/* Email */}
@@ -150,16 +164,13 @@ const Login = () => {
 
           {error && <p className={loginStyles.error}>{error}</p>}
 
-          <button
-            type="submit"
-            className={loginStyles.submitButton}
-          >
+          <button type="submit" className={loginStyles.submitButton}>
             Sign In
           </button>
         </form>
 
         <p className={loginStyles.signupText}>
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <Link to="/signup" className={loginStyles.signupLink}>
             Sign Up
           </Link>
