@@ -31,6 +31,9 @@ export default function Navbar() {
     Boolean(localStorage.getItem('authToken'))
   );
 
+  // Mobile menu ref
+  const mobileMenuRef = useRef(null);
+
   // Sync active tab & close mobile menu on route change
   useEffect(() => {
     setActiveTab(location.pathname);
@@ -62,6 +65,21 @@ export default function Navbar() {
     window.addEventListener('authStateChanged', handler);
     return () => window.removeEventListener('authStateChanged', handler);
   }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && mobileMenuRef.current && 
+          !mobileMenuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   // Logout handler
   const handleLogout = () => {
@@ -193,22 +211,40 @@ export default function Navbar() {
       <div
         className={`
           ${navbarStyles.mobileOverlay}
-          ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}
+          ${isOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}
+          fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300
         `}
         onClick={() => setIsOpen(false)}
       >
         <div
+          ref={mobileMenuRef}
           className={`
             ${navbarStyles.mobilePanel}
             ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+            fixed right-0 top-0 bottom-0 z-50 w-4/5 max-w-sm
           `}
           onClick={e => e.stopPropagation()}
         >
           <div className={navbarStyles.mobileHeader}>
             <div className={navbarStyles.mobileLogo}>
-             
+               <div className={navbarStyles.mobileLogo}>
+              <img
+                src={logo}
+                alt="RushBasket Logo"
+                className={navbarStyles.mobileLogoImage}
+              />
+              <span className={navbarStyles.mobileLogoText}>RushBasket</span>
+              
             </div>
           
+            </div>
+                 <button
+              onClick={() => setIsOpen(false)}
+              className={navbarStyles.closeButton}
+              aria-label="Close menu"
+            >
+              <FiX className="h-6 w-6 text-white" />
+            </button>
           </div>
 
           <div className={navbarStyles.mobileItemsContainer}>
