@@ -212,20 +212,9 @@ export default function Navbar() {
         >
           <div className={navbarStyles.mobileHeader}>
             <div className={navbarStyles.mobileLogo}>
-              <img
-                src={logo}
-                alt="RushBasket Logo"
-                className={navbarStyles.mobileLogoImage}
-              />
-              <span className={navbarStyles.mobileLogoText}>RushBasket</span>
+             
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className={navbarStyles.closeButton}
-              aria-label="Close menu"
-            >
-              <FiX className="h-6 w-6 text-white" />
-            </button>
+          
           </div>
 
           <div className={navbarStyles.mobileItemsContainer}>
