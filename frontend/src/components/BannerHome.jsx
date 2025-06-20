@@ -1,9 +1,10 @@
 // components/BannerHome.js
 import React, { useState } from 'react';
-import { FiSearch, FiShoppingCart, FiTruck, FiPercent, FiGift } from 'react-icons/fi';
+import { FiSearch, FiTruck } from 'react-icons/fi';
 import BannerFood from '../assets/FoodBanner.png';
 import { useNavigate } from 'react-router-dom';
-import { bannerStyles } from '../assets/dummyStyles'; // Import styles
+import { bannerStyles } from '../assets/dummyStyles'
+import { features } from '../assets/Dummy'
 
 const BannerHome = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,13 +26,6 @@ const BannerHome = ({ onSearch }) => {
       setSearchTerm('');
     }
   };
-
-  const features = [
-    { icon: <FiTruck className={bannerStyles.featureIcon} />, text: 'Fast Delivery' },
-    { icon: <FiPercent className={bannerStyles.featureIcon} />, text: 'Best Prices' },
-    { icon: <FiShoppingCart className={bannerStyles.featureIcon} />, text: 'Easy Returns' },
-    { icon: <FiGift className={bannerStyles.featureIcon} />, text: 'Daily Deals' },
-  ];
 
   return (
     <div className="relative overflow-hidden pt-16">

@@ -88,7 +88,9 @@ const Cart = () => {
                   </div>
 
                   <h3 className={cartStyles.cartItemName}>{item.name}</h3>
-                  <p className={cartStyles.cartItemPrice}>₹{item.price.toFixed(2)}</p>
+                  <p className={cartStyles.cartItemPrice}>
+                    ₹{(item.price ?? 0).toFixed(2)}
+                  </p>
 
                   <div className={cartStyles.cartItemQuantityContainer}>
                     <button

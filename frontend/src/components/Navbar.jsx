@@ -13,6 +13,7 @@ import { FaOpencart } from 'react-icons/fa';
 import { useCart } from '../CartContext';
 import logo from '../assets/logo.png';
 import { navbarStyles } from '../assets/dummyStyles';
+import { navItems } from '../assets/Dummy'
 
 export default function Navbar() {
   const location = useLocation();
@@ -69,12 +70,6 @@ export default function Navbar() {
     window.dispatchEvent(new Event('authStateChanged'));
     navigate('/login');
   };
-
-  const navItems = [
-    { name: 'Home', path: '/', icon: <FiHome className="text-xl" /> },
-    { name: 'Items', path: '/items', icon: <FiShoppingBag className="text-xl" /> },
-    { name: 'Contact', path: '/contact', icon: <FiMail className="text-xl" /> },
-  ];
 
   return (
     <nav
@@ -171,9 +166,8 @@ export default function Navbar() {
 
             <Link to="/cart" className={navbarStyles.cartLink}>
               <FaOpencart
-                className={`${navbarStyles.cartIcon} ${
-                  cartBounce ? 'animate-bounce' : ''
-                }`}
+                className={`${navbarStyles.cartIcon} ${cartBounce ? 'animate-bounce' : ''
+                  }`}
               />
               {cartCount > 0 && (
                 <span className={navbarStyles.cartBadge}>{cartCount}</span>
