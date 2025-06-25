@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiEdit, FiTrash2, FiPlus, FiSearch } from 'react-icons/fi';
+import { FiPlus, FiSearch } from 'react-icons/fi';
 import ProductTable from '../components/OrderManagement';
 
 const Products = () => {
