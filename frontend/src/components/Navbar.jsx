@@ -69,8 +69,8 @@ export default function Navbar() {
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isOpen && mobileMenuRef.current && 
-          !mobileMenuRef.current.contains(event.target)) {
+      if (isOpen && mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
@@ -227,18 +227,18 @@ export default function Navbar() {
         >
           <div className={navbarStyles.mobileHeader}>
             <div className={navbarStyles.mobileLogo}>
-               <div className={navbarStyles.mobileLogo}>
-              <img
-                src={logo}
-                alt="RushBasket Logo"
-                className={navbarStyles.mobileLogoImage}
-              />
-              <span className={navbarStyles.mobileLogoText}>RushBasket</span>
-              
+              <div className={navbarStyles.mobileLogo}>
+                <img
+                  src={logo}
+                  alt="RushBasket Logo"
+                  className={navbarStyles.mobileLogoImage}
+                />
+                <span className={navbarStyles.mobileLogoText}>RushBasket</span>
+
+              </div>
+
             </div>
-          
-            </div>
-                 <button
+            <button
               onClick={() => setIsOpen(false)}
               className={navbarStyles.closeButton}
               aria-label="Close menu"
