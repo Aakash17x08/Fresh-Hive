@@ -20,7 +20,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="orders" element={<Orders />} />
-            <Route path="*" element={<Navigate to="/admin" replace />} />
+           
           </Route>
           
           {/* Catch-all route */}
