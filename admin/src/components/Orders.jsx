@@ -4,9 +4,7 @@ import { FiCheck, FiX, FiDollarSign,
   FiTruck, FiPackage, FiCreditCard, FiUser, FiMapPin, FiEdit } from 'react-icons/fi'
 import initialOrders from '../assets/dummyData' 
 
-
 const OrdersPage = () => {
- 
   const [orders, setOrders] = useState(() => {
     const savedOrders = localStorage.getItem('adminOrders');
     return savedOrders ? JSON.parse(savedOrders) : initialOrders;
@@ -18,6 +16,11 @@ const OrdersPage = () => {
   const [paymentFilter] = useState('All');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
+  // Log initial orders on component mount
+  useEffect(() => {
+    console.log('OrdersPage initialized. Orders loaded:', orders);
+  }, []);
 
   // Apply filters
   useEffect(() => {
@@ -44,41 +47,48 @@ const OrdersPage = () => {
     }
     
     setFilteredOrders(result);
+    console.log('Filters applied. Showing orders:', result);
   }, [orders, searchTerm, statusFilter, paymentFilter]);
 
-  // Save orders to localStorage
+  // Save orders to localStorage and log changes
   useEffect(() => {
     localStorage.setItem('adminOrders', JSON.stringify(orders));
+    console.log('Orders saved to localStorage:', orders);
   }, [orders]);
 
   // Status options
   const statusOptions = ['All', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
   const paymentOptions = ['All', 'Paid', 'Unpaid', 'COD'];
 
-  // Update order status
+  // Update order status with logging
   const updateOrderStatus = (orderId, newStatus) => {
     setOrders(prev => 
-      prev.map(order => 
-        order.id === orderId ? { ...order, status: newStatus } : order
-      )
+      prev.map(order => {
+        if (order.id === orderId) {
+          console.log(`Updating order status: ${order.id} (${order.status} → ${newStatus})`);
+          return { ...order, status: newStatus };
+        }
+        return order;
+      })
     );
   };
 
- 
-
-  // Cancel order
+  // Cancel order with logging
   const cancelOrder = (orderId) => {
+    console.log(`Cancelling order: ${orderId}`);
     updateOrderStatus(orderId, 'Cancelled');
   };
 
-  // View order details
+  // View order details with logging
   const viewOrderDetails = (order) => {
+    console.log('Viewing order details:', order);
     setSelectedOrder(order);
     setIsDetailModalOpen(true);
   };
 
   // Close modal
   const closeModal = () => {
+    console.log('Closing order details modal');
     setIsDetailModalOpen(false);
     setSelectedOrder(null);
   };
@@ -317,8 +327,10 @@ const OrdersPage = () => {
                         <select
                           value={selectedOrder.status}
                           onChange={(e) => {
-                            setSelectedOrder({...selectedOrder, status: e.target.value});
-                            updateOrderStatus(selectedOrder.id, e.target.value);
+                            const newStatus = e.target.value;
+                            console.log(`Changing status in modal for ${selectedOrder.id}: ${selectedOrder.status} → ${newStatus}`);
+                            setSelectedOrder({...selectedOrder, status: newStatus});
+                            updateOrderStatus(selectedOrder.id, newStatus);
                           }}
                           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                         >
@@ -431,8 +443,7 @@ const OrdersPage = () => {
                 </button>
                 <button
                   onClick={() => {
-                    updateOrderStatus(selectedOrder.id, selectedOrder.status);
-                    updatePaymentStatus(selectedOrder.id, selectedOrder.paymentStatus);
+                    console.log('Saving changes for order:', selectedOrder.id);
                     closeModal();
                   }}
                   className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
