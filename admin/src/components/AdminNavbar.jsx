@@ -31,7 +31,7 @@ const AdminNavbar = () => {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex space-x-1">
             <NavLink 
-              to="/admin/add-item" 
+              to="/add-item" 
               className={({ isActive }) => 
                 `flex items-center px-4 py-2 rounded-lg transition-colors ${
                   isActive 
@@ -45,7 +45,7 @@ const AdminNavbar = () => {
             </NavLink>
             
             <NavLink 
-              to="/admin/list-items" 
+              to="/list-items" 
               className={({ isActive }) => 
                 `flex items-center px-4 py-2 rounded-lg transition-colors ${
                   isActive 
@@ -59,7 +59,7 @@ const AdminNavbar = () => {
             </NavLink>
             
             <NavLink 
-              to="/admin/orders" 
+              to="/orders" 
               className={({ isActive }) => 
                 `flex items-center px-4 py-2 rounded-lg transition-colors ${
                   isActive 
@@ -93,7 +93,7 @@ const AdminNavbar = () => {
       <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
           <NavLink 
-            to="/admin/add-item" 
+            to="/add-item" 
             onClick={closeMobileMenu}
             className={({ isActive }) => 
               `flex items-center px-3 py-3 rounded-lg mx-2 transition-colors ${
@@ -108,7 +108,7 @@ const AdminNavbar = () => {
           </NavLink>
           
           <NavLink 
-            to="/admin/list-items" 
+            to="/list-items" 
             onClick={closeMobileMenu}
             className={({ isActive }) => 
               `flex items-center px-3 py-3 rounded-lg mx-2 transition-colors ${
@@ -123,7 +123,7 @@ const AdminNavbar = () => {
           </NavLink>
           
           <NavLink 
-            to="/admin/orders" 
+            to="/orders" 
             onClick={closeMobileMenu}
             className={({ isActive }) => 
               `flex items-center px-3 py-3 rounded-lg mx-2 transition-colors ${
