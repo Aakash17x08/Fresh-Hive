@@ -1,7 +1,6 @@
-// src/pages/admin/OrdersPage.jsx
 import React, { useState, useEffect } from 'react';
 import { FiCheck, FiX, FiDollarSign, 
-  FiTruck, FiPackage, FiCreditCard, FiUser, FiMapPin, FiEdit } from 'react-icons/fi'
+  FiTruck, FiPackage, FiCreditCard, FiUser, FiMapPin, FiMail, FiEdit } from 'react-icons/fi';
 import initialOrders from '../assets/dummyData' 
 
 const OrdersPage = () => {
@@ -17,78 +16,56 @@ const OrdersPage = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
-  // Log initial orders on component mount
-  useEffect(() => {
-    console.log('OrdersPage initialized. Orders loaded:', orders);
-  }, []);
-
   // Apply filters
   useEffect(() => {
     let result = [...orders];
     
-    // Apply search filter
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       result = result.filter(order => 
         order.id.toLowerCase().includes(term) ||
         order.customer.name.toLowerCase().includes(term) ||
-        order.customer.phone.includes(term)
-      );
+        order.customer.phone.includes(term) ||
+        order.customer.email && order.customer.email.toLowerCase().includes(term))
     }
     
-    // Apply status filter
     if (statusFilter !== 'All') {
       result = result.filter(order => order.status === statusFilter);
     }
     
-    // Apply payment filter
     if (paymentFilter !== 'All') {
       result = result.filter(order => order.paymentStatus === paymentFilter);
     }
     
     setFilteredOrders(result);
-    console.log('Filters applied. Showing orders:', result);
   }, [orders, searchTerm, statusFilter, paymentFilter]);
 
-  // Save orders to localStorage and log changes
+  // Save orders to localStorage
   useEffect(() => {
     localStorage.setItem('adminOrders', JSON.stringify(orders));
-    console.log('Orders saved to localStorage:', orders);
   }, [orders]);
 
-  // Status options
   const statusOptions = ['All', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
   const paymentOptions = ['All', 'Paid', 'Unpaid', 'COD'];
 
-  // Update order status with logging
   const updateOrderStatus = (orderId, newStatus) => {
     setOrders(prev => 
-      prev.map(order => {
-        if (order.id === orderId) {
-          console.log(`Updating order status: ${order.id} (${order.status} → ${newStatus})`);
-          return { ...order, status: newStatus };
-        }
-        return order;
-      })
+      prev.map(order => 
+        order.id === orderId ? { ...order, status: newStatus } : order
+      )
     );
   };
 
-  // Cancel order with logging
   const cancelOrder = (orderId) => {
-    console.log(`Cancelling order: ${orderId}`);
     updateOrderStatus(orderId, 'Cancelled');
   };
 
-  // View order details with logging
   const viewOrderDetails = (order) => {
-    console.log('Viewing order details:', order);
     setSelectedOrder(order);
     setIsDetailModalOpen(true);
   };
 
-  // Close modal
   const closeModal = () => {
-    console.log('Closing order details modal');
     setIsDetailModalOpen(false);
     setSelectedOrder(null);
   };
@@ -290,9 +267,16 @@ const OrdersPage = () => {
                       Customer Information
                     </h3>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      <div className="mb-2">
+                      <div className="mb-3">
                         <div className="font-medium">{selectedOrder.customer.name}</div>
-                        <div className="text-gray-600">{selectedOrder.customer.phone}</div>
+                        <div className="text-gray-600 flex items-center mt-1">
+                          <FiMail className="mr-2 flex-shrink-0" />
+                          {selectedOrder.customer.email}
+                        </div>
+                        <div className="text-gray-600 flex items-center mt-1">
+                          <FiMapPin className="mr-2 flex-shrink-0" />
+                          {selectedOrder.customer.phone}
+                        </div>
                       </div>
                       <div className="flex items-start mt-3">
                         <FiMapPin className="text-gray-500 mr-2 mt-1 flex-shrink-0" />
@@ -328,7 +312,6 @@ const OrdersPage = () => {
                           value={selectedOrder.status}
                           onChange={(e) => {
                             const newStatus = e.target.value;
-                            console.log(`Changing status in modal for ${selectedOrder.id}: ${selectedOrder.status} → ${newStatus}`);
                             setSelectedOrder({...selectedOrder, status: newStatus});
                             updateOrderStatus(selectedOrder.id, newStatus);
                           }}
@@ -343,6 +326,23 @@ const OrdersPage = () => {
                       </div>
                       
                       <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Payment Status
+                        </label>
+                        <select
+                          value={selectedOrder.paymentStatus}
+                          onChange={(e) => {
+                            const newStatus = e.target.value;
+                            setSelectedOrder({...selectedOrder, paymentStatus: newStatus});
+                          }}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                        >
+                          {paymentOptions.filter(o => o !== 'All').map(option => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -442,10 +442,7 @@ const OrdersPage = () => {
                   Close
                 </button>
                 <button
-                  onClick={() => {
-                    console.log('Saving changes for order:', selectedOrder.id);
-                    closeModal();
-                  }}
+                  onClick={closeModal}
                   className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
                 >
                   Save Changes
