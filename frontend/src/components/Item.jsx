@@ -46,9 +46,7 @@ const ProductCard = ({ item }) => {
           <h3 className={itemsPageStyles.productTitle}>
             {item.name}
           </h3>
-          <span className={itemsPageStyles.organicTag}>
-            Organic
-          </span>
+          
         </div>
 
         <p className={itemsPageStyles.productDescription}>
