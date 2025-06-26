@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiCheck, FiX, FiDollarSign, 
-  FiTruck, FiPackage, FiCreditCard, FiUser, FiMapPin, FiMail, FiEdit } from 'react-icons/fi';
+  FiTruck, FiPackage, FiCreditCard, FiUser, FiMapPin, FiPhone , FiMail, FiEdit } from 'react-icons/fi';
 import initialOrders from '../assets/dummyData' 
 
 const OrdersPage = () => {
@@ -46,7 +46,7 @@ const OrdersPage = () => {
   }, [orders]);
 
   const statusOptions = ['All', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
-  const paymentOptions = ['All', 'Paid', 'Unpaid', 'COD'];
+  
 
   const updateOrderStatus = (orderId, newStatus) => {
     setOrders(prev => 
@@ -269,12 +269,13 @@ const OrdersPage = () => {
                     <div className="bg-gray-50 rounded-lg p-4">
                       <div className="mb-3">
                         <div className="font-medium">{selectedOrder.customer.name}</div>
+                       {/* In the Customer Information section of the modal */}
+<div className="text-gray-600 flex items-center mt-1">
+  <FiMail className="mr-2 flex-shrink-0" />
+  {selectedOrder.customer.email || 'No email provided'}
+</div>
                         <div className="text-gray-600 flex items-center mt-1">
-                          <FiMail className="mr-2 flex-shrink-0" />
-                          {selectedOrder.customer.email}
-                        </div>
-                        <div className="text-gray-600 flex items-center mt-1">
-                          <FiMapPin className="mr-2 flex-shrink-0" />
+                          <FiPhone className="mr-2 flex-shrink-0" />
                           {selectedOrder.customer.phone}
                         </div>
                       </div>
@@ -318,26 +319,6 @@ const OrdersPage = () => {
                           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                         >
                           {statusOptions.filter(o => o !== 'All').map(option => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Payment Status
-                        </label>
-                        <select
-                          value={selectedOrder.paymentStatus}
-                          onChange={(e) => {
-                            const newStatus = e.target.value;
-                            setSelectedOrder({...selectedOrder, paymentStatus: newStatus});
-                          }}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                        >
-                          {paymentOptions.filter(o => o !== 'All').map(option => (
                             <option key={option} value={option}>
                               {option}
                             </option>
