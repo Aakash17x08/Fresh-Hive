@@ -11,6 +11,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { loginStyles } from "../assets/dummyStyles";
 import Logout from "./Logout";
+import logo from "../assets/weblogo.png";
 
 const Login = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -108,9 +109,7 @@ const Login = () => {
       <div className={loginStyles.loginCard}>
         <div className={loginStyles.logoContainer}>
           <div className={loginStyles.logoOuter}>
-            <div className={loginStyles.logoInner}>
-              <FaUser className={loginStyles.logoIcon} />
-            </div>
+            <img src={logo} alt="Profile" className={loginStyles.avatarImage} />
           </div>
         </div>
 

@@ -53,31 +53,46 @@ const OrdersPage = () => {
     setFilteredOrders(result);
   }, [orders, searchTerm, statusFilter, paymentFilter]);
 
-  const updateOrderStatus = async (orderId, newStatus) => {
+  const updateOrderState = async (orderId, updates) => {
     try {
-      await axios.put(
+      const { data } = await axios.put(
         `http://localhost:4000/api/orders/${orderId}`,
-        { status: newStatus }
+        updates
       );
+      
       setOrders(prev =>
         prev.map(order =>
-          order._id === orderId ? { ...order, status: newStatus } : order
+          order._id === orderId ? data : order
         )
       );
 
       setFilteredOrders(prev =>
         prev.map(o =>
-          o._id === orderId ? { ...o, status: newStatus } : o
+          o._id === orderId ? data : o
         )
       );
+
+      if (selectedOrder && selectedOrder._id === orderId) {
+        setSelectedOrder(data);
+      }
     }
     catch (error) {
-      console.error('Error updating order status:', error);
+      console.error('Error updating order:', error);
     }
+  };
+
+  const updateOrderStatus = (orderId, newStatus) => {
+    updateOrderState(orderId, { status: newStatus });
   };
 
   const cancelOrder = (orderId) => {
     updateOrderStatus(orderId, 'Cancelled');
+  };
+
+  const completeOrder = (orderId) => {
+    if (window.confirm('Are you sure you want to complete this order? This will mark it as Delivered and Paid.')) {
+      updateOrderState(orderId, { status: 'Delivered', paymentStatus: 'Paid' });
+    }
   };
 
   const viewOrderDetails = (order) => {
@@ -90,153 +105,158 @@ const OrdersPage = () => {
     setSelectedOrder(null);
   };
 
+  // Helper to format image URL
+  const getImageUrl = (url) => {
+    if (!url) return null;
+    if (url.startsWith('http') || url.startsWith('data:')) return url;
+    return `http://localhost:4000${url.startsWith('/') ? '' : '/'}${url}`;
+  };
+
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.innerContainer}>
-        {/* Header */}
-        <div className={styles.headerContainer}>
-          <h1 className={styles.headerTitle}>Order Management</h1>
-          <p className={styles.headerSubtitle}>
-            View, manage, and track customer orders
-          </p>
-        </div>
-
-        {/* Stats Cards */}
-        <div className={styles.statsGrid}>
-          <div className={styles.statsCard('border-blue-500')}>
-            <div className={styles.statsCardInner}>
-              <div className={styles.statsCardIconContainer('bg-blue-100')}>
-                <FiPackage className={styles.statsCardIcon('text-blue-600')} />
-              </div>
-              <div>
-                <p className={styles.statsCardLabel}>Total Orders</p>
-                <p className={styles.statsCardValue}>{orders.length}</p>
-              </div>
+      
+      {/* Stats Cards */}
+      <div className={styles.statsGrid}>
+        <div className={styles.statsCard('border-blue-500')}>
+          <div className={styles.statsCardInner}>
+            <div className={styles.statsCardIconContainer('bg-blue-100')}>
+              <FiPackage className={styles.statsCardIcon('text-blue-600')} />
             </div>
-          </div>
-
-          <div className={styles.statsCard('border-amber-500')}>
-            <div className={styles.statsCardInner}>
-              <div className={styles.statsCardIconContainer('bg-amber-100')}>
-                <FiTruck className={styles.statsCardIcon('text-amber-600')} />
-              </div>
-              <div>
-                <p className={styles.statsCardLabel}>Processing</p>
-                <p className={styles.statsCardValue}>
-                  {orders.filter(o => o.status === 'Processing').length}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.statsCard('border-emerald-500')}>
-            <div className={styles.statsCardInner}>
-              <div className={styles.statsCardIconContainer('bg-emerald-100')}>
-                <FiCheck className={styles.statsCardIcon('text-emerald-600')} />
-              </div>
-              <div>
-                <p className={styles.statsCardLabel}>Delivered</p>
-                <p className={styles.statsCardValue}>
-                  {orders.filter(o => o.status === 'Delivered').length}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.statsCard('border-red-500')}>
-            <div className={styles.statsCardInner}>
-              <div className={styles.statsCardIconContainer('bg-red-100')}>
-                <BsCurrencyRupee className={styles.statsCardIcon('text-red-600')} />
-              </div>
-              <div>
-                <p className={styles.statsCardLabel}>Pending Payment</p>
-                <p className={styles.statsCardValue}>
-                  {orders.filter(o => o.paymentStatus === 'Unpaid').length}
-                </p>
-              </div>
+            <div>
+              <p className={styles.statsCardLabel}>Total Orders</p>
+              <p className={styles.statsCardValue}>{orders.length}</p>
             </div>
           </div>
         </div>
 
-        {/* Orders Table */}
-        <div className={styles.contentContainer}>
-          <div className="overflow-x-auto">
-            <table className={styles.table}>
-              <thead className={styles.tableHead}>
+        <div className={styles.statsCard('border-amber-500')}>
+          <div className={styles.statsCardInner}>
+            <div className={styles.statsCardIconContainer('bg-amber-100')}>
+              <FiTruck className={styles.statsCardIcon('text-amber-600')} />
+            </div>
+            <div>
+              <p className={styles.statsCardLabel}>Processing</p>
+              <p className={styles.statsCardValue}>
+                {orders.filter(o => o.status === 'Processing').length}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.statsCard('border-emerald-500')}>
+          <div className={styles.statsCardInner}>
+            <div className={styles.statsCardIconContainer('bg-emerald-100')}>
+              <FiCheck className={styles.statsCardIcon('text-emerald-600')} />
+            </div>
+            <div>
+              <p className={styles.statsCardLabel}>Delivered</p>
+              <p className={styles.statsCardValue}>
+                {orders.filter(o => o.status === 'Delivered').length}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.statsCard('border-red-500')}>
+          <div className={styles.statsCardInner}>
+            <div className={styles.statsCardIconContainer('bg-red-100')}>
+              <BsCurrencyRupee className={styles.statsCardIcon('text-red-600')} />
+            </div>
+            <div>
+              <p className={styles.statsCardLabel}>Pending Payment</p>
+              <p className={styles.statsCardValue}>
+                {orders.filter(o => o.paymentStatus === 'Unpaid').length}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Orders Table */}
+      <div className={styles.contentContainer}>
+        <div className="overflow-x-auto">
+          <table className={styles.table}>
+            <thead className={styles.tableHead}>
+              <tr>
+                <th className={styles.tableHeaderCell}>Order ID</th>
+                <th className={styles.tableHeaderCell}>Customer</th>
+                <th className={styles.tableHeaderCell}>Date</th>
+                <th className={styles.tableHeaderCell}>Items</th>
+                <th className={styles.tableHeaderCell}>Total</th>
+                <th className={styles.tableHeaderCell}>Status</th>
+                <th className={styles.tableHeaderCell}>Payment</th>
+                <th className={styles.tableHeaderCell}>Actions</th>
+              </tr>
+            </thead>
+            <tbody className={styles.tableBody}>
+              {filteredOrders.length === 0 ? (
                 <tr>
-                  <th className={styles.tableHeaderCell}>Order ID</th>
-                  <th className={styles.tableHeaderCell}>Customer</th>
-                  <th className={styles.tableHeaderCell}>Date</th>
-                  <th className={styles.tableHeaderCell}>Items</th>
-                  <th className={styles.tableHeaderCell}>Total</th>
-                  <th className={styles.tableHeaderCell}>Status</th>
-                  <th className={styles.tableHeaderCell}>Payment</th>
-                  <th className={styles.tableHeaderCell}>Actions</th>
+                  <td colSpan="8" className={styles.emptyStateCell}>
+                    <div className={styles.emptyStateContainer}>
+                      <FiPackage className={styles.emptyStateIcon} />
+                      <h3 className={styles.emptyStateTitle}>No orders found</h3>
+                      <p className={styles.emptyStateText}>Try changing your filters</p>
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody className={styles.tableBody}>
-                {filteredOrders.length === 0 ? (
-                  <tr>
-                    <td colSpan="8" className={styles.emptyStateCell}>
-                      <div className={styles.emptyStateContainer}>
-                        <FiPackage className={styles.emptyStateIcon} />
-                        <h3 className={styles.emptyStateTitle}>No orders found</h3>
-                        <p className={styles.emptyStateText}>Try changing your filters</p>
+              ) : (
+                filteredOrders.map(order => (
+                  <tr key={order._id} className={styles.tableRowHover}>
+                    <td className={`${styles.tableDataCell} ${styles.orderId}`}>
+                      {order.orderId || order._id.slice(-6).toUpperCase()}
+                    </td>
+                    <td className={styles.tableDataCell}>
+                      <div className="font-medium">{order.customer.name}</div>
+                      <div className="text-sm text-gray-500">{order.customer.phone}</div>
+                    </td>
+                    <td className={`${styles.tableDataCell} text-sm text-gray-500`}>
+                      {new Date(order.date).toLocaleDateString()}
+                    </td>
+                    <td className={`${styles.tableDataCell} text-sm text-gray-500`}>
+                      {order.items.length} items
+                    </td>
+                    <td className={`${styles.tableDataCell} font-medium`}>
+                      ₹{order.total.toFixed(2)}
+                    </td>
+                    <td className={styles.tableDataCell}>
+                      <span className={styles.statusBadge(order.status)}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className={styles.tableDataCell}>
+                      <span className={styles.paymentBadge(order.paymentStatus)}>
+                        {order.paymentStatus}
+                      </span>
+                    </td>
+                    <td className={styles.tableDataCell}>
+                      <div className={styles.actionButtons}>
+                        <button
+                          onClick={() => viewOrderDetails(order)}
+                          className={styles.viewButton}
+                        >
+                          View
+                        </button>
+                        <button
+                          onClick={() => completeOrder(order._id)}
+                          className={styles.completeButton(order.status === 'Delivered' || order.status === 'Cancelled')}
+                          disabled={order.status === 'Delivered' || order.status === 'Cancelled'}
+                        >
+                          Complete
+                        </button>
+                        <button
+                          onClick={() => cancelOrder(order._id)}
+                          className={styles.cancelButton(order.status === 'Cancelled' || order.status === 'Delivered')}
+                          disabled={order.status === 'Cancelled' || order.status === 'Delivered'}
+                        >
+                          Cancel
+                        </button>
                       </div>
                     </td>
                   </tr>
-                ) : (
-                  filteredOrders.map(order => (
-                    <tr key={order._id} className={styles.tableRowHover}>
-                      <td className={`${styles.tableDataCell} ${styles.orderId}`}>
-                        {order.orderId}
-                      </td>
-                      <td className={styles.tableDataCell}>
-                        <div className="font-medium">{order.customer.name}</div>
-                        <div className="text-sm text-gray-500">{order.customer.phone}</div>
-                      </td>
-                      <td className={`${styles.tableDataCell} text-sm text-gray-500`}>
-                        {order.date}
-                      </td>
-                      <td className={`${styles.tableDataCell} text-sm text-gray-500`}>
-                        {order.items.length} items
-                      </td>
-                      <td className={`${styles.tableDataCell} font-medium`}>
-                        ₹{order.total.toFixed(2)}
-                      </td>
-                      <td className={styles.tableDataCell}>
-                        <span className={styles.statusBadge(order.status)}>
-                          {order.status}
-                        </span>
-                      </td>
-                      <td className={styles.tableDataCell}>
-                        <span className={styles.paymentBadge(order.paymentStatus)}>
-                          {order.paymentStatus}
-                        </span>
-                      </td>
-                      <td className={styles.tableDataCell}>
-                        <div className={styles.actionButtons}>
-                          <button
-                            onClick={() => viewOrderDetails(order)}
-                            className={styles.viewButton}
-                          >
-                            View
-                          </button>
-                          <button
-                            onClick={() => cancelOrder(order._id)}
-                            className={styles.cancelButton(order.status === 'Cancelled' || order.status === 'Delivered')}
-                            disabled={order.status === 'Cancelled' || order.status === 'Delivered'}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -246,9 +266,9 @@ const OrdersPage = () => {
           <div className={styles.modalContainer}>
             {/* Modal Header */}
             <div className={styles.modalHeader}>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center w-full">
                 <h2 className={styles.modalHeaderTitle}>
-                  Order Details: {selectedOrder._id}
+                  Order Details: {selectedOrder.orderId || selectedOrder._id.slice(-6).toUpperCase()}
                 </h2>
                 <button
                   onClick={closeModal}
@@ -258,7 +278,7 @@ const OrdersPage = () => {
                 </button>
               </div>
               <p className="text-gray-600 mt-1">
-                Ordered on {selectedOrder.date} 
+                Ordered on {new Date(selectedOrder.date).toLocaleString()}
               </p>
             </div>
 
@@ -349,14 +369,15 @@ const OrdersPage = () => {
                           key={item._id || index}
                           className={styles.modalOrderItem(index, selectedOrder.items.length)}
                         >
-                          {item.imageUrl ? (
+                          {getImageUrl(item.imageUrl) ? (
                             <img
-                              src={`http://localhost:4000${item.imageUrl}`}
+                              src={getImageUrl(item.imageUrl)}
                               alt={item.name}
                               className={styles.modalOrderImage}
+                              onError={(e) => {e.target.src = 'https://placehold.co/40x40?text=NA'}}
                             />
                           ) : (
-                            <div className={styles.modalPlaceholderImage} />
+                            <div className={styles.modalPlaceholderImage}>No Img</div>
                           )}
                           <div className="flex-grow">
                             <div className="font-medium">{item.name}</div>

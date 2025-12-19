@@ -55,7 +55,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h2 className={footerStyles.brandTitle}>
-              RUSH<span className={footerStyles.brandSpan}>BASKET</span>
+              FRESH<span className={footerStyles.brandSpan}>HIVE</span>
             </h2>
             <p className={footerStyles.brandText}>
               Bringing you the freshest organic produce since 2010. Our mission is to deliver farm-fresh goodness straight to your doorstep.
@@ -166,6 +166,7 @@ const Footer = () => {
         </div>
 
         {/* Attribution */}
+        {/* 
         <div className={footerStyles.attribution}>
           <div className={footerStyles.attributionBadge}>
             <div className={footerStyles.hexagonContainer}>
@@ -187,6 +188,7 @@ const Footer = () => {
             </span>
           </div>
         </div>
+        */}
       </div>
 
       {/* Custom animations */}

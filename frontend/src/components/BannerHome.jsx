@@ -1,7 +1,7 @@
 // components/BannerHome.js
 import React, { useState } from 'react';
 import { FiSearch, FiTruck } from 'react-icons/fi';
-import BannerFood from '../assets/FoodBanner.png';
+import BannerFood from '../assets/bannerfood.png';
 import { useNavigate } from 'react-router-dom';
 import { bannerStyles } from '../assets/dummyStyles'
 import { features } from '../assets/Dummy'
@@ -33,14 +33,14 @@ const BannerHome = ({ onSearch }) => {
       <div className={bannerStyles.backgroundGradient}></div>
 
       {/* Decorative circles */}
-      <div className="hidden sm:block absolute top-6 left-6 w-20 h-20 rounded-full bg-teal-100 opacity-30"></div>
-      <div className="hidden md:block absolute bottom-12 right-28 w-32 h-32 rounded-full bg-seafoam-200 opacity-30"></div>
-      <div className="hidden lg:block absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-mint-200 opacity-30"></div>
+      <div className="hidden sm:block absolute top-6 left-6 w-20 h-20 rounded-full bg-emerald-100 opacity-30"></div>
+      <div className="hidden md:block absolute bottom-12 right-28 w-32 h-32 rounded-full bg-green-200 opacity-30"></div>
+      <div className="hidden lg:block absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-emerald-200 opacity-30"></div>
 
       <div className="relative z-10 mt-8 sm:mt-10 lg:mt-12 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-center">
-          {/* Left Content */}
-          <div className="text-center md:text-left">
+          {/* Right Content (ordered second on desktop) */}
+          <div className="order-1 md:order-2 text-center md:text-left">
             <div className={bannerStyles.tag}>
               <span className="flex items-center text-sm sm:text-base">
                 <FiTruck className="mr-2" /> Free delivery on orders over ₹500
@@ -48,16 +48,23 @@ const BannerHome = ({ onSearch }) => {
             </div>
 
             <h1 className={bannerStyles.heading}>
-              Fresh{' '}
-              <span className={bannerStyles.headingItalic}>
-                Groceries
-              </span>
-              <br />Delivered to Your Door
+                 Your Daily{' '}
+                <span className={bannerStyles.headingItalic}>Groceries</span>
+                 <br />Delivered Fast & Fresh
             </h1>
 
             <p className={bannerStyles.paragraph}>
-              Discover the freshest produce, top‐quality meats, and pantry essentials—all delivered within 30 minutes.
+              Enjoy the freshest produce and quality products delivered right to your home.
             </p>
+
+            <div className="mb-6">
+              <button
+                onClick={() => navigate('/items')}
+                className={bannerStyles.ctaButton}
+              >
+                Shop Now
+              </button>
+            </div>
 
             <form onSubmit={handleSubmit} className={bannerStyles.form}>
               <input
@@ -81,7 +88,7 @@ const BannerHome = ({ onSearch }) => {
                   key={i}
                   className={bannerStyles.featureItem}
                 >
-                  <div className="text-teal-600 mb-1">{f.icon}</div>
+                  <div className="text-emerald-600 mb-1">{f.icon}</div>
                   <span className={bannerStyles.featureText}>
                     {f.text}
                   </span>
@@ -90,8 +97,8 @@ const BannerHome = ({ onSearch }) => {
             </div>
           </div>
 
-          {/* Right Image */}
-          <div className="relative flex justify-center">
+          {/* Left Image (ordered first on desktop) */}
+          <div className="order-2 md:order-1 relative flex justify-center">
             <div className={bannerStyles.imageContainer}>
               <div className={bannerStyles.imageInner}>
                 <img

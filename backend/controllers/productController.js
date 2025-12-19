@@ -45,3 +45,39 @@ export const deleteProduct = async (req, res, next) => {
         next(err);
     }
 };
+
+// PUT update a product
+export const updateProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const filename = req.file?.filename ?? null;
+        const imageUrl = filename ? `/uploads/${filename}` : undefined;
+        const { name, description, category, oldPrice, price } = req.body;
+
+        const updateData = {
+            name,
+            description,
+            category,
+            oldPrice: Number(oldPrice),
+            price: Number(price),
+        };
+
+        if (imageUrl) {
+            updateData.imageUrl = imageUrl;
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(
+            id,
+            updateData,
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        res.json(updatedProduct);
+    } catch (err) {
+        next(err);
+    }
+};

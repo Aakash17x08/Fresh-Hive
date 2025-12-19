@@ -1,7 +1,13 @@
 import Order from '../models/orderModel.js';
 import Stripe from 'stripe';
 import { v4 as uuidv4 } from 'uuid';
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+let stripe;
+if (process.env.STRIPE_SECRET_KEY) {
+    stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+} else {
+    console.warn("STRIPE_SECRET_KEY is missing. Online payments will be disabled.");
+}
 
 // Create a new order
 export const createOrder = async (req, res) => {
@@ -12,7 +18,9 @@ export const createOrder = async (req, res) => {
         }
 
         const normalizedPM =
-            paymentMethod === 'COD' ? 'Cash on Delivery' : 'Online Payment';
+            (paymentMethod === 'COD' || paymentMethod === 'Cash on Delivery')
+                ? 'Cash on Delivery'
+                : 'Online Payment';
 
         const orderItems = items.map(i => ({
             id: i.id,
@@ -26,6 +34,9 @@ export const createOrder = async (req, res) => {
         let newOrder;
 
         if (normalizedPM === 'Online Payment') {
+            if (!stripe) {
+                return res.status(500).json({ message: 'Online payments are currently unavailable (Server Config Error)' });
+            }
             const session = await stripe.checkout.sessions.create({
                 payment_method_types: ['card'],
                 mode: 'payment',

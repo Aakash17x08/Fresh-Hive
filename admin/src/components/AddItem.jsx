@@ -27,6 +27,7 @@ const categories = [
 export default function AddItemPage() {
   const [formData, setFormData] = useState(initialFormState);
   const fileInputRef = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +51,7 @@ export default function AddItemPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const body = new FormData();
       body.append("name", formData.name);
@@ -66,14 +68,16 @@ export default function AddItemPage() {
       });
 
       console.log("Created", res.data);
-      alert("Product added!");
+      alert("Product added successfully!");
 
       // Reset form
       setFormData(initialFormState);
-      fileInputRef.current.value = "";
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (err) {
       console.error(err);
-      alert("Upload failed");
+      alert("Failed to add product. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -81,126 +85,136 @@ export default function AddItemPage() {
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.innerContainer}>
-        <h1 className={styles.heading}>Add New Product</h1>
-
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Name & Category */}
-          <div className={styles.gridContainer}>
-            <div>
-              <label className={styles.label}>Product Name *</label>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                onChange={handleChange}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div>
-              <label className={styles.label}>Category *</label>
-              <select
-                name="category"
-                value={category}
-                onChange={handleChange}
-                required
-                className={styles.input}
-              >
-                <option value="">Select category</option>
-                {categories.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Description */}
+      <form onSubmit={handleSubmit} className={styles.form}>
+        
+        {/* Name & Category */}
+        <div className={styles.gridContainer}>
           <div>
-            <label className={styles.label}>Description</label>
-            <textarea
-              name="description"
-              value={description}
+            <label className={styles.label}>Product Name *</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
               onChange={handleChange}
-              rows="3"
-              className={styles.textarea}
+              required
+              placeholder="e.g. Fresh Organic Bananas"
+              className={styles.input}
             />
           </div>
 
-          {/* Prices */}
-          <div className={styles.priceGrid}>
-            <div>
-              <label className={styles.label}>Original Price (₹) *</label>
-              <input
-                type="number"
-                name="oldPrice"
-                value={oldPrice}
-                onChange={handleChange}
-                required
-                className={styles.input}
-              />
-            </div>
-            <div>
-              <label className={styles.label}>Selling Price (₹) *</label>
-              <input
-                type="number"
-                name="price"
-                value={price}
-                onChange={handleChange}
-                required
-                className={styles.input}
-              />
-            </div>
-          </div>
-
-          {/* Image Upload */}
           <div>
-            <label className={styles.label}>Product Image</label>
-            <div
-              onClick={() => fileInputRef.current.click()}
-              className={styles.imageUploadContainer}
+            <label className={styles.label}>Category *</label>
+            <select
+              name="category"
+              value={category}
+              onChange={handleChange}
+              required
+              className={styles.input}
             >
-              {preview ? (
-                <div className="relative">
-                  <img
-                    src={preview}
-                    alt="Preview"
-                    className={styles.previewImage}
-                  />
-                  <button
-                    type="button"
-                    onClick={removeImage}
-                    className={styles.removeButton}
-                  >
-                    <FiX size={16} />
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <FiUpload className={styles.uploadIcon} />
-                  <p className={styles.uploadText}>
-                    Click to upload image (max 5 MB)
-                  </p>
-                </>
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleImageUpload}
-                className={styles.hiddenInput}
-              />
-            </div>
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
           </div>
+        </div>
 
-          <button type="submit" className={styles.submitButton}>
-            <FiSave className="mr-2" />
-            Add Product
-          </button>
-        </form>
-      </div>
+        {/* Description */}
+        <div>
+          <label className={styles.label}>Description</label>
+          <textarea
+            name="description"
+            value={description}
+            onChange={handleChange}
+            placeholder="Describe the product..."
+            className={styles.textarea}
+          />
+        </div>
+
+        {/* Prices */}
+        <div className={styles.priceGrid}>
+          <div>
+            <label className={styles.label}>Price (₹) *</label>
+            <input
+              type="number"
+              name="price"
+              value={price}
+              onChange={handleChange}
+              required
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              className={styles.input}
+            />
+          </div>
+          <div>
+            <label className={styles.label}>Old Price (₹)</label>
+            <input
+              type="number"
+              name="oldPrice"
+              value={oldPrice}
+              onChange={handleChange}
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              className={styles.input}
+            />
+          </div>
+        </div>
+
+        {/* Image Upload */}
+        <div>
+          <label className={styles.label}>Product Image</label>
+          <div 
+            className={styles.imageUploadContainer}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            {preview ? (
+              <div className="relative inline-block">
+                <img src={preview} alt="Preview" className={styles.previewImage} />
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeImage();
+                  }}
+                  className={styles.removeButton}
+                >
+                  <FiX />
+                </button>
+              </div>
+            ) : (
+              <div>
+                <FiUpload className={styles.uploadIcon} />
+                <p className={styles.uploadText}>
+                  Click to upload or drag and drop
+                </p>
+                <p className="text-xs text-gray-400 mt-1">
+                  PNG, JPG, GIF up to 5MB
+                </p>
+              </div>
+            )}
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageUpload}
+              accept="image/*"
+              className={styles.hiddenInput}
+            />
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          disabled={isSubmitting}
+          className={styles.submitButton}
+        >
+          <FiSave className="mr-2" />
+          {isSubmitting ? "Adding Product..." : "Save Product"}
+        </button>
+      </form>
     </div>
   );
 }

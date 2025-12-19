@@ -48,11 +48,18 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   const fetchCart = async () => {
+    const auth = getAuthHeader();
+    if (!auth.headers) {
+      setCart([]);
+      setLoading(false);
+      return;
+    }
+
     try {
       const { data } = await axios.get(
         'http://localhost:4000/api/cart',
         {
-          ...getAuthHeader(),
+          ...auth,
           withCredentials: true,   // if you’re relying on cookies too
         }
       );
@@ -64,15 +71,22 @@ export const CartProvider = ({ children }) => {
 
       setCart(normalizeItems(rawItems));
     } catch (err) {
-      console.error('Error fetching cart:', err);
+      if (err.response && err.response.status === 401) {
+        setCart([]);
+      } else {
+        console.error('Error fetching cart:', err);
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const refreshCart = async () => {
+    const auth = getAuthHeader();
+    if (!auth.headers) return;
+
     try {
-      const { data } = await axios.get('http://localhost:4000/api/cart', getAuthHeader());
+      const { data } = await axios.get('http://localhost:4000/api/cart', auth);
       const rawItems = Array.isArray(data)
         ? data
         : Array.isArray(data.items)
@@ -80,7 +94,11 @@ export const CartProvider = ({ children }) => {
           : data.cart?.items || [];
       setCart(normalizeItems(rawItems));
     } catch (err) {
-      console.error('Error refreshing cart:', err);
+      if (err.response && err.response.status === 401) {
+        setCart([]);
+      } else {
+        console.error('Error refreshing cart:', err);
+      }
     }
   };
 

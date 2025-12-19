@@ -25,10 +25,13 @@ const ProductCard = ({ item }) => {
   };
 
   const rawImage = item.image || item.imageUrl;
-  let imgSrc = item.image;
+  let imgSrc = rawImage;
   if (rawImage) {
-    if (rawImage.startsWith('http')) imgSrc = rawImage;
-    else if (rawImage.startsWith('/')) imgSrc = `${BACKEND_URL}${rawImage}`;
+    if (rawImage.startsWith('data:')) imgSrc = rawImage;
+    else if (rawImage.startsWith('http')) imgSrc = rawImage;
+    else if (rawImage.startsWith('/uploads/')) imgSrc = `${BACKEND_URL}${rawImage}`;
+    else if (rawImage.startsWith('/')) imgSrc = rawImage;
+    else if (/\.(png|jpg|jpeg|webp|gif)$/i.test(rawImage) || rawImage.includes('static')) imgSrc = rawImage;
     else imgSrc = `${BACKEND_URL}/uploads/${rawImage}`;
   }
 

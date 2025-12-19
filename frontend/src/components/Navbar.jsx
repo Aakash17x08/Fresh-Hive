@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   FiHome,
   FiShoppingBag,
-  FiMail,
   FiUser,
   FiX,
   FiMenu,
@@ -12,7 +11,7 @@ import {
 } from 'react-icons/fi';
 import { FaOpencart } from 'react-icons/fa';
 import { useCart } from '../CartContext';
-import logo from '../assets/logo.png';
+import logo from '../assets/weblogo.png';
 import { navbarStyles } from '../assets/dummyStyles';
 import { navItems } from '../assets/Dummy'
 
@@ -137,10 +136,10 @@ export default function Navbar() {
           <Link to="/" className={navbarStyles.logoLink}>
             <img
               src={logo}
-              alt="RushBasket Logo"
+              alt="FreshHive Logo"
               className={`${navbarStyles.logoImage} ${scrolled ? 'h-10 w-10' : 'h-12 w-12'}`}
             />
-            <span className={navbarStyles.logoText}>RushBasket</span>
+            <span className={navbarStyles.logoText}>FreshHive</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -186,6 +185,7 @@ export default function Navbar() {
 
           {/* Icons & Hamburger */}
           <div className={navbarStyles.iconsContainer}>
+            
             {isLoggedIn ? (
               // Logout button when logged in
               <button
@@ -193,14 +193,14 @@ export default function Navbar() {
                 className={navbarStyles.loginLink}
                 aria-label="Logout"
               >
-                <FiUser className={navbarStyles.loginIcon} />
-                <span className="ml-1 text-white">Logout</span>
+                <FiUser className={`${navbarStyles.loginIcon} text-gray-900`} />
+                <span className="ml-1">Logout</span>
               </button>
             ) : (
               // Login link when not logged in
               <Link to="/login" className={navbarStyles.loginLink}>
-                <FiUser className={navbarStyles.loginIcon} />
-                <span className="ml-1 text-white">Login</span>
+                <FiUser className={`${navbarStyles.loginIcon} text-gray-900`} />
+                <span className="ml-1">Login</span>
               </Link>
             )}
 
@@ -220,9 +220,9 @@ export default function Navbar() {
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
               {isOpen ? (
-                <FiX className="h-6 w-6 text-white" />
+                <FiX className="h-6 w-6 text-gray-900" />
               ) : (
-                <FiMenu className="h-6 w-6 text-white" />
+                <FiMenu className="h-6 w-6 text-gray-900" />
               )}
             </button>
           </div>
@@ -249,16 +249,12 @@ export default function Navbar() {
         >
           <div className={navbarStyles.mobileHeader}>
             <div className={navbarStyles.mobileLogo}>
-              <div className={navbarStyles.mobileLogo}>
-                <img
-                  src={logo}
-                  alt="RushBasket Logo"
-                  className={navbarStyles.mobileLogoImage}
-                />
-                <span className={navbarStyles.mobileLogoText}>RushBasket</span>
-
-              </div>
-
+              <img
+                src={logo}
+                alt="FreshHive Logo"
+                className={navbarStyles.mobileLogoImage}
+              />
+              <span className={navbarStyles.mobileLogoText}>FreshHive</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}

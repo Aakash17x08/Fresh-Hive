@@ -34,11 +34,12 @@ export const addToCart = async (req, res, next) => {
         let cartItem = await CartItem.findOne({ user: req.user._id, product: pid });
 
         if (cartItem) {
-            cartItem.quantity = Math.max(1, cartItem.quantity + quantity);
-            if (cartItem.quantity < 1) {
+            const newQuantity = cartItem.quantity + quantity;
+            if (newQuantity < 1) {
                 await cartItem.deleteOne();
                 return res.status(200).json({ message: 'Item removed', _id: cartItem._id.toString() });
             }
+            cartItem.quantity = newQuantity;
             await cartItem.save();
             await cartItem.populate('product');
             return res.status(200).json({

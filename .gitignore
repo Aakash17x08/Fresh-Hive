@@ -1,0 +1,21 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Env
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+# Uploads / images (optional)
+backend/uploads/
+
+# Dependency locks (optional)
+# package-lock.json

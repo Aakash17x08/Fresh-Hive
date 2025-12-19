@@ -54,7 +54,7 @@ const UserOrdersPage = () => {
   const viewOrderDetails = (order) => {
     setSelectedOrder(order);
     setIsDetailModalOpen(true);
-  };
+  }; 
   const closeModal = () => {
     setIsDetailModalOpen(false);
     setSelectedOrder(null);
@@ -95,72 +95,46 @@ const UserOrdersPage = () => {
           </div>
         </div>
 
-        {/* Orders Table */}
-        <div className={ordersPageStyles.ordersTable}>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className={ordersPageStyles.tableHeader}>
-                <tr>
-                  <th className={ordersPageStyles.tableHeaderCell}>Order ID</th>
-                  <th className={ordersPageStyles.tableHeaderCell}>Date</th>
-                  <th className={ordersPageStyles.tableHeaderCell}>Items</th>
-                  <th className={ordersPageStyles.tableHeaderCell}>Total</th>
-                  <th className={ordersPageStyles.tableHeaderCell}>Status</th>
-                  <th className={ordersPageStyles.tableHeaderCell}>Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-emerald-700/50">
-                {filteredOrders.length === 0 ? (
-                  <tr>
-                    <td colSpan="6" className="py-12 text-center">
-                      <div className="flex flex-col items-center justify-center">
-                        <FiPackage className="text-emerald-400 text-4xl mb-4" />
-                        <h3 className="text-lg font-medium text-emerald-100 mb-1">No orders found</h3>
-                        <p className="text-emerald-300">Try adjusting your search criteria</p>
-                      </div>
-                    </td>
-                  </tr>
-                ) : (
-                  filteredOrders.map(order => (
-                    <tr key={order._id} className={ordersPageStyles.tableRow}>
-                      <td className={`${ordersPageStyles.tableCell} font-medium text-emerald-200`}>
-                        {order.orderId}
-                      </td>
-                      <td className={`${ordersPageStyles.tableCell} text-sm`}>
-                        {order.date}
-                      </td>
-                      <td className={ordersPageStyles.tableCell}>
-                        <div className="text-emerald-100">
-                          {order.items.length} items
-                        </div>
-                      
-                      </td>
-                      <td className={`${ordersPageStyles.tableCell} font-medium`}>
-                        ₹{order.total.toFixed(2)}
-                      </td>
-                      <td className={ordersPageStyles.tableCell}>
-                        <span className={`${ordersPageStyles.statusBadge} ${order.status === 'Delivered' ? 'bg-emerald-500/20 text-emerald-200' :
-                          order.status === 'Processing' ? 'bg-amber-500/20 text-amber-200' :
-                            order.status === 'Shipped' ? 'bg-blue-500/20 text-blue-200' :
-                              'bg-red-500/20 text-red-200'
-                          }`}>
-                          {order.status}
-                        </span>
-                      </td>
-                      <td className={ordersPageStyles.tableCell}>
-                        <button
-                          onClick={() => viewOrderDetails(order)}
-                          className={ordersPageStyles.actionButton}
-                        >
-                          View Details
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+        {/* Orders Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredOrders.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <div className="flex flex-col items-center justify-center">
+                <FiPackage className="text-emerald-400 text-4xl mb-4" />
+                <h3 className="text-lg font-medium text-emerald-100 mb-1">No orders found</h3>
+                <p className="text-emerald-300">Try adjusting your search criteria</p>
+              </div>
+            </div>
+          ) : (
+            filteredOrders.map(order => (
+              <div key={order._id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-xs text-gray-500 mb-1">Order ID</div>
+                    <div className="font-bold text-gray-900">{order.orderId}</div>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-700' :
+                    order.status === 'Processing' ? 'bg-amber-50 text-amber-700' :
+                      order.status === 'Shipped' ? 'bg-blue-50 text-blue-700' :
+                        'bg-red-50 text-red-700'
+                    }`}>
+                    {order.status}
+                  </span>
+                </div>
+                <div className="mt-3 text-sm text-gray-600">{new Date(order.date).toLocaleString()}</div>
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="text-sm text-gray-600">Items: <span className="font-semibold text-gray-900">{order.items.length}</span></div>
+                  <div className="font-extrabold text-emerald-600">₹{order.total.toFixed(2)}</div>
+                </div>
+                <button
+                  onClick={() => viewOrderDetails(order)}
+                  className="mt-5 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl"
+                >
+                  View Details
+                </button>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
@@ -240,12 +214,21 @@ const UserOrdersPage = () => {
                     <div className="border border-emerald-700 rounded-xl overflow-hidden">
                       {selectedOrder.items.map((item, index) => (
                         <div
-                          key={item._id || idx}
+                          key={item._id || `${item.name}-${index}`}
                           className={`flex items-center p-4 bg-emerald-900/30 ${index !== selectedOrder.items.length - 1 ? 'border-b border-emerald-700' : ''}`}
                         >
                           {item.imageUrl ? (
                             <img
-                              src={`http://localhost:4000${item.imageUrl}`}
+                              src={(() => {
+                                const path = item.imageUrl;
+                                if (!path) return '';
+                                if (path.startsWith('data:')) return path;
+                                if (path.startsWith('http')) return path;
+                                if (path.startsWith('/uploads/')) return `http://localhost:4000${path}`;
+                                if (path.startsWith('/')) return path;
+                                if (/\.(png|jpg|jpeg|webp|gif)$/i.test(path) || path.includes('static')) return path;
+                                return `http://localhost:4000/uploads/${path}`;
+                              })()}
                               alt={item.name}
                               className="w-16 h-16 object-cover rounded-lg mr-4"
                             />
@@ -255,10 +238,10 @@ const UserOrdersPage = () => {
                             </div>
                           )}
                           <div className="flex-grow">
-                            <div className="font-medium text-emerald-100">{item.name}</div>
-                            <div className="text-emerald-400">₹{item.price.toFixed(2)} × {item.quantity}</div>
+                            <div className="font-semibold text-gray-900">{item.name}</div>
+                            <div className="text-emerald-700 font-medium">₹{item.price.toFixed(2)} × {item.quantity}</div>
                           </div>
-                          <div className="font-medium text-emerald-100">
+                          <div className="font-bold text-gray-900">
                             ₹{(item.price * item.quantity).toFixed(2)}
                           </div>
                         </div>

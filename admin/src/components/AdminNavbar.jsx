@@ -1,87 +1,72 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FiPackage, FiPlusCircle, FiShoppingBag, FiX, FiMenu } from 'react-icons/fi';
-import { adminNavbarStyles as styles } from '../assets/adminStyles';
+import { FiPackage, FiPlusCircle, FiShoppingBag, FiGrid, FiX } from 'react-icons/fi';
+import { adminLayoutStyles as styles } from '../assets/adminStyles';
 
-const AdminNavbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+const AdminNavbar = ({ isMobileOpen, onClose }) => {
+  const NavLinks = () => (
+    <>
+      <NavLink to="/admin/add-item" className={styles.navLink}>
+        <FiPlusCircle className={styles.navIcon} />
+        Add Products
+      </NavLink>
+      
+      <NavLink to="/admin/list-items" className={styles.navLink}>
+        <FiGrid className={styles.navIcon} />
+        Inventory
+      </NavLink>
+      
+      <NavLink to="/admin/orders" className={styles.navLink}>
+        <FiShoppingBag className={styles.navIcon} />
+        Orders
+      </NavLink>
+    </>
+  );
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.container}>
-        <div className={styles.mainFlex}>
-          {/* Logo */}
-          <div className={styles.logoContainer}>
-            <div className={styles.logoIconContainer}>
-              <FiPackage className={styles.logoIcon} />
+    <>
+      {/* Desktop Sidebar */}
+      <aside className={styles.sidebar}>
+        <div className={styles.sidebarHeader}>
+          <div className={styles.sidebarBrand}>
+            <div className="bg-emerald-800 p-1.5 rounded-lg">
+              <FiPackage className="text-xl" />
             </div>
-            <h1 className={styles.logoText}>
-              <span className={styles.logoAccent}>Rush Basket</span> Admin
-            </h1>
-          </div>
-
-          {/* Desktop Navigation Links */}
-          <div className={styles.desktopNavLinks}>
-            <NavLink to="/admin/add-item" className={styles.navLink}>
-              <FiPlusCircle className="mr-2" />
-              Add Products
-            </NavLink>
-            
-            <NavLink to="/admin/list-items" className={styles.navLink}>
-              <FiPackage className="mr-2" />
-              List Items
-            </NavLink>
-            
-            <NavLink to="/admin/orders" className={styles.navLink}>
-              <FiShoppingBag className="mr-2" />
-              Orders
-            </NavLink>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className={styles.mobileMenuButton}>
-            <button onClick={toggleMobileMenu} className={styles.menuButton}>
-              {isMobileMenuOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
-            </button>
+            FreshHive
           </div>
         </div>
+        
+        <nav className={styles.sidebarContent}>
+          <NavLinks />
+        </nav>
+        
+        <div className={styles.sidebarFooter}>
+          <div className="text-xs text-emerald-300">
+            &copy; 2025 FreshHive
+          </div>
+        </div>
+      </aside>
+
+      {/* Mobile Sidebar */}
+      <div className={`${styles.sidebarMobile} ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={styles.sidebarHeader}>
+          <div className={styles.sidebarBrand}>
+            <FiPackage className="mr-2" /> FreshHive
+          </div>
+          <button onClick={onClose} className="ml-auto text-white p-2">
+            <FiX size={24} />
+          </button>
+        </div>
+        <nav className={styles.sidebarContent}>
+          <NavLinks />
+        </nav>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`${styles.mobileMenuContainer} ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-        <div className={styles.mobileMenuInner}>
-          <NavLink 
-            to="/admin/add-item" 
-            onClick={closeMobileMenu}
-            className={styles.mobileNavLink}
-          >
-            <FiPlusCircle className="mr-3 ml-1" size={20} />
-            Manage Products
-          </NavLink>
-          
-          <NavLink 
-            to="/admin/list-items" 
-            onClick={closeMobileMenu}
-            className={styles.mobileNavLink}
-          >
-            <FiPackage className="mr-3 ml-1" size={20} />
-            Inventory
-          </NavLink>
-          
-          <NavLink 
-            to="/admin/orders" 
-            onClick={closeMobileMenu}
-            className={styles.mobileNavLink}
-          >
-            <FiShoppingBag className="mr-3 ml-1" size={20} />
-            Orders
-          </NavLink>
-        </div>
-      </div>
-    </nav>
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div className={styles.overlay} onClick={onClose} />
+      )}
+    </>
   );
 };
 

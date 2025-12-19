@@ -6,6 +6,7 @@ import {
     getProducts,
     createProduct,
     deleteProduct,
+    updateProduct,
 } from '../controllers/productController.js';
 
 const itemrouter = express.Router();
@@ -22,6 +23,9 @@ itemrouter.get('/', getProducts);
 
 // POST create a new product (with optional image upload)
 itemrouter.post('/', upload.single('image'), createProduct);
+
+// PUT update a product
+itemrouter.put('/:id', upload.single('image'), updateProduct);
 
 // DELETE a product by ID
 itemrouter.delete('/:id', deleteProduct);

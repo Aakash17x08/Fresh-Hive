@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaShoppingCart, FaChevronRight, FaMinus, FaPlus, FaThList } from "react-icons/fa";
-import { categories } from "../assets/dummyData";
+import { categories, products as sampleProducts } from "../assets/dummyData";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
 import BannerHome from "../components/BannerHome";
@@ -10,6 +10,7 @@ import axios from 'axios'
 
 const ItemsHome = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(() =>
     localStorage.getItem("activeCategory") || "All"
   );
@@ -19,15 +20,39 @@ const ItemsHome = () => {
   }, [activeCategory]);
 
   useEffect(() => {
+    setLoading(true);
     axios.get("http://localhost:4000/api/items")
       .then(res => {
-        const normalized = res.data.map(p => ({
+        const normalized = (Array.isArray(res.data) ? res.data : []).map(p => ({
           ...p,
           id: p._id,
         }));
-        setProducts(normalized);
+        if (normalized.length === 0) {
+          const fallback = sampleProducts.map((sp, idx) => ({
+            _id: `sample-${idx}`,
+            id: `sample-${idx}`,
+            name: sp.name,
+            price: sp.price,
+            category: sp.category,
+            imageUrl: sp.image, // local asset
+          }));
+          setProducts(fallback);
+        } else {
+          setProducts(normalized);
+        }
       })
-      .catch(console.error);
+      .catch(() => {
+        const fallback = sampleProducts.map((sp, idx) => ({
+          _id: `sample-${idx}`,
+          id: `sample-${idx}`,
+          name: sp.name,
+          price: sp.price,
+          category: sp.category,
+          imageUrl: sp.image,
+        }));
+        setProducts(fallback);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const navigate = useNavigate();
@@ -49,6 +74,10 @@ const ItemsHome = () => {
     : (activeCategory === "All"
       ? products
       : products.filter((product) => product.category === activeCategory));
+
+  const displayProducts = (!searchTerm && searchedProducts.length === 0)
+    ? products
+    : searchedProducts;
 
   const getQuantity = (productId) => {
     const item = cart.find((ci) => ci.productId === productId);
@@ -190,8 +219,10 @@ const ItemsHome = () => {
           </div>
 
           <div className={itemsHomeStyles.productsGrid}>
-            {searchedProducts.length > 0 ? (
-              searchedProducts.map((product) => {
+            {loading ? (
+              <div className="col-span-full text-center py-10 text-gray-500">Loading products...</div>
+            ) : displayProducts.length > 0 ? (
+              displayProducts.map((product) => {
                 const qty = getQuantity(product._id);
                 return (
                   <div
@@ -200,7 +231,19 @@ const ItemsHome = () => {
                   >
                     <div className={itemsHomeStyles.imageContainer}>
                       <img
-                        src={`http://localhost:4000${product.imageUrl}`}
+                        src={(() => {
+                          const path = product.imageUrl;
+                          if (!path) return '';
+                          if (typeof path === 'string') {
+                            if (path.startsWith('data:')) return path;
+                            if (path.startsWith('http')) return path;
+                            if (path.startsWith('/uploads/')) return `http://localhost:4000${path}`;
+                            if (path.startsWith('/')) return path;
+                            if (/\.(png|jpg|jpeg|webp|gif)$/i.test(path) || path.includes('static')) return path;
+                            return `http://localhost:4000/uploads/${path}`;
+                          }
+                          return '';
+                        })()}
                         alt={product.name}
                         className={itemsHomeStyles.productImage}
                         onError={(e) => {

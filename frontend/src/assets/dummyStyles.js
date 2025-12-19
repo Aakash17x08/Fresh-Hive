@@ -1,597 +1,406 @@
 // assets/dummyStyles.js
+
+// --- Banner Styles ---
 export const bannerStyles = {
-  backgroundGradient: "absolute inset-0 bg-gradient-to-r from-mint-100 to-seafoam-100 z-0",
+  backgroundGradient: "absolute inset-0 bg-gradient-to-r from-green-50 to-emerald-50 z-0",
   decorativeCircle: "hidden absolute rounded-full",
-  tag: "inline-block bg-teal-50 text-teal-800 px-3 py-1 rounded-full mb-3 border border-teal-100",
-  heading: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4",
-  headingItalic: "font-serif italic text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-teal-700",
-  paragraph: "text-sm sm:text-base md:text-lg text-gray-600 mb-6 mx-auto md:mx-0 max-w-md md:max-w-lg",
-  form: "relative max-w-md mx-auto md:mx-0 mb-6",
-  input: "w-full py-3 sm:py-4 px-4 pr-12 rounded-2xl border border-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-300 shadow-sm",
-  searchButton: "absolute right-2 top-1/2 transform -translate-y-1/2 bg-teal-600 text-white p-2 rounded-full hover:bg-teal-700 transition-colors",
-  featureIcon: "h-6 w-6",
-  featureItem: "bg-white bg-opacity-80 backdrop-blur-sm rounded-xl p-2 sm:p-3 flex flex-col items-center shadow-sm border border-teal-50 hover:shadow-md transition-shadow",
-  featureText: "text-gray-700 font-medium text-xs sm:text-sm",
-  imageContainer: "z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md w-full transform transition-transform duration-500 hover:scale-[1.02]",
-  imageInner: "rounded-xl overflow-hidden w-full h-48 sm:h-56 md:h-64 lg:h-[350px] shadow-lg border-4 border-white"
+  tag: "inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full mb-3 border border-emerald-200 font-medium",
+  heading: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight",
+  headingItalic: "font-serif italic text-emerald-600",
+  paragraph: "text-base sm:text-lg text-gray-600 mb-8 mx-auto md:mx-0 max-w-lg leading-relaxed",
+  ctaButton: "inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-full transition-all shadow-md hover:shadow-lg active:scale-95",
+  form: "relative max-w-md mx-auto md:mx-0 mb-8 shadow-lg rounded-2xl",
+  input: "w-full py-4 px-6 pr-14 rounded-2xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500 transition-all",
+  searchButton: "absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white p-3 rounded-xl hover:bg-emerald-700 transition-all shadow-md hover:shadow-lg active:scale-95",
+  featureIcon: "h-6 w-6 text-emerald-600",
+  featureItem: "bg-white/80 backdrop-blur-md rounded-2xl p-4 flex flex-col items-center shadow-sm border border-white hover:shadow-md transition-all hover:-translate-y-1",
+  featureText: "text-gray-700 font-semibold text-xs sm:text-sm mt-2",
+  imageContainer: "z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg w-full transform transition-transform duration-500 hover:scale-[1.02]",
+  imageInner: "rounded-3xl overflow-hidden w-full h-64 sm:h-80 md:h-96 shadow-2xl border-8 border-white"
 };
 
-
-
-// assets/cartStyles.js
+// --- Cart Styles ---
 export const cartStyles = {
-  pageContainer: "min-h-screen bg-black py-12 px-4",
-  maxContainer: "container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8",
-  maxContainerLarge: "container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8",
-  continueShopping: "inline-flex cursor-pointer items-center text-emerald-300 hover:text-emerald-100 mb-8 text-sm sm:text-base",
-  emptyCartContainer: "bg-emerald-800/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 text-center border border-emerald-700 shadow-2xl",
-  emptyCartIcon: "text-emerald-100 text-4xl sm:text-5xl mb-4",
-  emptyCartHeading: "text-2xl sm:text-3xl font-bold text-emerald-100 mb-3",
-  emptyCartText: "text-emerald-300 mb-6 max-w-md mx-auto text-sm sm:text-base",
-  emptyCartButton: "inline-block cursor-pointer bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-2.5 px-6 sm:py-3 sm:px-8 rounded-full transition-all duration-300 hover:scale-[1.03] text-sm sm:text-base",
-  headerContainer: "text-center mb-10",
-  headerTitle: "text-3xl sm:text-4xl font-bold font-cursive text-emerald-100 mt-8 sm:mt-12",
-  clearCartButton: "text-emerald-300 mt-2 cursor-pointer hover:text-red-400 flex justify-center items-center text-sm sm:text-base",
+  pageContainer: "min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8",
+  maxContainer: "container mx-auto max-w-4xl",
+  maxContainerLarge: "container mx-auto max-w-6xl",
+  continueShopping: "inline-flex cursor-pointer items-center text-emerald-600 hover:text-emerald-700 mb-8 font-medium transition-colors",
+  emptyCartContainer: "bg-white rounded-3xl p-12 text-center border border-gray-100 shadow-xl max-w-2xl mx-auto",
+  emptyCartIcon: "text-emerald-200 text-6xl mb-6 mx-auto",
+  emptyCartHeading: "text-2xl sm:text-3xl font-bold text-gray-900 mb-4",
+  emptyCartText: "text-gray-500 mb-8 max-w-md mx-auto text-lg",
+  emptyCartButton: "inline-block cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-full transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5",
+  headerContainer: "text-center mb-12",
+  headerTitle: "text-3xl sm:text-4xl font-bold text-gray-900 mt-8",
+  clearCartButton: "text-red-500 mt-3 cursor-pointer hover:text-red-600 flex justify-center items-center text-sm font-medium transition-colors",
   cartGrid: "grid grid-cols-1 lg:grid-cols-3 gap-8",
-  cartItemsSection: "lg:col-span-2",
-  cartItemsGrid: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6",
-  cartItemCard: "bg-emerald-800/30 backdrop-blur-sm rounded-2xl border border-emerald-700 p-5 sm:p-6 flex flex-col items-center shadow-2xl",
-  cartItemImageContainer: "w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-emerald-900 flex items-center justify-center mb-4",
-  cartItemImage: "object-contain w-12 h-12 sm:w-16 sm:h-16",
-  cartItemName: "font-bold text-emerald-50 text-base sm:text-lg mb-2 text-center",
-  cartItemPrice: "text-emerald-300 mb-4 text-sm sm:text-base",
-  cartItemQuantityContainer: "flex items-center space-x-4 mb-4",
-  cartItemQuantityButton: "p-2 cursor-pointer text-emerald-300 hover:text-emerald-100",
-  cartItemQuantity: "text-emerald-50 w-6 sm:w-8 text-center",
-  cartItemRemoveButton: "flex items-center cursor-pointer text-emerald-300 hover:text-red-400 text-sm sm:text-base",
-  orderSummaryCard: "bg-emerald-800/30 backdrop-blur-sm rounded-2xl border border-emerald-700 p-5 sm:p-6 shadow-2xl",
-  orderSummaryTitle: "text-lg sm:text-xl font-bold text-emerald-100 mb-6",
-  orderSummaryRow: "flex justify-between",
-  orderSummaryLabel: "text-emerald-300",
-  orderSummaryValue: "text-emerald-50",
-  orderSummaryDivider: "h-px bg-emerald-700 my-4",
-  orderSummaryTotalRow: "flex justify-between text-base sm:text-lg font-bold",
-  orderSummaryTotalLabel: "text-emerald-100",
-  orderSummaryTotalValue: "text-emerald-50",
-  checkoutButton: "mt-6 sm:mt-8 w-full bg-emerald-400 hover:bg-emerald-300 text-black font-bold py-3 sm:py-4 cursor-pointer rounded-xl transition-all duration-300 text-sm sm:text-base",
-  continueShoppingBottom: "mt-4 sm:mt-6 text-center"
+  cartItemsSection: "lg:col-span-2 space-y-6",
+  cartItemsGrid: "space-y-4", // Changed to list view for better UX
+  cartItemCard: "bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 flex flex-row items-center shadow-sm hover:shadow-md transition-shadow gap-4 sm:gap-6",
+  cartItemImageContainer: "w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200",
+  cartItemImage: "object-contain w-full h-full p-2",
+  cartItemName: "font-bold text-gray-900 text-base sm:text-lg mb-1",
+  cartItemPrice: "text-emerald-600 font-bold text-lg",
+  cartItemQuantityContainer: "flex items-center bg-gray-100 rounded-lg p-1",
+  cartItemQuantityButton: "p-2 cursor-pointer text-gray-600 hover:text-emerald-600 transition-colors rounded-md hover:bg-white shadow-sm",
+  cartItemQuantity: "text-gray-900 font-semibold w-8 text-center",
+  cartItemRemoveButton: "ml-auto p-2 text-gray-400 hover:text-red-500 cursor-pointer transition-colors rounded-full hover:bg-red-50",
+  orderSummaryCard: "bg-white rounded-3xl border border-gray-100 p-6 sm:p-8 shadow-lg h-fit sticky top-24",
+  orderSummaryTitle: "text-xl font-bold text-gray-900 mb-6",
+  orderSummaryRow: "flex justify-between mb-3",
+  orderSummaryLabel: "text-gray-500",
+  orderSummaryValue: "text-gray-900 font-medium",
+  orderSummaryDivider: "h-px bg-gray-100 my-6",
+  orderSummaryTotalRow: "flex justify-between text-lg sm:text-xl font-bold mb-6",
+  orderSummaryTotalLabel: "text-gray-900",
+  orderSummaryTotalValue: "text-emerald-600",
+  checkoutButton: "w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl cursor-pointer transition-all duration-300 shadow-lg hover:shadow-emerald-200 transform hover:-translate-y-0.5",
+  continueShoppingBottom: "mt-6 text-center text-sm text-gray-500"
 };
 
-// assets/contactStyles.js
-const contactStyles = {
-  pageContainer: "min-h-screen bg-gradient-to-br from-emerald-900 to-green-900 flex items-center justify-center py-12 px-4 sm:px-6 relative overflow-hidden",
-  toast: "fixed top-17 right-6 bg-green-600 text-black inline-flex items-center px-4 py-2 rounded-lg shadow-lg z-50 whitespace-nowrap hover:opacity-90 transition-opacity duration-200",
-  centeredContainer: "w-full max-w-md z-10",
-  headingContainer: "flex flex-col items-center justify-center mt-15",
-  heading: "text-4xl sm:text-5xl font-semibold text-center text-emerald-100 whitespace-nowrap",
-  divider: "w-32 h-1 bg-gradient-to-r from-emerald-400 to-green-300 rounded-full mt-4",
-  contactFormContainer: "contact-form-container relative overflow-hidden",
-  form: "space-y-6 relative z-10",
-  formField: "form-field",
+// --- Contact Styles ---
+export const contactStyles = {
+  pageContainer: "min-h-screen bg-gray-50/50 flex items-center justify-center pt-24 py-12 px-4 sm:px-6 relative overflow-hidden font-sans",
+  toast: "fixed top-24 right-6 bg-emerald-600 text-white inline-flex items-center px-6 py-3 rounded-xl shadow-2xl z-50 whitespace-nowrap font-medium animate-fade-in-down",
+  centeredContainer: "w-full max-w-2xl z-10",
+  headingContainer: "flex flex-col items-center justify-center mb-10",
+  heading: "text-3xl sm:text-4xl font-bold text-center text-gray-900 tracking-tight",
+  divider: "hidden",
+  contactFormContainer: "bg-white rounded-2xl shadow-sm border border-gray-100 p-8 sm:p-10 relative",
+  form: "space-y-6",
+  formField: "group",
   inputContainer: "relative",
-  inputIconContainer: "absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none",
-  inputIcon: "h-5 w-5 text-emerald-400",
-  textareaIconContainer: "absolute top-3 left-3",
-  formInput: "form-input",
-  formTextarea: "form-textarea",
-  submitButton: "submit-button",
-  submitButtonText: "font-semibold text-xl text-black mr-2",
-  customCSS: `@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
-  
-  .font-cursive {
-    font-family: 'Dancing Script', cursive;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  }
-  
-  .contact-form-container {
-    background: rgba(5, 46, 22, 0.6);
-    backdrop-filter: blur(8px);
-    border-radius: 20px;
-    box-shadow: 
-      0 10px 25px rgba(0,0,0,0.4),
-      inset 0 0 0 1px rgba(52, 211, 153, 0.2);
-    padding: 30px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .contact-form-container:hover {
-    box-shadow: 
-      0 15px 35px rgba(0,0,0,0.5),
-      inset 0 0 0 1px rgba(52, 211, 153, 0.3);
-  }
-  
-  .form-field {
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  .form-field:hover {
-    transform: translateY(-2px);
-  }
-  
-  .form-input, .form-textarea {
-    width: 100%;
-    padding: 15px 15px 15px 45px;
-    border: 1px solid rgba(52, 211, 153, 0.2);
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    background: rgba(6, 78, 59, 0.4);
-    font-family: 'Poppins', sans-serif;
-    color: #d1fae5;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-  }
-  
-  .form-input::placeholder, .form-textarea::placeholder {
-    color: #a7f3d0;
-    opacity: 0.7;
-  }
-  
-  .form-input:focus, .form-textarea:focus {
-    outline: none;
-    border-color: #34d399;
-    box-shadow: 
-      0 0 0 3px rgba(52, 211, 153, 0.25),
-      inset 0 2px 4px rgba(0,0,0,0.2);
-    background: rgba(6, 78, 59, 0.6);
-  }
-  
-  .form-textarea {
-    min-height: 150px;
-    padding-left: 45px;
-  }
-  
-  .submit-button {
-    width: 100%;
-    background: linear-gradient(to right, #10b981, #34d399);
-    color: white;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(5, 150, 105, 0.2);
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .submit-button::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -60%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      to right,
-      rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0.4) 50%,
-      rgba(255,255,255,0) 100%
-    );
-    transform: rotate(30deg);
-    transition: all 0.6s ease;
-  }
-  
-  .submit-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 14px rgba(5, 150, 105, 0.3);
-    background: linear-gradient(to right, #059669, #10b981);
-  }
-  
-  .submit-button:hover::after {
-    left: 120%;
-  }
-  
-  .submit-button:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
-  }`
+  inputIconContainer: "absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none",
+  inputIcon: "h-5 w-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors",
+  textareaIconContainer: "absolute top-4 left-4",
+  formInput: "w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all shadow-sm outline-none",
+  formTextarea: "w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all shadow-sm min-h-[150px] outline-none",
+  submitButton: "w-full inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/30 text-lg transition-all duration-200 active:scale-[0.98] gap-2",
+  submitButtonText: "text-lg",
+  customCSS: "" 
 };
 
-export default contactStyles;
-
-
-// assets/footerStyles.js
+// --- Footer Styles ---
 export const footerStyles = {
-  footer: "bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 text-white pt-12 pb-8 relative overflow-hidden border-t-8 border-emerald-500",
-  topBorder: "hidden md:block absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-500 to-emerald-400 z-20",
-  floatingShape: "hidden lg:block absolute rounded-full bg-emerald-700 animate-pulse-slow",
-  pattern: "absolute inset-0 opacity-5",
-  container: "container mx-auto px-4 relative z-10",
-  grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12",
-  brandTitle: "text-2xl sm:text-3xl font-bold tracking-wider mb-4",
-  brandSpan: "text-emerald-300",
-  brandText: "text-emerald-200 mb-6 leading-relaxed text-sm sm:text-base",
-  socialLink: "bg-emerald-700 hover:bg-emerald-600 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-transform transform hover:-translate-y-1 shadow-md",
-  socialIcon: "text-emerald-100 hover:text-white",
-  sectionTitle: "text-xl sm:text-2xl font-bold mb-4 pb-2 border-b-2 border-emerald-500 inline-flex items-center",
-  sectionIcon: "mr-2 text-emerald-400",
-  linkList: "space-y-2 text-sm sm:text-base",
-  linkItem: "flex items-center group hover:text-white",
-  linkBullet: "inline-block w-2 h-2 bg-emerald-400 rounded-full mr-3 group-hover:bg-white transition-colors",
-  contactItem: "flex items-start",
-  contactIconContainer: "mt-1 bg-emerald-700 p-2 rounded-lg mr-3",
-  contactIcon: "text-emerald-300",
-  newsletterText: "text-emerald-200 mb-4 text-sm sm:text-base",
-  newsletterForm: "flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-4",
-  newsletterInput: "w-full sm:flex-1 bg-emerald-800 border-2 border-emerald-600 rounded-t-xl sm:rounded-l-xl sm:rounded-tr-none px-4 py-2 text-white placeholder-emerald-300 focus:outline-none focus:border-emerald-400 mb-2 sm:mb-0",
-  newsletterButton: "w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-400 hover:to-emerald-600 px-4 py-2 rounded-b-xl sm:rounded-r-xl sm:rounded-bl-none flex items-center justify-center transition-transform transform hover:-translate-y-1",
-  privacyText: "text-emerald-300 text-xs sm:text-sm",
-  paymentSection: "border-t-2 border-emerald-800 pt-6",
-  paymentTitle: "text-emerald-300 mb-4 font-medium flex items-center justify-center text-sm sm:text-base",
-  paymentIcon: "mr-2 text-emerald-400 text-lg",
-  paymentMethods: "flex flex-wrap justify-center gap-4",
-  paymentItem: "bg-emerald-800 p-3 rounded-lg hover:bg-emerald-700 transition-transform transform hover:-translate-y-1",
-  paymentIcon: "text-2xl hover:text-white",
-  attribution: "mt-8 text-center",
-  attributionBadge: "inline-flex items-center bg-emerald-900 px-6 py-3 rounded-full border border-emerald-700 shadow-lg",
-  hexagonContainer: "relative mr-3",
-  hexagon: "w-6 h-6 bg-emerald-500 rounded-sm transform rotate-45",
-  hexagonInner: "absolute inset-0 flex items-center justify-center",
-  hexagonInnerShape: "w-3 h-3 bg-white transform -rotate-45",
-  attributionText: "text-emerald-200 text-sm sm:text-base",
-  attributionLink: "font-bold text-white underline hover:text-purple-400",
-  customCSS: `@keyframes pulse {
-    0% { opacity: 0.1; transform: scale(1); }
-    50% { opacity: 0.2; transform: scale(1.05); }
-    100% { opacity: 0.1; transform: scale(1); }
-  }
-  @keyframes pulse-slow {
-    0% { opacity: 0.1; }
-    50% { opacity: 0.2; }
-    100% { opacity: 0.1; }
-  }
-  @keyframes float {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-  }
-  .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
-  .animate-pulse { animation: pulse 4s ease-in-out infinite; }
-  .animate-float { animation: float 8s ease-in-out infinite; }
-  .animation-delay-1000 { animation-delay: 1s; }
-  .animation-delay-2000 { animation-delay: 2s; }
-  .animation-delay-3000 { animation-delay: 3s; }`
+  footer: "bg-gray-900 text-gray-300 pt-16 pb-8 relative overflow-hidden",
+  topBorder: "absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-green-400 to-emerald-600",
+  floatingShape: "hidden", // Simplified
+  pattern: "hidden", // Simplified
+  container: "container mx-auto px-6 relative z-10",
+  grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16",
+  brandTitle: "text-3xl font-bold text-white mb-4 tracking-tight",
+  brandSpan: "text-emerald-400",
+  brandText: "text-gray-400 mb-8 leading-relaxed text-sm",
+  socialLink: "bg-gray-800 hover:bg-emerald-600 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 text-gray-400 hover:text-white",
+  socialIcon: "",
+  sectionTitle: "text-lg font-bold text-white mb-6",
+  sectionIcon: "hidden",
+  linkList: "space-y-3",
+  linkItem: "flex items-center text-gray-400 hover:text-emerald-400 transition-colors text-sm",
+  linkBullet: "w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3",
+
+  contactItem: "flex items-start mb-4",
+  contactIconContainer: "mt-1 bg-gray-800 p-2 rounded-lg mr-3",
+  contactIcon: "text-emerald-400 w-4 h-4",
+  newsletterText: "text-gray-400 mb-4 text-sm",
+  newsletterForm: "flex flex-col sm:flex-row gap-2",
+  newsletterInput: "w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500",
+  newsletterButton: "bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors",
+  privacyText: "text-xs text-gray-500 mt-3",
+  paymentSection: "border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4",
+  paymentTitle: "hidden",
+  paymentIcon: "hidden",
+  paymentMethods: "flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all",
+  paymentItem: "",
+  attribution: "mt-12 text-center border-t border-gray-800 pt-8",
+  attributionBadge: "inline-flex items-center bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700",
+  hexagonContainer: "hidden",
+  attributionText: "text-gray-500 text-sm",
+  attributionLink: "text-emerald-400 hover:text-emerald-300 font-medium ml-1",
+  customCSS: ""
 };
 
-// assets/itemsPageStyles.js
+// --- Items Page Styles ---
 export const itemsPageStyles = {
-  // Page styles
-  page: "min-h-screen bg-gradient-to-br from-emerald-900 to-emerald-950",
+  page: "min-h-screen bg-gray-50 pt-24",
   container: "container mx-auto px-4 py-8",
-  header: "mb-12 text-center py-8 relative",
-  backLink: "absolute top-5 left-0 flex items-center text-emerald-300 hover:text-emerald-100 cursor-pointer transition-colors",
-  mainTitle: "text-5xl font-bold text-emerald-100 mt-7",
-  titleSpan: "text-emerald-400 font-playfair",
-  subtitle: "text-emerald-300 mt-4 max-w-2xl mx-auto text-lg",
-  titleDivider: "mt-8 flex justify-center",
-  dividerLine: "w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full",
-  searchContainer: "mb-10 max-w-2xl mx-auto",
-  searchForm: "relative",
-  searchInput: "w-full py-3 px-4 pr-12 rounded-2xl bg-emerald-800 text-emerald-100 border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-inner",
-  searchButton: "absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white p-2 rounded-full",
-  expandButton: "flex items-center bg-emerald-800 hover:bg-emerald-700 cursor-pointer text-emerald-200 py-3 px-6 rounded-full transition-all shadow-lg shadow-emerald-950 hover:shadow-emerald-900/50",
-  categorySection: "mb-16",
-  categoryHeader: "flex items-center mb-8",
-  categoryIcon: "w-3 h-8 bg-emerald-400 rounded-full mr-3",
-  categoryTitle: "text-3xl font-bold text-emerald-100",
-  categoryDivider: "ml-4 flex-1 h-px bg-gradient-to-r from-emerald-700 to-transparent",
-  productsGrid: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8",
-  showMoreButton: "flex items-center bg-emerald-600 hover:bg-emerald-500 text-black py-3 px-6 rounded-full transition-all shadow-lg cursor-pointer shadow-emerald-950 hover:shadow-emerald-900/50",
-  noProductsContainer: "text-center py-16",
-  noProductsCard: "bg-emerald-800 p-8 rounded-2xl max-w-md mx-auto",
-  noProductsIcon: "text-emerald-400 mb-4",
-  noProductsTitle: "text-xl font-bold text-emerald-100 mb-2",
-  noProductsText: "text-emerald-300 mb-6",
-  clearSearchButton: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-colors",
+  header: "mb-10 text-center relative",
+  backLink: "absolute top-1 left-0 flex items-center text-gray-500 hover:text-emerald-600 font-medium transition-colors",
+  mainTitle: "text-4xl md:text-5xl font-extrabold text-gray-900 mt-4",
+  titleSpan: "text-emerald-600",
+  subtitle: "text-gray-500 mt-3 max-w-2xl mx-auto text-lg",
+  titleDivider: "mt-6 flex justify-center",
+  dividerLine: "w-20 h-1.5 bg-emerald-500 rounded-full",
+  searchContainer: "mb-12 max-w-xl mx-auto",
+  searchForm: "relative shadow-lg rounded-2xl",
+  searchInput: "w-full py-4 px-6 pr-14 rounded-2xl bg-white text-gray-900 border border-gray-100 focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500 transition-all text-lg",
+  searchButton: "absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white p-2.5 rounded-xl hover:bg-emerald-700 transition-colors",
+  expandButton: "hidden", // Simplified
+  categorySection: "mb-12",
+  categoryHeader: "flex items-center justify-between mb-6",
+  categoryIcon: "hidden",
+  categoryTitle: "text-2xl font-bold text-gray-900",
+  categoryDivider: "hidden",
+  productsGrid: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6",
+  showMoreButton: "mx-auto flex items-center bg-white border border-gray-200 hover:border-emerald-500 text-gray-900 py-3 px-8 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer mt-12",
+  noProductsContainer: "text-center py-20",
+  noProductsCard: "bg-white p-8 rounded-3xl max-w-md mx-auto shadow-sm border border-gray-100",
+  noProductsIcon: "text-gray-300 text-5xl mb-4 mx-auto",
+  noProductsTitle: "text-xl font-bold text-gray-900 mb-2",
+  noProductsText: "text-gray-500 mb-6",
+  clearSearchButton: "bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer px-6 py-2.5 rounded-full font-medium shadow-md transition-colors",
   
   // ProductCard styles
-  productCard: "bg-emerald-900 rounded-2xl overflow-hidden shadow-2xl shadow-emerald-950 hover:shadow-emerald-900/50 transition-all duration-300 hover:-translate-y-1 border-2 border-emerald-700",
-  imageContainer: "h-48 relative overflow-hidden bg-emerald-950 flex items-center justify-center",
-  productImage: "object-contain w-full h-full transition-transform duration-500",
-  cardContent: "p-5",
-  titleContainer: "flex justify-between items-start",
-  productTitle: "font-bold text-emerald-50 text-lg truncate max-w-[70%]",
-  organicTag: "text-black text-sm bg-emerald-400 px-2 py-1 rounded-full",
-  productDescription: "mt-2 text-emerald-200 text-sm h-12 overflow-hidden",
-  priceContainer: "mt-4 flex justify-between items-center",
-  currentPrice: "text-emerald-50 font-bold text-xl",
-  oldPrice: "text-emerald-300 line-through text-sm",
-  quantityControls: "flex items-center justify-between bg-emerald-400 text-black rounded-full",
-  quantityButton: "p-3 cursor-pointer hover:bg-emerald-300 transition-colors",
-  quantityButtonLeft: "rounded-l-full",
-  quantityButtonRight: "rounded-r-full",
-  quantityValue: "font-bold",
-  addButton: "w-full bg-emerald-400 hover:bg-emerald-300 text-black cursor-pointer py-3 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-[1.02] group font-bold shadow-lg shadow-emerald-900/20",
-  addButtonArrow: "ml-2 text-xl transform group-hover:translate-x-1 transition-transform"
+  productCard: "bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group flex flex-col h-full",
+  imageContainer: "h-56 relative overflow-hidden bg-gray-50 flex items-center justify-center p-6",
+  productImage: "object-contain w-full h-full transition-transform duration-500 group-hover:scale-110 mix-blend-multiply",
+  cardContent: "p-5 flex flex-col flex-grow",
+  titleContainer: "flex justify-between items-start mb-2",
+  productTitle: "font-bold text-gray-900 text-lg line-clamp-2 leading-tight",
+  organicTag: "text-emerald-700 text-xs font-bold bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wide",
+  productDescription: "text-gray-500 text-sm line-clamp-2 mb-4 h-10",
+  priceContainer: "mt-auto flex justify-between items-center pt-4 border-t border-gray-50",
+  currentPrice: "text-emerald-600 font-extrabold text-xl",
+  oldPrice: "text-gray-400 line-through text-sm font-medium",
+  quantityControls: "flex items-center bg-gray-100 rounded-lg p-1",
+  quantityButton: "p-2 cursor-pointer text-gray-600 hover:bg-white hover:shadow-sm rounded-md transition-all",
+  quantityButtonLeft: "",
+  quantityButtonRight: "",
+  quantityValue: "font-bold text-gray-900 w-8 text-center text-sm",
+  addButton: "w-full bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer py-3 rounded-xl flex items-center justify-center transition-all duration-300 font-bold shadow-md hover:shadow-lg mt-4",
+  addButtonArrow: "ml-2 text-lg"
 };
 
-  export const checkoutStyles = {
-    page: "min-h-screen bg-gradient-to-br from-emerald-900 to-emerald-950",
-    container: "container mx-auto px-4 py-8",
-    backLink: "inline-flex items-center text-emerald-300 hover:text-emerald-100 mb-6 transition-colors",
-    header: "mb-8",
-    mainTitle: "text-4xl md:text-5xl font-bold text-emerald-100 mb-2",
-    subtitle: "text-emerald-300 mb-8",
-    card: "bg-emerald-800/50 backdrop-blur-sm rounded-2xl shadow-2xl shadow-emerald-950 p-6 border border-emerald-700",
-    sectionTitle: "text-xl font-bold text-emerald-100 mb-6 flex items-center",
-    input: "w-full px-4 py-3 rounded-xl bg-emerald-900 text-emerald-100 border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-inner",
-    inputError: "border-red-500",
-    radioCard: "flex items-center p-4 border border-emerald-700 rounded-xl cursor-pointer hover:border-emerald-500 transition-colors",
-    cartItem: "flex items-center border-b border-emerald-700/50 pb-4 last:border-0",
-    cartImage: "bg-emerald-800 border-2 border-dashed border-emerald-700 rounded-xl w-16 h-16 mr-4 flex items-center justify-center",
-    summaryCard: "bg-emerald-800/50 border border-emerald-700 rounded-xl p-4",
-    infoCard: "bg-emerald-800/50 border border-emerald-700 rounded-xl p-4",
-    button: "w-full py-3 px-6 rounded-xl font-medium flex items-center justify-center transition-colors shadow-lg shadow-emerald-900/30",
-    submitButton: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white",
-    disabledButton: "bg-gray-500 cursor-not-allowed",
-    link: "text-emerald-400 hover:text-emerald-200 hover:underline",
-     emptyPage: "min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-900 to-emerald-950 p-4",
-  emptyCard: "max-w-md w-full bg-emerald-800/50 backdrop-blur-sm rounded-2xl shadow-2xl shadow-emerald-950 p-8 text-center border border-emerald-700",
-  emptyIcon: "text-emerald-400 text-6xl mb-4",
-  emptyTitle: "text-2xl font-bold text-emerald-100 mb-2",
-  emptyText: "text-emerald-300 mb-6",
-  emptyButton: "inline-flex items-center bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-medium py-2 px-6 rounded-full transition-colors shadow-lg shadow-emerald-900/30",
+// --- Checkout Styles ---
+export const checkoutStyles = {
+  pageContainer: "min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8",
+  maxContainer: "container mx-auto max-w-6xl",
+  headingContainer: "text-center mb-12",
+  heading: "text-3xl sm:text-4xl font-bold text-gray-900 mt-4",
+  gridContainer: "grid grid-cols-1 lg:grid-cols-3 gap-8",
+  formContainer: "lg:col-span-2 space-y-6",
+  sectionTitle: "text-xl font-bold text-gray-900 mb-6 flex items-center gap-2",
+  sectionIcon: "text-emerald-600",
+  inputGroup: "grid grid-cols-1 gap-6",
+  inputWrapper: "relative",
+  inputIcon: "absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400",
+  input: "w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all",
+  textarea: "w-full p-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all min-h-[100px]",
+  errorText: "text-red-500 text-sm mt-1 ml-1",
+  paymentMethodsGrid: "grid grid-cols-1 sm:grid-cols-2 gap-4",
+  paymentMethodLabel: (isActive) => `flex items-center p-4 border rounded-xl cursor-pointer transition-all ${isActive ? "border-emerald-500 bg-emerald-50/30 ring-1 ring-emerald-500" : "border-gray-200 hover:border-emerald-500 hover:bg-gray-50"}`,
+  paymentRadio: "hidden",
+  paymentIcon: "text-xl mr-3 text-gray-500",
+  paymentText: "font-medium text-gray-900",
+  paymentCheck: "ml-auto text-emerald-600 text-xl",
+  summaryContainer: "bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sticky top-24",
+  summaryTitle: "text-xl font-bold text-gray-900 mb-6",
+  itemsList: "space-y-4 mb-6 max-h-96 overflow-y-auto pr-2",
+  itemCard: "flex items-center gap-4 py-4 border-b border-gray-50 last:border-0",
+  itemImage: "w-16 h-16 bg-gray-50 rounded-lg p-2 flex-shrink-0 border border-gray-100",
+  itemInfo: "flex-1",
+  itemName: "font-medium text-gray-900 line-clamp-1",
+  itemQuantity: "text-sm text-gray-500",
+  itemPrice: "font-bold text-emerald-600",
+  costsContainer: "space-y-3 pt-4 border-t border-gray-100",
+  costRow: "flex justify-between text-gray-600",
+  totalRow: "flex justify-between text-lg font-bold text-gray-900 pt-4 border-t border-gray-100 mt-4",
+  totalValue: "text-emerald-600 font-bold",
+  submitButton: "w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl mt-8 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2",
+  submitButtonText: "text-lg",
+  secureIcon: "w-5 h-5",
   
-  // Checkout page styles
-  page: "min-h-screen bg-gradient-to-br from-emerald-950 to-emerald-900 p-4 md:p-8",
-  container: "max-w-6xl mx-auto",
-  backLink: "inline-flex items-center text-emerald-300 hover:text-emerald-100 mb-8",
-  header: "mb-8",
-  mainTitle: "text-3xl md:text-4xl font-bold text-emerald-100 mb-2",
-  subtitle: "text-emerald-400",
-  card: "bg-emerald-800/50 backdrop-blur-sm rounded-2xl shadow-xl shadow-emerald-950/30 p-6 border border-emerald-700/50",
-  sectionTitle: "flex items-center text-xl font-bold text-emerald-100 mb-6 pb-2 border-b border-emerald-700/50",
-  input: "w-full bg-emerald-900/30 border border-emerald-700/50 rounded-xl px-4 py-3 text-emerald-100 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none transition",
-  inputError: "border-red-500 focus:ring-red-500 focus:border-red-500",
-  radioCard: "flex items-start p-4 mb-3 bg-emerald-900/30 border border-emerald-700/50 rounded-xl hover:border-emerald-500 transition",
-  cartItem: "flex gap-4 items-center",
-  cartImage: "w-16 h-16 flex-shrink-0 rounded-xl bg-emerald-900/50 flex items-center justify-center overflow-hidden",
-  button: "w-full flex items-center justify-center font-medium py-3 px-6 rounded-xl transition-colors",
-  disabledButton: "opacity-50 cursor-not-allowed",
-  submitButton: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg shadow-emerald-900/30",
-  link: "text-emerald-300 hover:text-emerald-100 underline transition",
-  
-  // Delivery info styles
-  deliveryInfo: "mt-8 p-6 bg-amber-500/20 rounded-2xl border border-amber-500/30 backdrop-blur-sm",
-  deliveryTitle: "font-bold text-amber-200 flex items-center mb-2",
-  deliveryText: "text-amber-100"
-  };
+  // Legacy/Unused (kept for compatibility if needed elsewhere)
+  page: "min-h-screen bg-gray-50 py-12 px-4",
+  container: "max-w-4xl mx-auto",
+  backLink: "inline-flex items-center text-gray-500 hover:text-emerald-600 mb-8 font-medium transition-colors",
+  header: "mb-10",
+  mainTitle: "text-3xl md:text-4xl font-bold text-gray-900 mb-2",
+  subtitle: "text-gray-500",
+  card: "bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 mb-6",
+  inputError: "border-red-500 ring-1 ring-red-500",
+  radioCard: "flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-emerald-500 hover:bg-emerald-50/30 transition-all mb-3",
+  cartItem: "flex items-center border-b border-gray-100 py-4 last:border-0",
+  cartImage: "bg-gray-100 rounded-xl w-16 h-16 mr-4 flex items-center justify-center p-2",
+  summaryCard: "bg-gray-50 rounded-xl p-6",
+  infoCard: "bg-blue-50 text-blue-800 rounded-xl p-4 text-sm",
+  button: "w-full py-4 px-6 rounded-xl font-bold flex items-center justify-center transition-all shadow-md hover:shadow-lg",
+  disabledButton: "bg-gray-300 cursor-not-allowed text-gray-500",
+  link: "text-emerald-600 hover:text-emerald-700 hover:underline",
+  emptyPage: "min-h-screen flex items-center justify-center bg-gray-50 p-4",
+  emptyCard: "max-w-md w-full bg-white rounded-3xl shadow-xl p-10 text-center border border-gray-100",
+  emptyIcon: "text-emerald-200 text-6xl mb-6 mx-auto",
+  emptyTitle: "text-2xl font-bold text-gray-900 mb-2",
+  emptyText: "text-gray-500 mb-8",
+  emptyButton: "inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-xl",
+  deliveryInfo: "mt-6 p-5 bg-amber-50 border border-amber-100 rounded-xl",
+  deliveryTitle: "font-bold text-amber-800 flex items-center mb-1",
+  deliveryText: "text-amber-700 text-sm"
+};
 
- // Styles object matching the requested theme
-  export const ordersPageStyles = {
-    page: "min-h-screen bg-gradient-to-br from-emerald-900 to-emerald-950",
-    container: "container mx-auto px-4 py-8",
-    header: "mb-8 text-center py-8 relative",
-    backLink: "absolute top-5 left-0 flex items-center text-emerald-300 hover:text-emerald-100 cursor-pointer transition-colors",
-    mainTitle: "text-4xl md:text-5xl font-bold text-emerald-100 mt-7",
-    titleSpan: "text-emerald-400 font-playfair",
-    subtitle: "text-emerald-300 mt-4 max-w-2xl mx-auto text-lg",
-    titleDivider: "mt-6 flex justify-center",
-    dividerLine: "w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full",
-    searchContainer: "mb-8 max-w-2xl mx-auto",
-    searchForm: "relative",
-    searchInput: "w-full py-3 px-4 pr-12 rounded-2xl bg-emerald-800 text-emerald-100 border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-inner",
-    searchButton: "absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white p-2 rounded-full",
-    ordersTable: "bg-emerald-800/30 backdrop-blur-sm rounded-2xl shadow-2xl shadow-emerald-950 overflow-hidden",
-    tableHeader: "bg-emerald-800/50",
-    tableHeaderCell: "py-4 px-4 text-left text-sm font-semibold text-emerald-300",
-    tableRow: "hover:bg-emerald-900/30 transition-colors",
-    tableCell: "py-4 px-4 text-emerald-100",
-    statusBadge: "px-3 py-1 rounded-full text-xs font-medium",
-    actionButton: "text-sm bg-emerald-600 hover:bg-emerald-500 text-white py-1.5 px-4 rounded-full transition-colors shadow-md shadow-emerald-950/50",
-    modalOverlay: "fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm",
-    modalContainer: "bg-emerald-900/80 backdrop-blur-md rounded-2xl shadow-2xl shadow-emerald-950 w-full max-w-4xl max-h-[90vh] overflow-y-auto border-2 border-emerald-700",
-    modalHeader: "sticky top-0 bg-emerald-900/90 border-b border-emerald-700 p-6 z-10",
-    modalTitle: "text-2xl font-bold text-emerald-100",
-    modalCloseButton: "text-emerald-300 hover:text-emerald-100 transition-colors",
-    modalBody: "p-6",
-    modalSection: "mb-8",
-    modalSectionTitle: "text-lg font-bold text-emerald-100 mb-4 flex items-center",
-    modalCard: "bg-emerald-800/50 rounded-xl p-4 border border-emerald-700",
-    modalFooter: "sticky bottom-0 bg-emerald-900/90 border-t border-emerald-700 p-6",
-    closeButton: "px-6 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-full transition-colors shadow-lg shadow-emerald-900/30 font-medium"
-  };
+// --- Orders Page Styles ---
+export const ordersPageStyles = {
+  page: "min-h-screen bg-gray-50 pt-24",
+  container: "container mx-auto px-4 py-12",
+  header: "mb-10 text-center relative",
+  backLink: "absolute top-0 left-0 flex items-center text-gray-500 hover:text-emerald-600 transition-colors",
+  mainTitle: "text-4xl font-extrabold text-gray-900 mt-4",
+  titleSpan: "text-emerald-600",
+  subtitle: "text-gray-500 mt-2",
+  titleDivider: "mt-6 flex justify-center",
+  dividerLine: "w-20 h-1.5 bg-emerald-500 rounded-full",
+  searchContainer: "mb-8 max-w-xl mx-auto",
+  searchForm: "relative",
+  searchInput: "w-full py-3 px-5 pr-12 rounded-xl bg-white text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm",
+  searchButton: "absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white p-2 rounded-lg",
+  ordersTable: "bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden",
+  tableHeader: "bg-gray-50 border-b border-gray-200",
+  tableHeaderCell: "py-4 px-6 text-left text-xs font-bold text-gray-500 uppercase tracking-wider",
+  tableRow: "hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0",
+  tableCell: "py-4 px-6 text-gray-900 text-sm",
+  statusBadge: "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide",
+  actionButton: "text-xs bg-white border border-gray-200 hover:border-emerald-500 hover:text-emerald-600 text-gray-600 py-1.5 px-4 rounded-full transition-all font-medium",
+  modalOverlay: "fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 backdrop-blur-sm",
+  modalContainer: "bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto",
+  modalHeader: "sticky top-0 bg-white/90 backdrop-blur-md border-b border-gray-100 p-6 z-10 flex justify-between items-center",
+  modalTitle: "text-2xl font-bold text-gray-900",
+  modalCloseButton: "text-gray-400 hover:text-gray-900 transition-colors p-2 hover:bg-gray-100 rounded-full",
+  modalBody: "p-6 sm:p-8",
+  modalSection: "mb-8",
+  modalSectionTitle: "text-lg font-bold text-gray-900 mb-4 flex items-center border-b border-gray-100 pb-2",
+  modalCard: "bg-gray-50 rounded-xl p-5 border border-gray-100",
+  modalFooter: "sticky bottom-0 bg-white border-t border-gray-100 p-6 flex justify-end",
+  closeButton: "px-6 py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-xl transition-colors font-medium"
+};
 
-
-// assets/itemsHomeStyles.js
+// --- Items Home Styles (Sidebar & Grid) ---
 export const itemsHomeStyles = {
-  page: "flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100",
-  sidebar: "hidden lg:flex w-64 rounded-r-3xl bg-gradient-to-b from-emerald-600 to-emerald-800 text-white p-4 shadow-2xl flex-col",
-  sidebarHeader: "text-center mb-8 mt-4",
-  sidebarTitle: "text-4xl font-bold tracking-tighter",
-  sidebarDivider: "w-32 h-1 bg-emerald-400 mx-auto mt-2 rounded-full",
-  categoryList: "flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-emerald-500 scrollbar-track-emerald-700",
-  categoryItem: "w-full cursor-pointer flex items-center p-4 rounded-xl transition-transform transform hover:scale-105",
-  categoryIcon: "bg-emerald-500 p-3 rounded-full",
-  categoryName: "ml-4 text-lg",
-  mainContent: "flex-1 p-6 overflow-y-auto",
-  mobileCategories: "lg:hidden mb-6 overflow-x-auto",
-  mobileCategoryItem: "whitespace-nowrap px-4 py-2 rounded-full border-2 transition-colors",
-  searchResults: "text-center mb-6 bg-white rounded-xl p-4 shadow-sm max-w-2xl mx-auto",
-  sectionTitle: "text-3xl font-bold text-emerald-700 capitalize mb-2",
-  sectionDivider: "w-32 h-1 bg-emerald-500 mx-auto rounded-full mb-6",
-  productsGrid: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10",
-  productCard: "bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 border border-gray-100 transform hover:-translate-y-1",
-  imageContainer: "w-full h-40 sm:h-52 bg-gray-100 flex items-center justify-center",
-  productImage: "max-h-full object-cover transition-transform duration-300",
-  productContent: "p-5",
-  productTitle: "font-bold text-lg text-gray-800 text-center mb-2 line-clamp-1",
-  priceContainer: "flex justify-between items-center mt-4",
-  currentPrice: "text-emerald-600 font-bold text-xl",
-  oldPrice: "text-gray-500 text-sm line-through",
-  addButton: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-4 py-2 rounded-full flex items-center transition-shadow shadow-md hover:shadow-lg",
-  quantityControls: "flex items-center space-x-2",
-  quantityButton: "p-2 cursor-pointer bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200",
-  noProducts: "col-span-full text-center py-12",
-  noProductsText: "text-emerald-600 font-medium text-xl mb-4",
-  clearSearchButton: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-colors",
-  viewAllButton: "bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white cursor-pointer px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-transform duration-300 inline-flex items-center text-lg",
-  activeCategory: "bg-white text-emerald-700 font-bold shadow-lg",
-  inactiveCategory: "bg-emerald-700 hover:bg-emerald-500",
-  activeMobileCategory: "bg-emerald-600 text-white border-emerald-600",
-  inactiveMobileCategory: "bg-white text-emerald-700 border-emerald-300"
+  page: "flex flex-col min-h-screen bg-gray-50",
+  sidebar: "hidden lg:flex w-72 bg-white border-r border-gray-200 flex-col h-[calc(100vh-80px)] sticky top-20",
+  sidebarHeader: "p-6 border-b border-gray-100",
+  sidebarTitle: "text-2xl font-bold text-gray-900",
+  sidebarDivider: "hidden",
+  categoryList: "flex-1 overflow-y-auto p-4 space-y-2",
+  categoryItem: "w-full cursor-pointer flex items-center p-3 rounded-xl transition-all duration-200 group",
+  categoryIcon: "hidden",
+  categoryName: "text-sm font-medium text-gray-600 group-hover:text-gray-900",
+  mainContent: "flex-1 p-6 lg:p-8",
+  mobileCategories: "lg:hidden mb-6 overflow-x-auto flex gap-3 pb-2 scrollbar-hide",
+  mobileCategoryItem: "whitespace-nowrap px-4 py-2 rounded-full border text-sm font-medium transition-colors",
+  searchResults: "text-center mb-8 bg-white rounded-2xl p-6 shadow-sm max-w-2xl mx-auto border border-gray-100",
+  sectionTitle: "text-2xl font-bold text-gray-900 mb-6",
+  sectionDivider: "hidden",
+  productsGrid: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mb-10",
+  productCard: "bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group flex flex-col",
+  imageContainer: "w-full h-48 bg-gray-50 flex items-center justify-center p-4 relative",
+  productImage: "max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply",
+  productContent: "p-4 flex flex-col flex-grow",
+  productTitle: "font-bold text-base text-gray-900 mb-1 line-clamp-1",
+  priceContainer: "flex justify-between items-center mt-auto pt-3",
+  currentPrice: "text-emerald-600 font-bold text-lg",
+  oldPrice: "text-gray-400 text-sm line-through ml-2",
+  addButton: "bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white cursor-pointer px-3 py-1.5 rounded-lg flex items-center transition-colors text-sm font-bold",
+  quantityControls: "flex items-center bg-gray-100 rounded-lg",
+  quantityButton: "p-1.5 cursor-pointer text-gray-600 hover:text-emerald-600 transition-colors",
+  noProducts: "col-span-full text-center py-20",
+  noProductsText: "text-gray-400 font-medium text-lg mb-4",
+  clearSearchButton: "bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-colors",
+  viewAllButton: "bg-white border border-gray-200 text-gray-900 hover:border-emerald-500 hover:text-emerald-600 cursor-pointer px-8 py-3 rounded-full font-bold shadow-sm transition-all inline-flex items-center",
+  activeCategory: "bg-emerald-50 text-emerald-700", // Sidebar active
+  inactiveCategory: "hover:bg-gray-50", // Sidebar inactive
+  activeMobileCategory: "bg-emerald-600 text-white border-emerald-600 shadow-md",
+  inactiveMobileCategory: "bg-white text-gray-600 border-gray-200 hover:border-emerald-300"
 };
 
-// assets/loginStyles.js
+// --- Login & Signup Styles ---
 export const loginStyles = {
-  page: "relative w-full h-screen bg-black flex items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8 lg:px-4",
-  backLink: "absolute top-4 left-4 mt-19 flex items-center text-white hover:text-emerald-400 z-20",
-  toast: "fixed top-16 right-6 bg-green-600 text-black inline-flex items-center px-4 py-2 rounded-lg shadow-lg z-50",
-  loginCard: "mt-29 md:mt-24 lg:mt-0 sm:max-w-xs md:max-w-md lg:max-w-sm bg-gray-900 bg-opacity-80 backdrop-blur-sm p-6 sm:p-8 md:p-10 lg:p-6 rounded-2xl border border-green-700/30 shadow-lg flex-shrink-0",
-  logoContainer: "flex justify-center mb-6",
-  logoOuter: "w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-lg",
-  logoInner: "w-12 h-12 sm:w-16 sm:h-16 bg-emerald-800 rounded-full flex items-center justify-center",
-  logoIcon: "text-xl sm:text-3xl text-emerald-400",
-  title: "text-center text-lg sm:text-xl font-semibold text-white mb-4",
-  form: "space-y-4",
+  page: "min-h-screen bg-gray-50 flex items-center justify-center p-4",
+  backLink: "absolute top-6 left-6 flex items-center text-gray-500 hover:text-emerald-600 transition-colors font-medium",
+  toast: "fixed top-6 right-6 bg-emerald-600 text-white inline-flex items-center px-4 py-2 rounded-lg shadow-lg z-50",
+  loginCard: "w-full max-w-md bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-gray-100",
+  logoContainer: "flex justify-center mb-8",
+  logoOuter: "w-16 h-16 rounded-full overflow-hidden bg-gray-100 border border-gray-200 flex items-center justify-center shadow-sm",
+  logoInner: "w-full h-full",
+  logoIcon: "hidden",
+  avatarImage: "w-full h-full object-cover",
+  title: "text-center text-2xl font-bold text-gray-900 mb-8",
+  form: "space-y-5",
   inputContainer: "relative",
-  inputIcon: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
-  input: "w-full pl-10 pr-3 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500",
-  passwordInput: "w-full pl-10 pr-10 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500",
-  toggleButton: "absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400",
-  rememberContainer: "flex items-center justify-between text-sm",
-  rememberLabel: "flex items-center text-white",
-  rememberCheckbox: "mr-2 h-4 w-4 cursor-pointer text-green-500 bg-gray-800 border-gray-600 rounded focus:ring-green-500",
-  forgotLink: "text-green-400 hover:underline",
-  error: "text-xs text-red-500",
-  submitButton: "w-full py-2.5 bg-green-500 hover:bg-green-600 text-black font-medium rounded-lg transition",
-  signupText: "text-center text-sm text-white mt-6",
-  signupLink: "text-green-400 hover:underline"
+  inputIcon: "absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400",
+  input: "w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 transition-all",
+  passwordInput: "w-full pl-11 pr-11 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 transition-all",
+  toggleButton: "absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer",
+  rememberContainer: "flex items-center justify-between text-sm mt-2",
+  rememberLabel: "flex items-center text-gray-600",
+  rememberCheckbox: "mr-2 h-4 w-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500",
+  forgotLink: "text-emerald-600 hover:text-emerald-700 font-medium",
+  error: "text-xs text-red-500 mt-1",
+  submitButton: "w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-emerald-200 transform hover:-translate-y-0.5 mt-2",
+  signupText: "text-center text-sm text-gray-500 mt-8",
+  signupLink: "text-emerald-600 hover:text-emerald-700 font-bold ml-1"
 };
 
-// assets/navbarStyles.js
+export const signupStyles = {
+  ...loginStyles,
+  signupCard: "w-full max-w-md bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-gray-100",
+  termsContainer: "flex items-start text-sm mt-2",
+  termsLabel: "text-gray-500 leading-tight",
+  termsCheckbox: "mr-2 h-4 w-4 mt-0.5 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500",
+  signinText: "text-center text-sm text-gray-500 mt-8",
+  signinLink: "text-emerald-600 hover:text-emerald-700 font-bold ml-1"
+};
+
+// --- Navbar Styles ---
 export const navbarStyles = {
-  nav: "fixed w-full z-50 transition-all duration-500",
-  scrolledNav: "bg-black/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] h-16",
-  unscrolledNav: "bg-gradient-to-r from-black/80 via-slate-900/80 to-black/80 backdrop-blur-lg h-20",
-  borderGradient: "absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent",
-  particlesContainer: "absolute inset-0 overflow-hidden pointer-events-none",
-  particle: "absolute rounded-full",
+  nav: "fixed w-full z-50 transition-all duration-300",
+  scrolledNav: "bg-white/90 backdrop-blur-md shadow-sm h-20",
+  unscrolledNav: "bg-white/80 backdrop-blur-sm h-20 border-b border-gray-100",
+  borderGradient: "hidden",
+  particlesContainer: "hidden",
+  particle: "hidden",
   container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
   innerContainer: "flex justify-between items-center h-20",
-  logoLink: "flex items-center space-x-3 group transition-transform duration-300 hover:scale-[1.02]",
-  logoImage: "transition-all duration-500",
-  logoText: "text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300 tracking-tight",
-  desktopNav: "hidden lg:flex items-center space-x-8",
-  navItem: "relative font-medium flex flex-col items-center py-2 transition-all duration-300 group",
-  activeNavItem: "text-green-300",
-  inactiveNavItem: "text-slate-300 hover:text-green-200",
-  navIcon: "mr-2 transition-transform",
-  activeNavIcon: "scale-125",
-  inactiveNavIcon: "group-hover:scale-110",
-  navIndicator: "absolute -bottom-1 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full transition-all duration-500",
-  activeIndicator: "w-full opacity-100",
-  inactiveIndicator: "w-0 opacity-0 group-hover:w-full group-hover:opacity-100",
-  iconsContainer: "flex items-center space-x-5",
-  loginLink: "hidden lg:inline-flex p-2.5 rounded-full hover:bg-slate-700/50 transition-colors group",
-  loginIcon: "h-5 w-5 text-slate-300 group-hover:text-green-300 transition-colors",
-  cartLink: "relative p-2.5 rounded-full hover:bg-slate-700/50 transition-colors",
-  cartIcon: "h-5 w-5 text-slate-300 hover:text-green-200 transition-transform",
-  cartBadge: "absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white bg-green-500 rounded-full transform transition-transform duration-300 hover:scale-110",
-  hamburgerButton: "lg:hidden ml-2 p-2 rounded-full text-slate-300 hover:bg-gray-700 transition-colors",
-  mobileOverlay: "lg:hidden fixed inset-0 z-40 transition-all duration-500",
-  mobilePanel: "absolute top-0 right-0 h-full w-4/5 max-w-xs   shadow-2xl transform transition-transform duration-500 ease-in-out",
-  mobileHeader: "flex items-center justify-between p-5 ",
-  mobileLogo: "flex items-center space-x-2",
-  mobileLogoImage: "h-10 w-10",
-  mobileLogoText: "text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300",
-  closeButton: "p-2 rounded-full transition-colors hover:bg-slate-800",
-  mobileItemsContainer: "p-4 space-y-2",
-  mobileItem: "flex items-center bg-gradient-to-r from-black/80 via-slate-900/80 to-black/80 p-4 rounded-xl transition-all duration-300 hover:bg-slate-800/60 text-slate-200 hover:text-green-300",
+  logoLink: "flex items-center gap-2 group",
+  logoImage: "w-8 h-8",
+  logoText: "text-2xl font-extrabold text-gray-900 tracking-tight",
+  desktopNav: "hidden lg:flex items-center space-x-1",
+  navItem: "px-4 py-2 rounded-full font-medium text-sm transition-all duration-200",
+  activeNavItem: "text-emerald-700 bg-emerald-50 border border-emerald-100",
+  inactiveNavItem: "text-gray-700 hover:text-emerald-700 hover:bg-emerald-50",
+  navIcon: "mr-1.5 inline-block text-lg align-text-bottom",
+  activeNavIcon: "text-emerald-600",
+  inactiveNavIcon: "text-gray-400",
+  navIndicator: "hidden",
+  activeIndicator: "hidden",
+  inactiveIndicator: "hidden",
+  iconsContainer: "flex items-center gap-2",
+  loginLink: "hidden lg:inline-flex px-4 py-2 rounded-full font-bold text-sm border border-emerald-600 text-emerald-700 bg-white hover:bg-emerald-600 hover:text-white transition-colors",
+  loginIcon: "hidden",
+  cartLink: "relative p-3 rounded-full hover:bg-gray-100 transition-colors text-gray-600 hover:text-emerald-600",
+  cartIcon: "h-6 w-6",
+  cartBadge: "absolute top-1 right-1 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full",
+  hamburgerButton: "lg:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors",
+  mobileOverlay: "lg:hidden fixed inset-0 z-40 bg-black/20 backdrop-blur-sm",
+  mobilePanel: "fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-white shadow-2xl p-6 flex flex-col",
+  mobileHeader: "flex items-center justify-between mb-8",
+  mobileLogo: "flex items-center gap-2",
+  mobileLogoImage: "w-8 h-8",
+  mobileLogoText: "text-xl font-bold text-gray-900",
+  closeButton: "p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors",
+  mobileItemsContainer: "space-y-1 flex-1",
+  mobileItem: "flex items-center w-full px-4 py-3 rounded-xl text-left font-medium transition-colors",
   mobileItemIcon: "mr-3 text-lg",
-  mobileItemText: "text-lg",
-  mobileButtons: "pt-4 mt-4 grid grid-cols-2 gap-3 border-t border-slate-800",
-  loginButton: "col-span-2 flex items-center justify-center p-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 group",
-  loginButtonIcon: "mr-2 transform group-hover:scale-110 transition-transform",
-  floatAnimation: "animate-float",
-  floatSlowAnimation: "animate-float-slow",
-  floatSlowerAnimation: "animate-float-slower",
-  customCSS: `@keyframes float {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-  }
-  .animate-float { animation: float 8s ease-in-out infinite; }
-  .animate-float-slow { animation: float 12s ease-in-out infinite; }
-  .animate-float-slower { animation: float 16s ease-in-out infinite; }`
+  mobileItemText: "text-base",
+  mobileButtons: "mt-auto pt-6 border-t border-gray-100",
+  loginButton: "w-full py-3 bg-emerald-600 text-white rounded-xl font-bold text-center hover:bg-emerald-700 transition-colors shadow-md",
+  loginButtonIcon: "hidden",
+  profileAvatar: "w-8 h-8 rounded-full overflow-hidden border border-gray-200 bg-gray-100",
+  profileImage: "w-full h-full object-cover",
+  floatAnimation: "",
+  floatSlowAnimation: "",
+  floatSlowerAnimation: "",
+  customCSS: ""
 };
 
-// assets/signupStyles.js
-export const signupStyles = {
-  page: "relative w-full h-screen bg-black flex items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8 lg:px-4",
-  backLink: "absolute top-4 left-4 mt-19 flex items-center text-white hover:text-emerald-400 z-20",
-  toast: "fixed top-16 right-6 bg-green-600 text-black inline-flex items-center px-4 py-2 rounded-lg shadow-lg z-50",
-  signupCard: "mt-29 md:mt-24 lg:mt-10 sm:max-w-xs md:max-w-md lg:max-w-sm bg-gray-900 bg-opacity-80 backdrop-blur-sm p-6 sm:p-8 md:p-10 lg:p-6 rounded-2xl border border-green-700/30 shadow-lg flex-shrink-0",
-  logoContainer: "flex justify-center mb-6",
-  logoOuter: "w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-lg",
-  logoInner: "w-12 h-12 sm:w-16 sm:h-16 bg-emerald-800 rounded-full flex items-center justify-center",
-  logoIcon: "text-xl sm:text-3xl text-emerald-400",
-  title: "text-center text-lg sm:text-xl font-semibold text-white mb-4",
-  form: "space-y-4",
-  inputContainer: "relative",
-  inputIcon: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
-  input: "w-full pl-10 pr-3 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500",
-  passwordInput: "w-full pl-10 pr-10 py-2.5 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500",
-  toggleButton: "absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400",
-  error: "text-xs text-red-500 mt-1",
-  termsContainer: "flex items-center text-sm",
-  termsLabel: "flex items-center text-white",
-  termsCheckbox: "mr-2 h-4 w-4 cursor-pointer text-green-500 bg-gray-800 border-gray-600 rounded focus:ring-green-500",
-  submitButton: "w-full py-2.5 bg-green-500 hover:bg-green-600 text-black font-medium rounded-lg transition",
-  signinText: "text-center text-sm text-white mt-6",
-  signinLink: "text-green-400 hover:underline"
-};
-
-
-// src/assets/dummyStyles.js
-export const userOrdersPageStyles = {
-  page: "min-h-screen bg-gradient-to-br from-emerald-950 to-emerald-900 p-4 md:p-8",
-  container: "max-w-6xl mx-auto",
-  header: "mb-8",
-  backLink: "inline-flex items-center text-emerald-300 hover:text-emerald-100 mb-4",
-  mainTitle: "text-3xl md:text-4xl font-bold text-emerald-100 mb-2",
-  titleSpan: "text-emerald-300",
-  subtitle: "text-emerald-400",
-  titleDivider: "w-full flex justify-center my-6",
-  dividerLine: "w-24 h-1 bg-emerald-700 rounded-full",
-  searchContainer: "mb-8",
-  searchForm: "relative max-w-md mx-auto",
-  searchInput: "w-full bg-emerald-800/50 backdrop-blur-sm border border-emerald-700 rounded-full py-3 pl-5 pr-12 text-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition",
-  searchButton: "absolute right-3 top-1/2 transform -translate-y-1/2 text-emerald-400 hover:text-emerald-200",
-  ordersTable: "bg-emerald-800/50 backdrop-blur-sm rounded-2xl shadow-xl shadow-emerald-950/30 p-6 border border-emerald-700/50",
-  tableHeader: "bg-emerald-900/50",
-  tableHeaderCell: "py-3 px-4 text-left text-sm font-semibold text-emerald-300",
-  tableRow: "hover:bg-emerald-700/10 transition",
-  tableCell: "py-4 px-4",
-  statusBadge: "inline-flex px-3 py-1 rounded-full text-xs font-medium",
-  actionButton: "px-4 py-2 bg-emerald-700/50 hover:bg-emerald-700 text-emerald-100 rounded-full transition text-sm",
-  emptyStateCell: "py-12 text-center",
-  emptyStateContainer: "flex flex-col items-center justify-center",
-  emptyStateIcon: "text-emerald-400 text-4xl mb-4",
-  emptyStateTitle: "text-lg font-medium text-emerald-100 mb-1",
-  emptyStateText: "text-emerald-300",
-  modalOverlay: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50",
-  modalContainer: "bg-emerald-900/80 backdrop-blur-lg rounded-2xl shadow-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-emerald-700/50",
-  modalHeader: "sticky top-0 bg-emerald-900/80 backdrop-blur-md border-b border-emerald-700/50 p-6",
-  modalTitle: "text-xl font-bold text-emerald-100",
-  modalCloseButton: "text-emerald-400 hover:text-emerald-100 transition",
-  modalBody: "p-6",
-  modalSection: "mb-6",
-  modalSectionTitle: "flex items-center text-lg font-bold text-emerald-100 mb-4",
-  modalCard: "bg-emerald-800/50 rounded-xl p-4 border border-emerald-700/50",
-  modalNoteBox: "bg-emerald-800/50 border-l-4 border-emerald-400 p-4 rounded-lg",
-  modalOrderItem: "flex items-center p-4 bg-emerald-900/30",
-  modalOrderImage: "w-16 h-16 object-cover rounded-lg mr-4",
-  modalPlaceholderImage: "bg-emerald-800 border-2 border-dashed border-emerald-700 rounded-xl w-16 h-16 mr-4 flex items-center justify-center",
-  modalOrderTotal: "p-4 bg-emerald-800/50",
-  modalFooter: "sticky bottom-0 bg-emerald-900/80 backdrop-blur-md border-t border-emerald-700/50 p-6",
-  closeButton: "px-6 py-2 bg-emerald-700/50 hover:bg-emerald-700 text-emerald-100 rounded-full transition"
-};
+// --- User Orders Page Styles (Alias) ---
+export const userOrdersPageStyles = ordersPageStyles;

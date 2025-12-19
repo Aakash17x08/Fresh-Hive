@@ -11,6 +11,7 @@ import {
   FaEnvelope,
 } from 'react-icons/fa';
 import { signupStyles } from '../assets/dummyStyles';
+import logo from '../assets/weblogo.png';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -118,9 +119,7 @@ const Signup = () => {
         {/* Logo Avatar */}
         <div className={signupStyles.logoContainer}>
           <div className={signupStyles.logoOuter}>
-            <div className={signupStyles.logoInner}>
-              <FaUser className={signupStyles.logoIcon} />
-            </div>
+            <img src={logo} alt="Profile" className={signupStyles.avatarImage} />
           </div>
         </div>
 

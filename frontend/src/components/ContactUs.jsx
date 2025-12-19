@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaUser, FaEnvelope, FaCheck, FaPhone, FaTag, FaComment, FaPaperPlane } from 'react-icons/fa';
-import contactStyles from '../assets/dummyStyles';
+import { contactStyles } from '../assets/dummyStyles';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const ContactUs = () => {
   const [showToast, setShowToast] = useState(false);
 
   // Replace with your WhatsApp number (with country code, no '+' or dashes)
-  const whatsappNumber = '8299431275';
+  const whatsappNumber = '9529419298';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +74,6 @@ const ContactUs = () => {
 
         {/* Contact Form */}
         <div className={contactStyles.contactFormContainer}>
-          <div className="absolute inset-0 bg-emerald-900 bg-opacity-90 backdrop-blur-sm z-0"></div>
           
           <form onSubmit={handleSubmit} className={contactStyles.form}>
             {/* Name Field */}
@@ -173,7 +172,7 @@ const ContactUs = () => {
               className={contactStyles.submitButton}
             >
               <span className={contactStyles.submitButtonText}>Send Message</span>
-              <FaPaperPlane className="h-5 w-5 text-black" />
+              <FaPaperPlane className="h-5 w-5 text-white" />
             </button>
           </form>
         </div>

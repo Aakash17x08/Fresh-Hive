@@ -18,7 +18,10 @@ const Cart = () => {
   const getItemName  = item => item.name  ?? item.product?.name  ?? 'Unnamed item';
   const getItemImage = item => {
     const path = item.image   ?? item.product?.imageUrl ?? '';
-    return path ? `http://localhost:4000${path}` : '';
+    if (!path) return '';
+    if (path.startsWith('http')) return path;
+    if (path.startsWith('/')) return `http://localhost:4000${path}`;
+    return `http://localhost:4000/uploads/${path}`;
   };
 
   // Compute subtotal
@@ -170,9 +173,9 @@ const Cart = () => {
                 </div>
               </div>
 
-              <button className={cartStyles.checkoutButton}>
-                <Link to="/checkout">Proceed to Checkout</Link>
-              </button>
+              <Link to="/checkout" className={cartStyles.checkoutButton}>
+                Proceed to Checkout
+              </Link>
 
               <div className={cartStyles.continueShoppingBottom}>
                 <Link to="/items" className={cartStyles.continueShopping}>
