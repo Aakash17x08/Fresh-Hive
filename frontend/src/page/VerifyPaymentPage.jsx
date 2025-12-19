@@ -27,7 +27,7 @@ const VerifyPaymentPage = () => {
         }
 
         axios
-            .get('http://localhost:4000/api/orders/confirm', {
+            .get('https://fresh-hive-backend.onrender.com/api/orders/confirm', {
                 params: { session_id },
                 headers: token
                     ? { Authorization: `Bearer ${token}` }

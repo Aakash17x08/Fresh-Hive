@@ -57,7 +57,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const { data } = await axios.get(
-        'http://localhost:4000/api/cart',
+        'https://fresh-hive-backend.onrender.com/api/cart',
         {
           ...auth,
           withCredentials: true,   // if you’re relying on cookies too
@@ -86,7 +86,7 @@ export const CartProvider = ({ children }) => {
     if (!auth.headers) return;
 
     try {
-      const { data } = await axios.get('http://localhost:4000/api/cart', auth);
+      const { data } = await axios.get('https://fresh-hive-backend.onrender.com/api/cart', auth);
       const rawItems = Array.isArray(data)
         ? data
         : Array.isArray(data.items)
@@ -105,7 +105,7 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (productId, quantity = 1) => {
     try {
       await axios.post(
-        'http://localhost:4000/api/cart',
+        'https://fresh-hive-backend.onrender.com/api/cart',
         { productId, quantity },
         getAuthHeader()
       );
@@ -118,7 +118,7 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = async (lineId, quantity) => {
     try {
       await axios.put(
-        `http://localhost:4000/api/cart/${lineId}`,
+        `https://fresh-hive-backend.onrender.com/api/cart/${lineId}`,
         { quantity },
         getAuthHeader()
       );
@@ -130,7 +130,7 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = async (lineId) => {
     try {
-      await axios.delete(`http://localhost:4000/api/cart/${lineId}`, getAuthHeader());
+      await axios.delete(`https://fresh-hive-backend.onrender.com/api/cart/${lineId}`, getAuthHeader());
       await refreshCart();
     } catch (err) {
       console.error('Error removing from cart:', err);
@@ -139,7 +139,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = async () => {
     try {
-      await axios.post('http://localhost:4000/api/cart/clear', {}, getAuthHeader());
+      await axios.post('https://fresh-hive-backend.onrender.com/api/cart/clear', {}, getAuthHeader());
       setCart([]);
     } catch (err) {
       console.error('Error clearing cart:', err);

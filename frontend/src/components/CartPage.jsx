@@ -20,8 +20,8 @@ const Cart = () => {
     const path = item.image   ?? item.product?.imageUrl ?? '';
     if (!path) return '';
     if (path.startsWith('http')) return path;
-    if (path.startsWith('/')) return `http://localhost:4000${path}`;
-    return `http://localhost:4000/uploads/${path}`;
+    if (path.startsWith('/')) return `https://fresh-hive-backend.onrender.com${path}`;
+    return `https://fresh-hive-backend.onrender.com/uploads/${path}`;
   };
 
   // Compute subtotal

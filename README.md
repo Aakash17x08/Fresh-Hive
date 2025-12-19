@@ -40,7 +40,7 @@ The backend handles API requests, database interactions, and authentication.
     ```bash
     npm start
     ```
-    The server will start on `http://localhost:4000`.
+    The server will start on `https://fresh-hive-backend.onrender.com`.
 
 ---
 
@@ -64,7 +64,7 @@ The admin panel is for store owners to manage inventory and orders.
     ```
     The admin panel will typically run on `http://localhost:5174` (or similar).
 
-    **Note:** The Admin Panel expects the backend to be running at `http://localhost:4000`.
+    **Note:** The Admin Panel expects the backend to be reachable at `https://fresh-hive-backend.onrender.com`.
 
 ---
 
@@ -88,7 +88,7 @@ The frontend is the customer-facing e-commerce website.
     ```
     The frontend will typically run on `http://localhost:5173`.
 
-    **Note:** The Frontend expects the backend to be running at `http://localhost:4000`.
+    **Note:** The Frontend expects the backend to be reachable at `https://fresh-hive-backend.onrender.com`.
 
 ---
 

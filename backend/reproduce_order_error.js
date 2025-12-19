@@ -1,5 +1,5 @@
 
-const BASE_URL = 'http://localhost:4000/api';
+const BASE_URL = 'https://fresh-hive-backend.onrender.com/api';
 
 async function reproduce() {
     try {

@@ -21,7 +21,7 @@ const ItemsHome = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:4000/api/items")
+    axios.get("https://fresh-hive-backend.onrender.com/api/items")
       .then(res => {
         const normalized = (Array.isArray(res.data) ? res.data : []).map(p => ({
           ...p,
@@ -237,10 +237,10 @@ const ItemsHome = () => {
                           if (typeof path === 'string') {
                             if (path.startsWith('data:')) return path;
                             if (path.startsWith('http')) return path;
-                            if (path.startsWith('/uploads/')) return `http://localhost:4000${path}`;
+                            if (path.startsWith('/uploads/')) return `https://fresh-hive-backend.onrender.com${path}`;
                             if (path.startsWith('/')) return path;
                             if (/\.(png|jpg|jpeg|webp|gif)$/i.test(path) || path.includes('static')) return path;
-                            return `http://localhost:4000/uploads/${path}`;
+                            return `https://fresh-hive-backend.onrender.com/uploads/${path}`;
                           }
                           return '';
                         })()}

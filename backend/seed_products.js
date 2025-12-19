@@ -59,7 +59,7 @@ const seedProducts = async () => {
 
             // Handle filename encoding if necessary (spaces are usually fine in fs, but URLs might need encoding)
             // But here we just store the path relative to uploads, or just the filename if the frontend handles it.
-            // Based on frontend code seen earlier: `http://localhost:4000/uploads/${path}`
+            // Based on frontend code seen earlier: `https://fresh-hive-backend.onrender.com/uploads/${path}`
             // So we should store the raw filename as imageUrl if we follow `productController.js` logic which did:
             // const imageUrl = filename ? `/uploads/${filename}` : null;
             // Wait, the controller stored `/uploads/${filename}`. 

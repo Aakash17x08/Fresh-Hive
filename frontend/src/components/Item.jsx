@@ -7,7 +7,7 @@ import { groceryData } from '../assets/dummyDataItem';
 import { itemsPageStyles } from '../assets/dummyStyles';
 
 // Backend base URL
-const BACKEND_URL = 'http://localhost:4000';
+const BACKEND_URL = 'https://fresh-hive-backend.onrender.com';
 
 const ProductCard = ({ item }) => {
   const { addToCart, removeFromCart, updateQuantity, cart } = useCart();

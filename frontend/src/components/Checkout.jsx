@@ -69,7 +69,7 @@ const CheckoutPage = () => {
     try {
       const token = localStorage.getItem('authToken');
       const res = await axios.post(
-        'http://localhost:4000/api/orders',
+        'https://fresh-hive-backend.onrender.com/api/orders',
         {
           ...order,
           paymentMethod: formData.paymentMethod === 'COD' ? 'Cash on Delivery' : 'Online Payment',
