@@ -23,7 +23,7 @@ const __dirname = path.dirname(__filename);
 app.use(
     cors({
         origin: (origin, callback) => {
-            const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+            const allowedOrigins = ['https://fresh-hive.onrender.com', 'https://fresh-hive-admin.onrender.com/admin/list-items'];
             if (!origin || allowedOrigins.includes(origin)) {
                 callback(null, true);
             } else {
